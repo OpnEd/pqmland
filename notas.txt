@@ -1,0 +1,162 @@
+Laravel proporciona los layouts `app.blade.php` y `guest.blade.php` como plantillas de base para
+aplicaciones web. Estos archivos se utilizan para definir estructuras de página diferentes en función
+ de si el usuario está autenticado o no.
+
+### Propósito de los Layouts:
+1. **`app.blade.php`**:
+   - Es el layout principal usado para páginas que requieren autenticación (usuarios autenticados).
+   - Contiene menús de navegación, encabezados, y otras secciones que solo deben mostrarse a
+   usuarios que han iniciado sesión.
+   - Típicamente se utiliza para el *dashboard* u otras áreas privadas de la aplicación.
+
+2. **`guest.blade.php`**:
+   - Es el layout usado para páginas públicas o aquellas que no requieren autenticación.
+   - Se emplea para vistas como el formulario de inicio de sesión, registro, y otras páginas públicas.
+
+### Cómo Configurar el Uso de `app.blade.php` o `guest.blade.php`:
+Puedes configurar el uso de estos layouts condicionalmente en tus controladores o componentes de
+Blade de la siguiente manera:
+
+#### 1. **En Controladores**:
+Cuando defines un método en un controlador, puedes retornar vistas que utilicen diferentes
+layouts basándote en la autenticación:
+
+```php
+public function showPage()
+{
+    if (auth()->check()) {
+        // Usuario autenticado, usa 'app.blade.php'
+        return view('pagina', ['layout' => 'layouts.app']);
+    } else {
+        // Usuario no autenticado, usa 'guest.blade.php'
+        return view('pagina', ['layout' => 'layouts.guest']);
+    }
+}
+```
+
+En la vista `pagina.blade.php`, puedes extender el layout dinámicamente:
+
+```blade
+@extends($layout)
+
+@section('content')
+    <p>Contenido de la página</p>
+@endsection
+```
+
+#### 2. **En Componentes de Blade**:
+Puedes usar la directiva `@auth` para verificar si el usuario está autenticado directamente en un
+archivo de Blade:
+
+```blade
+@auth
+    @extends('layouts.app')
+@else
+    @extends('layouts.guest')
+@endauth
+
+@section('content')
+    <p>Contenido de la página</p>
+@endsection
+```
+
+- **`@auth`**: La directiva de Blade que muestra su contenido si el usuario está autenticado.
+- **`@guest`**: La directiva de Blade que muestra su contenido si el usuario no está autenticado.
+
+### Razón por la que Laravel Trae Ambos Layouts:
+1. **Separación de lógica de usuario**:
+   Laravel trae estos dos layouts para permitir una separación clara entre las vistas de usuarios
+   autenticados y no autenticados. Facilita mantener diferentes estructuras y estilos para la parte
+   pública y privada de la aplicación.
+
+2. **Facilidad de uso**:
+   Tener estos dos layouts predefinidos permite a los desarrolladores configurar de manera sencilla
+   una aplicación con áreas públicas y privadas, sin tener que construir la estructura desde cero.
+
+### Flujo Común:
+- **`guest.blade.php`** se usa para páginas de login, registro y contraseñas olvidadas.
+- **`app.blade.php`** se utiliza para páginas internas como el *dashboard*, paneles de usuario y
+otras vistas que requieren autenticación.
+
+### Ejemplo de Uso Completo:
+Puedes tener una ruta que use un controlador así:
+
+```php
+Route::get('/dashboard', [DashboardController::class, 'index']);
+```
+
+Y en el controlador:
+
+```php
+public function index()
+{
+    return view('dashboard')->with('layout', auth()->check() ? 'layouts.app' : 'layouts.guest');
+}
+```
+
+Esto te permite cambiar automáticamente entre layouts sin duplicar código en tus vistas.
+
+
+No directamente desde el archivo de configuración de Livewire, ya que Livewire no tiene una opción
+nativa en su archivo de configuración para cambiar el layout condicionalmente en función de si el
+ usuario está autenticado o no. Sin embargo, puedes hacer uso de algunos enfoques en tus componentes
+ Livewire para gestionar esto de manera más dinámica.
+
+### Opciones para Configurar el Layout de Livewire Basado en la Autenticación:
+
+1. **Sobrescribir el método `render()` en componentes de Livewire**:
+   Puedes configurar el layout en el método `render()` de tus componentes Livewire y usar condicionales
+   de autenticación para retornar la vista con un layout específico.
+
+   ```php
+   public function render()
+   {
+       if (auth()->check()) {
+           return view('livewire.dashboard')->layout('layouts.app');
+       } else {
+           return view('livewire.dashboard')->layout('layouts.guest');
+       }
+   }
+   ```
+
+   En este ejemplo, se verifica si el usuario está autenticado con `auth()->check()` y, dependiendo
+   de eso, se usa el layout `layouts.app` o `layouts.guest`.
+
+2. **Definir layouts predeterminados en el componente base**:
+   Si tienes múltiples componentes de Livewire y deseas que todos usen automáticamente un layout en
+   función de la autenticación, puedes crear un componente base que otros componentes extiendan:
+
+   ```php
+   namespace App\Http\Livewire;
+
+   use Livewire\Component;
+
+   class BaseComponent extends Component
+   {
+       protected function getLayout()
+       {
+           return auth()->check() ? 'layouts.app' : 'layouts.guest';
+       }
+
+       public function render()
+       {
+           // Ejemplo de cómo se podría utilizar en componentes que heredan
+           return view('livewire.child-component')->layout($this->getLayout());
+       }
+   }
+   ```
+
+   Luego, otros componentes pueden extender de `BaseComponent` y usar `getLayout()` para aplicar el
+   layout adecuado.
+
+3. **Middleware para redirigir y aplicar layouts**:
+   Si prefieres mantener la lógica de autenticación fuera de los componentes, puedes usar middleware
+   para redirigir a diferentes rutas con diferentes layouts. Esto es más útil si tus rutas específicas
+   usan diferentes layouts y no necesitas cambiar la lógica en los componentes.
+
+### Conclusión:
+Aunque el archivo de configuración de Livewire no permite definir layouts condicionales directamente,
+puedes manejar esto dentro de tus componentes usando lógica condicional en el método `render()` o
+mediante un componente base que otros componentes extiendan. Esta flexibilidad permite que la
+aplicación utilice layouts específicos dependiendo del estado de autenticación del usuario,
+proporcionando una experiencia coherente tanto para usuarios autenticados como invitados.
