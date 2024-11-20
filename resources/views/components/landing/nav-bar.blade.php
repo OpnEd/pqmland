@@ -1,9 +1,9 @@
 <nav x-data="{ movilenavOpen: false }" class="bg-white border-gray-200 dark:bg-gray-900">
     <div class="md:flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
         <div class="flex items-center justify-between h-20">
-            <a href="https://flowbite.com" class="flex items-center space-x-3 rtl:space-x-reverse">
-                <img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Flowbite Logo" />
-                <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
+            <a href="{{ route('inicio') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
+                <x-application-logo class="w-15 h-15 fill-current text-gray-500" />
+                <span class="self-center text-2xl text-indigo-500 font3 whitespace-nowrap dark:text-white">PQM</span>
             </a>
             <mobileicon class="md:hidden">
                 <a @click="movilenavOpen = !movilenavOpen"
@@ -17,11 +17,11 @@
         </div>
         {{-- <ul class="flex items-center space-x-6 rtl:space-x-reverse"> --}}
         <nav x-show="movilenavOpen" x-cloak
-            class="md:!block bg-gray-50 rounded-lg px-3 h-screen w-screen md:h-auto md:w-auto absolute md:relative -translate-x-7"
+            class="md:!block bg-gray-100 rounded-lg px-3 h-screen w-screen md:h-auto md:w-auto absolute md:relative -translate-x-7"
             x-transition:enter="duration-300 esae-out" x-transition:enter-start="opacity-0 -translate-y-96"
             x-transition:enter-end="opacity-100 -translate-y-0">
             <ul
-                class="flex items-center navitems flex-col md:flex-row gap-8 md:gap-0 justify-center h-full -translate-y-10 md:translate-y-0">
+                class="flex items-center navitems flex-col md:flex-row gap-8 md:gap-0 justify-center h-full -translate-y-10 md:translate-y-0 font5">
                 {{-- <li class="my-3"> --}}
                 <li>
                     <p class="text-sm text-gray-500 dark:text-white px-6">(57) 314 309 5251</p>
@@ -66,7 +66,7 @@
         </nav>
     </div>
 </nav>
-<nav class="hidden md:block bg-gray-50 dark:bg-gray-700 h-12">
+<nav class="hidden md:block bg-gray-100 dark:bg-gray-700 h-12">
     <div class="max-w-screen-xl px-4 py-3 mx-auto">
         <div class="flex items-center">
             <ul class="flex flex-row font-medium mt-0 space-x-8 rtl:space-x-reverse text-sm navitems">

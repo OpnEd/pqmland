@@ -21,18 +21,18 @@
         <a class="flex items-center gap-1 mb-4" href="">
             <img class="w-8 h-8 rounded-full" src="https://img.icons8.com/small/96/A9A9A9/happy.png"
                 alt="">
-            <span class="font-bold hover:underline">Richard</span>
+            <span class="font-bold hover:underline">{{ $featuredPost->user->name }}</span>
         </a>
-        <p class="text-5xl mb-10 px-4 font1">Título de prueba</p>
+        <p class="text-3xl mb-10 px-4 font1">{{ $featuredPost->title }}</p>
         <div class="px-4 flex items-center gap-2 text-sm mb-5">
-            <a class="bg-gray-200 rounded-full px-3 py-1 hover:bg-gray-500 hover:text-white"
-                href="">URM</a>
-            <a class="bg-gray-200 rounded-full px-3 py-1 hover:bg-gray-500 hover:text-white"
-                href="">Indicadores</a>
+            @foreach ($featuredPost->tags as $tag)
+                <a class="bg-gray-200 rounded-full px-3 py-1 hover:bg-gray-500 hover:text-white"
+                href="">{{ $tag }}</a>
+            @endforeach
         </div>
         <div class="flex items-center justify-between text-sm px-2">
-            <a class="font-bold hover:underline" href="">Comments<span
-                    class="font-light text-gray-500 ml-2">3</span></a>
+            <a class="font-bold hover:underline" href="">Commentarios<span
+                    class="font-light text-gray-500 ml-2">{{ $featuredPost->comments->count() }}</span></a>
             <div class="flex items-center gap-4 [&>a:hover]:underline">
                 <div class="flex items-center gap-1">
                     <img class="w-5 -mt-1"

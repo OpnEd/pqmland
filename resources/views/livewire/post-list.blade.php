@@ -9,14 +9,18 @@
             </a>
         </movileSidebarNav>
         <main class="col-span-full md:col-span-2 mx-[5%] md:mx-[10%] order-2 md:order-1">
-            @section('pageDescription', 'Esta es una descripción específica para la página Blog')
             <div class="flex justify-between items-center border-b border-gray-100">
+                @if ($search)
+                    <div class="p-2 bg-green-200 text-sm rounded-lg">
+                        <p>Estás buscando: <strong>{{ $search }}</strong></p>
+                    </div>
+                @endif
                 <div class="flex items-center space-x-4 font-light">
                     <button
-                        class="{{ $sort === 'desc' ? 'text-gray-900 border-b border-gray-700' : 'text-gray-500' }} py-4"
+                        class="{{ $sort === 'desc' ? 'text-gray-900 border-b border-gray-700' : 'text-gray-500' }} py-4 px-2 ml-2 order-1 md:order-1"
                         wire:click="setSort('desc')">Latest</button>
                     <button
-                        class="{{ $sort === 'asc' ? 'text-gray-900 border-b border-gray-700' : 'text-gray-500' }} py-4 "
+                        class="{{ $sort === 'asc' ? 'text-gray-900 border-b border-gray-700' : 'text-gray-500' }} py-4 px-2 order-2 md:order-2"
                         wire:click="setSort('asc')">Oldest</button>
                 </div>
             </div>
@@ -25,7 +29,7 @@
                     <div class="flex w-full mb-5">
                         <x-posts.post-card :post="$post" />
                     </div>
-                    <hr class="border-1 border-black">
+                    <hr class="border-1 border-gray-300">
                 @endforeach
             </div>
             <div class="my-3">
@@ -35,23 +39,11 @@
         </main>
 
         <aside x-show="mobileSidebarOpen" x-cloak
-            class="md:!block col-span-full md:col-span-1 mx-[5%] md:mr-[20%] order-1 md:order-2"
+            class="md:!block col-span-full md:col-span-1 mx-[5%] md:mr-[20%] order-1 md:order-2 sticky"
             x-transition:enter="duration-300 esae-out" x-transition:enter-start="opacity-0 -mt-96"
             x-transition:enter-end="opacity-100 -mt-0">
-            <section class="">
-                <h2>Categorías</h2>
-                <ul class="hoverlist">
-                    <li class="highlight"><a href="">
-                            <img class="w-8 h-8 object-cover mr-2"
-                                src="https://img.icons8.com/?size=100&id=22136&format=png&color=000000">
-                            <span class="font-bold text-sm">Gesión Calidad</span>
-                        </a></li>
-                    <li><a href=""></a>URM</li>
-                    <li><a href=""></a>EVS</li>
-                    <li><a href=""></a>Salud</li>
-                    <li><a href=""></a>Legislación</li>
-                </ul>
-            </section>
+            <livewire:search-box />
+            <livewire:blog-categories-section />
         </aside>
     </content>
 </div>

@@ -4,9 +4,11 @@ use App\Livewire\Blog;
 use App\Livewire\Contacto;
 use App\Livewire\Nosotros;
 use App\Livewire\PostList;
+Use App\Http\Controllers\PolicyTermsController;
 use App\Livewire\ShowPost;
 use App\Livewire\Store;
 use App\Livewire\Welcome;
+
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', Welcome::class)->name('inicio');
@@ -23,6 +25,10 @@ Route::get('/posts/{post}', ShowPost::class); // Puede hacerse así o de la form
 Route::get('/contacto', Contacto::class)->name('contacto');
 
 Route::get('/tienda', Store::class)->name('tienda');
+
+Route::get('/terminos', [PolicyTermsController::class, 'showTerms'])->name('terminos');
+
+Route::get('/privacidad', [PolicyTermsController::class, 'showPolicy'])->name('privacidad');
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])

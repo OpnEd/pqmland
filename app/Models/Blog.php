@@ -37,9 +37,9 @@ class Blog extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function blog_category(): BelongsTo
+    public function category(): BelongsTo
     {
-        return $this->belongsTo(BlogCategory::class);
+        return $this->belongsTo(BlogCategory::class, 'blog_category_id');
     }
 
     public function comments(): HasMany
@@ -57,6 +57,13 @@ class Blog extends Model
         $query->where('is_featured', true);
     }
 
+    public function scopeWithCategory ($query, string $category)
+    {
+        $query->whereHas('category', function ($query) use ($category) {
+            $query->where('slug', $category);
+        });
+    }
+
     public function getExcerpt ()
     {
         return Str::limit(strip_tags($this->body), 150);
@@ -64,6 +71,9 @@ class Blog extends Model
 
     public function getReadingTime ()
     {
-        return round (str_word_count($this->body) / 250);
+        $mins = round (str_word_count($this->body) / 250);
+
+        return ( $mins < 1) ? 1 : $mins;
+
     }
 }

@@ -12,6 +12,9 @@ display: none !important;
 --writemachine1: 'Special Elite', sans-serif;
 --writemachine2: 'Cutive Mono', sans-serif;
 --writemachine3: 'Courier Prime', sans-serif;
+--futuristic1: 'Audiowide', sans-serif;
+--futuristic2: 'Goldman', sans-serif;
+--futuristic3: 'Michroma', sans-serif;
 }
 
 .activo {
@@ -25,6 +28,18 @@ font-family: var(--writemachine1);
 
 .font2 {
 font-family: var(--writemachine2);
+}
+
+.font3 {
+font-family: var(--futuristic1);
+}
+
+.font4 {
+font-family: var(--futuristic2);
+}
+
+.font5 {
+font-family: var(--futuristic3);
 }
 
 .navitems>li>a {

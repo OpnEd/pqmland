@@ -33,6 +33,12 @@
                 {{ $slot }}
             </main>
         </div>
+
+        <!-- Footer -->
+
+        <x-landing.footer>
+        </x-landing.footer>
+
         @livewireScripts
     </body>
 </html>
