@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignIdFor(User::class);
             $table->foreignIdFor(BlogCategory::class);
             $table->string('title')->unique();
+            $table->string('video')->nullable();
             $table->string('cover');
             $table->json('tags');
             $table->string('abstract');

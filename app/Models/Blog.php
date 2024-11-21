@@ -19,6 +19,7 @@ class Blog extends Model
         'user_id',
         'blog_category_id',
         'title',
+        'video',
         'cover',
         'tags',
         'abstract',
@@ -32,9 +33,9 @@ class Blog extends Model
         'tags' => 'array',
     ];
 
-    public function user(): BelongsTo
+    public function author(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function category(): BelongsTo
@@ -76,4 +77,10 @@ class Blog extends Model
         return ( $mins < 1) ? 1 : $mins;
 
     }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
 }

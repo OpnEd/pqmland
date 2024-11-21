@@ -18,13 +18,16 @@
                     src="https://img.icons8.com/small/32/777777/expand-arrow.png" />
             </a>
         </movileSidebarNav>
-        <main class="col-span-full md:col-span-2 mx-[5%] md:mx-[10%] order-2 md:order-1">
+        <main class="col-span-full md:col-span-2 mx-[5%] md:mx-[10%] order-2 md:order-1 rounded-md">
 
-            <h5 class="text-xl font1">Publicación descatacada</h5>
+            <div class="flex justify-center bg-gray-200 hover:bg-gray-300 p-2 rounded-lg">
+                <h5 class="text-sm text-gray-700 font-semibold font5">Publicación descatacada</h5>
+            </div>
             <hr>
             <x-posts.featured-posts-card :featuredPost="$featuredPost[0]" />
-
-            <h5 class="text-xl font1">Últimas publicaciones</h5>
+            <div class="flex justify-center bg-gray-200 mt-4 hover:bg-gray-300 p-2 rounded-lg">
+                <h5 class="text-sm text-gray-700 font-semibold font5">Últimas publicaciones</h5>
+            </div>
             <hr class="mb-5">
 
             @foreach ($latestPosts as $post)
@@ -33,34 +36,24 @@
                     <x-posts.post-card :post="$post" />
                 </div>
             @endforeach
-            <a wire:navigate href="{{ route('posts') }}" class="inline-flex items-center px-3 py-2 text-lg font-medium text-center text-white bg-gray-700 rounded-lg hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800 font1">
-                Leer más publicaciones
-                <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                    fill="none" viewBox="0 0 14 10">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M1 5h12m0 0L9 1m4 4L9 9" />
-                </svg>
-            </a>
+            <div class="flex justify-center">
+                <a wire:navigate href="{{ route('posts') }}"
+                    class="inline-flex items-center px-2 py-1 text-sm text-center text-white bg-green-500 rounded-lg hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-gray-300 dark:hover:bg-gray-700 dark:focus:ring-gray-800 font5">
+                    Leer más publicaciones
+                    <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                        fill="none" viewBox="0 0 14 10">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M1 5h12m0 0L9 1m4 4L9 9" />
+                    </svg>
+                </a>
+            </div>
         </main>
 
         <aside x-show="mobileSidebarOpen" x-cloak
             class="md:!block col-span-full md:col-span-1 mx-[5%] md:mr-[20%] order-1 md:order-2"
             x-transition:enter="duration-300 esae-out" x-transition:enter-start="opacity-0 -mt-96"
             x-transition:enter-end="opacity-100 -mt-0">
-            <section class="card p-4">
-                <h2>Categorías</h2>
-                <ul class="hoverlist">
-                    <li class="highlight"><a href="">
-                            <img class="w-8 h-8 object-cover mr-2"
-                                src="https://img.icons8.com/?size=100&id=22136&format=png&color=000000">
-                            <span class="font-bold text-sm">Gesión Calidad</span>
-                        </a></li>
-                    <li><a href=""></a>URM</li>
-                    <li><a href=""></a>EVS</li>
-                    <li><a href=""></a>Salud</li>
-                    <li><a href=""></a>Legislación</li>
-                </ul>
-            </section>
+            <livewire:blog-categories-section />
         </aside>
     </content>
 </div>

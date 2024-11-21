@@ -22,7 +22,7 @@ class Comment extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function blog(): BelongsTo
+    public function post(): BelongsTo
     {
         return $this->belongsTo(Blog::class);
     }

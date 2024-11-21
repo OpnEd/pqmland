@@ -3,20 +3,19 @@
 namespace App\Livewire;
 
 use App\Livewire\BaseComponent;
+use App\Models\Blog;
 
 class ShowPost extends BaseComponent
 {
-    /* public Post $post;
+    public Blog $post;
 
-    public function mount($id)
-    {
-        $this->post = Post::findOrFail($id);
-    } */
+    public bool $canReadMore = false;
 
-    /* public function mount(Post $post) // puede hacers así o de la forma anterior. Si se hace de esta forma puede omiritse el método mount(), desde luego conservando 'public Post $post;'
+    public function mount(Blog $post)
     {
         $this->post = $post;
-    } */
+        $this->canReadMore = auth()->check(); // Permite seguir leyendo si el usuario está autenticado
+    }
 
     public function render()
     {

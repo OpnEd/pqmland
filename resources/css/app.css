@@ -15,6 +15,7 @@ display: none !important;
 --futuristic1: 'Audiowide', sans-serif;
 --futuristic2: 'Goldman', sans-serif;
 --futuristic3: 'Michroma', sans-serif;
+--blog: 'Inter', sans-serif;
 }
 
 .activo {
@@ -40,6 +41,10 @@ font-family: var(--futuristic2);
 
 .font5 {
 font-family: var(--futuristic3);
+}
+
+.fontBlog {
+font-family: var(--blog);
 }
 
 .navitems>li>a {

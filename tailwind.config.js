@@ -19,7 +19,7 @@ export default {
             },
             fontFamily: {
                 'body': [
-              'Roboto',
+              'Inter',
               'ui-sans-serif',
               'system-ui',
               '-apple-system',
@@ -52,6 +52,9 @@ export default {
               'Segoe UI Symbol',
               'Noto Color Emoji'
                 ],
+            },
+            lineHeight: {
+                'extra-relaxed': '1.75', // Nombre personalizado
             },
         },
     },

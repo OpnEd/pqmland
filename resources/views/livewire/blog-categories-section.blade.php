@@ -11,13 +11,13 @@
             </li>
         @endforeach
     </ul>
-<div class="justify-center">
-    <button @click="showAll = !showAll" class="text-sm text-indigo-700 font5 flex items-center cursor-pointer select-none hover:bg-indigo-100 rounded-lg p-3">
-        <span x-show="!showAll">Más categorías</span>
-        <span x-show="showAll">Mostrar menos</span>
-        <img x-bind:class="showAll && 'rotate-180 duration-300'" class="w-4 ml-1.5"
-                    src="https://img.icons8.com/small/32/777777/expand-arrow.png" />
-    </button>
-</div>
+    <div class="justify-center">
+        <button @click="showAll = !showAll"
+            class="text-sm text-indigo-700 font5 flex items-center cursor-pointer select-none hover:bg-indigo-100 rounded-lg p-3">
+            <span x-show="!showAll">Más categorías</span>
+            <span x-show="showAll">Mostrar menos</span>
+            <img x-bind:class="showAll && 'rotate-180 duration-300'" class="w-4 ml-1.5"
+                src="https://img.icons8.com/small/32/777777/expand-arrow.png" />
+        </button>
+    </div>
 </section>
-

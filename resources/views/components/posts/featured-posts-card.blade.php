@@ -21,7 +21,7 @@
         <a class="flex items-center gap-1 mb-4" href="">
             <img class="w-8 h-8 rounded-full" src="https://img.icons8.com/small/96/A9A9A9/happy.png"
                 alt="">
-            <span class="font-bold hover:underline">{{ $featuredPost->user->name }}</span>
+            <span class="font-bold hover:underline">{{ $featuredPost->author->name }}</span>
         </a>
         <p class="text-3xl mb-10 px-4 font1">{{ $featuredPost->title }}</p>
         <div class="px-4 flex items-center gap-2 text-sm mb-5">

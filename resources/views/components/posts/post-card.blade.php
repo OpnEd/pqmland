@@ -12,7 +12,7 @@
         <div class="flex justify-between items-center py-3">
             <span class="flex flex-wrap items-center text-gray-600">
                 <span>
-                    <span class="text-gray-500">Por</span> <strong>{{ $post->user->name }}</strong>
+                    <span class="text-gray-500">Por</span> <strong>{{ $post->author->name }}</strong>
                     <span class="mx-2 text-gray-300">|</span>
                 </span>
                 <span>
@@ -40,7 +40,7 @@
         </div>
         <hr class="py-1">
         <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ $post->abstract }}</p>
-        <a href="#"
+        <a wire:navigate href="{{ route('post.show', $post) }}"
             class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
             Leer más
             <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
