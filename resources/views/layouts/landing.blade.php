@@ -33,6 +33,7 @@
     <x-landing.footer>
     </x-landing.footer>
 
+    @livewire('wire-elements-modal')
     @livewireScripts
 
 <script>

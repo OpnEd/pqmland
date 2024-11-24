@@ -126,3 +126,12 @@ animation: 1s fadeIn;
 10% { opacity: 0; }
 100% { opacity: 1; }
 }
+
+.group:hover .group-hover\:opacity-50 {
+    opacity: 0.5;
+}
+
+.group:hover .group-hover\:opacity-100 {
+    opacity: 1;
+}
+

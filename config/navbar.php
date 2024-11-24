@@ -25,11 +25,5 @@ return [
         'class' => 'text-gray-900 dark:text-white',
         'target' => '_self',
     ],
-    [
-        'name' => 'Tienda',
-        'route' => 'tienda',
-        'class' => 'text-gray-900 dark:text-white',
-        'target' => '_self',
-    ],
     // Más enlaces...
 ];

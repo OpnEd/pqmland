@@ -17,7 +17,9 @@ class Contacto extends BaseComponent
         $this->form->store();
 
         /* return redirect('tienda')->with('status', 'Mensaje enviado! Mientras te contactamos, te gustaría echar un ojo a nuestra tienda?'); */
-        $this->dispatch('message-sent', ['message' => 'Mientras te contactamos, podrías echar un ojo a nuestra tienda, o a nuestro blog...']);
+        $this->dispatch('message-sent', [
+            'message' => 'Mientras te contactamos, podrías echar un ojo a nuestra tienda, o a nuestro blog...'
+        ]);
 
     }
 

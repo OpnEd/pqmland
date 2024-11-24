@@ -22,7 +22,7 @@ Route::get('/posts', PostList::class)->name('posts');
 
 // Route::get('/posts/{id}', ShowPost::class);
 Route::get('/posts/{post}', ShowPost::class)
-    //->middleware(['auth', 'verified'])
+    ->middleware(['auth', 'verified'])
     ->name('post.show'); // Puede hacerse así o de la forma anterior
 
 Route::get('/contacto', Contacto::class)->name('contacto');
