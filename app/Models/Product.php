@@ -17,6 +17,8 @@ class Product extends Model
         'images',
         'slug',
         'featured',
+        'featured_description',
+        'publicity',
         'purchase_price',
         'sell_price',
     ];

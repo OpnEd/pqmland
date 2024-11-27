@@ -22,6 +22,7 @@ class ProductFactory extends Factory
             ]),
             'slug' => $this->faker->slug(),
             'featured' => $this->faker->boolean(20), // 20% de probabilidades de ser destacado
+            'featured_description' => null,
             'purchase_price' => $this->faker->randomFloat(2, 50, 200),
             'sell_price' => $this->faker->randomFloat(2, 200, 500),
         ];

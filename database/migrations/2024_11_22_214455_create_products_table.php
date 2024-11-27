@@ -20,6 +20,7 @@ return new class extends Migration
             $table->json('images');
             $table->string('slug')->unique();
             $table->boolean('featured')->default(false);
+            $table->string('featured_description')->nullable();
             $table->decimal('purchase_price', 10, 2);
             $table->decimal('sell_price', 10, 2);
             $table->timestamps();

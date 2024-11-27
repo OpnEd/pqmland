@@ -5,6 +5,7 @@ use App\Livewire\Contacto;
 use App\Livewire\Nosotros;
 use App\Livewire\PostList;
 Use App\Http\Controllers\PolicyTermsController;
+use App\Livewire\CurriculumVitae;
 use App\Livewire\ShowPost;
 use App\Livewire\Store;
 use App\Livewire\Welcome;
@@ -32,6 +33,8 @@ Route::get('/tienda', Store::class)->name('tienda');
 Route::get('/terminos', [PolicyTermsController::class, 'showTerms'])->name('terminos');
 
 Route::get('/privacidad', [PolicyTermsController::class, 'showPolicy'])->name('privacidad');
+
+Route::get('/curriculo/{user}', CurriculumVitae::class)->name('curriculo.user');
 
 Route::get('/email/verify', function () {
     return view('auth.verify-email');
