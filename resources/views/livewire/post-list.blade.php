@@ -39,11 +39,14 @@
         </main>
 
         <aside x-show="mobileSidebarOpen" x-cloak
-            class="md:!block col-span-full md:col-span-1 mx-[5%] md:mr-[20%] order-1 md:order-2 sticky"
+            class="md:!block col-span-full md:col-span-1 mx-[5%] md:ml-[20%] order-1 md:order-2 sticky"
             x-transition:enter="duration-300 esae-out" x-transition:enter-start="opacity-0 -mt-96"
             x-transition:enter-end="opacity-100 -mt-0">
             <livewire:search-box />
-            <livewire:blog-categories-section />
+            <livewire:category-section
+                model-class="\App\Models\BlogCategory"
+                scope-method="published"
+            />
         </aside>
     </content>
 </div>

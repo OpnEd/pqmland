@@ -1,5 +1,8 @@
 <!-- Page Container -->
 <div class="min-h-dvh min-w-[320px] bg-white text-gray-800">
+    @php
+        $vista_url = strtolower($user->name);
+    @endphp
     <!-- Info -->
     <div class="container mx-auto max-w-screen-lg p-4 lg:p-8">
         <div class="grid grid-cols-1 md:mt-12 md:grid-cols-6">
@@ -17,7 +20,7 @@
                     @if ($user->url != null)
                     <p>
                         <a class="font-medium text-black underline hover:text-black/75"
-                            href="javascript:void(0)">{{ $user->url }}</a>
+                            href="{{ $user->url }}">https://www.{{ $vista_url }}.com</a>
                     </p>
                     @endif
                 </div>
@@ -53,7 +56,7 @@
                     @foreach ($user->education as $education)
                         <div>
                             <h4 class="mb-2 text-lg font-semibold text-indigo-700">
-                                {{ $educacion->año }}
+                                {{ $education->año }}
                             </h4>
                             <h5 class="mb-1 font-bold">
                                 {{ $education->titulo }}
@@ -78,7 +81,7 @@
                     @foreach ($user->workExperience as $experience)
                         <div>
                             <h4 class="mb-2 text-lg font-semibold text-indigo-700">
-                                {{ $experience->año_inicio }} - {{ $experience->año_fin }}
+                                {{ \Carbon\Carbon::parse($experience->año_inicio)->translatedFormat('d M Y') }} - {{ \Carbon\Carbon::parse($experience->año_fin)->translatedFormat('d M Y') }}
                             </h4>
                             <h5 class="mb-1 font-bold">{{ $experience->puesto }} en {{ $experience->empresa }}</h5>
                             <p class="leading-relaxed">
@@ -117,10 +120,10 @@
                 <div class="px-5 py-2 text-left md:col-span-2 md:text-right">
                     <h3 class="text-lg font-bold uppercase">Sígueme en redes sociales</h3>
                 </div>
-                <div class="space-y-6 px-5 py-2 md:col-span-4">
+                <div class="flex flex-row px-5 py-2 md:col-span-4">
                     @foreach ($socialMediaLinks as $platform => $url)
                         @if ($url) <!-- Mostrar solo si hay URL -->
-                            <a href="{{ $url }}" target="_blank" rel="noopener noreferrer" class="hover:opacity-75">
+                            <a href="{{ $url }}" target="_blank" rel="noopener noreferrer" class="hover:opacity-75 pr-8">
                                 <img src="{{ asset('storage/images/redes-sociales/' . $platform . '.png') }}"
                                     alt="{{ ucfirst($platform) }}"
                                     class="w-10 h-10">

@@ -6,7 +6,9 @@ use App\Livewire\Nosotros;
 use App\Livewire\PostList;
 Use App\Http\Controllers\PolicyTermsController;
 use App\Livewire\CurriculumVitae;
+use App\Livewire\ProductList;
 use App\Livewire\ShowPost;
+use App\Livewire\ShowProduct;
 use App\Livewire\Store;
 use App\Livewire\Welcome;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -29,6 +31,10 @@ Route::get('/posts/{post}', ShowPost::class)
 Route::get('/contacto', Contacto::class)->name('contacto');
 
 Route::get('/tienda', Store::class)->name('tienda');
+
+Route::get('/articulos', ProductList::class)->name('articulos');
+
+Route::get('/articulos/{product}', ShowProduct::class)->name('articulo.show');
 
 Route::get('/terminos', [PolicyTermsController::class, 'showTerms'])->name('terminos');
 

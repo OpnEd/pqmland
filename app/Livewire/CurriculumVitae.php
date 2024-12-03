@@ -18,7 +18,7 @@ class CurriculumVitae extends BaseComponent
     public function render()
     {
         return view('livewire.curriculum-vitae', [
-            'socialMediaLinks' => $this->user->social_media_links,
+            'socialMediaLinks' => $this->user->social_media_links, //getSocialMediaLinksAttribute() accessor en User model
         ])->layout($this->getLayout());
     }
 }

@@ -1,4 +1,4 @@
-<nav class="bg-white dark:bg-gray-800 antialiased">
+<nav class="bg-white dark:bg-gray-800 antialiased sticky top-0 z-50">
     @php
         $categories = config('categories');
     @endphp
@@ -26,7 +26,7 @@
                             <div x-data="{ open: false }" class="inline-flex rounded-md shadow-sm">
                                 <a href="{{ route('tienda') }}"
                                     class="px-4 py-2 rounded-l-md {{ request()->routeIs('tienda') ? 'bg-indigo-700 text-white border-indigo-800' : 'bg-indigo-500 text-white hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2' }}">
-                                    Tienda
+                                    {{ __('messages.nav.store') }}
                                 </a>
                                 <button @click="open = !open"
                                     class="px-4 py-2 bg-indigo-500 text-white rounded-r-md border-l border-indigo-600 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
@@ -68,7 +68,7 @@
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312" />
                     </svg>
-                    <span class="hidden sm:flex">My Cart</span>
+                    <span class="hidden sm:flex">{{ __('messages.nav.cart') }}</span>
                     <svg class="hidden sm:flex w-4 h-4 text-gray-900 dark:text-white ms-1" aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                         viewBox="0 0 24 24">
@@ -252,24 +252,24 @@
 
         <div id="ecommerce-navbar-menu-1"
             class="bg-gray-50 dark:bg-gray-700 dark:border-gray-600 border border-gray-200 rounded-lg py-3 hidden px-4 mt-4">
-            <ul class="text-gray-900 dark:text-white text-sm font-medium dark:text-white space-y-3">
+            <ul class="text-gray-900 text-sm font-medium dark:text-white space-y-3">
                 <x-responsive-nav-link :href="route('inicio')" :active="request()->routeIs('inicio')" wire:navigate>
-                    {{ __('Home') }}
+                    {{ __('messages.nav.home') }}
                 </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('nosotros')" :active="request()->routeIs('nosotros')" wire:navigate>
-                    {{ __('About') }}
+                    {{ __('messages.nav.about') }}
                 </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('blog')" :active="request()->routeIs('blog')" wire:navigate>
                     {{ __('Blog') }}
                 </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('tienda')" :active="request()->routeIs('tienda')" wire:navigate>
-                    {{ __('Store') }}
+                    {{ __('messages.nav.store') }}
                 </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('contacto')" :active="request()->routeIs('contacto')" wire:navigate>
-                    {{ __('Contact') }}
+                    {{ __('messages.nav.contact') }}
                 </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
-                    {{ __('Dashboard') }}
+                    {{ __('messages.nav.dashboard') }}
                 </x-responsive-nav-link>
             </ul>
             <div class="pt-4 pb-1 border-t border-gray-200">

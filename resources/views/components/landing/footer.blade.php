@@ -5,12 +5,12 @@
                 <x-application-logo class="w-15 h-15 fill-current text-gray-500" />
                 <span class="self-center text-2xl text-indigo-500 font3 whitespace-nowrap dark:text-white">PQM</span>
             </a>
-            <ul class="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
+            <ul class="flex flex-wrap items-center mb-6 text-sm font-medium text-blue-500 sm:mb-0 dark:text-gray-400">
                 <li>
                     <a href="{{ route('nosotros') }}" class="hover:underline me-4 md:me-6">Nosotros</a>
                 </li>
                 <li>
-                    <a href="{{ route('contacto') }}" class="hover:underline">Contacto</a>
+                    <a href="{{ route('contacto') }}" class="hover:underline me-4 md:me-6">Contacto</a>
                 </li>
                 <li>
                     <a href="{{ route('privacidad') }}" class="hover:underline me-4 md:me-6">Política de Privacidad</a>

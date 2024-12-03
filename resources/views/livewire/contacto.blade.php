@@ -3,7 +3,7 @@
     <section class="bg-white dark:bg-gray-900">
         <div x-data="{ open: false, message: '' }"
             @message-sent.window="open = true; message = $event.detail[0].message; $nextTick(() => $refs.modal.focus())"
-            class="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
+            class="py-4 lg:py-8 px-4 mx-auto my-auto max-w-screen-md">
             <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-center text-gray-900 dark:text-white">Contact Us
             </h2>
             <p class="mb-8 lg:mb-16 font-light text-center text-gray-500 dark:text-gray-400 sm:text-xl">Got a technical
@@ -58,11 +58,9 @@
                         @enderror
                     </div>
                 </div>
-                <div class="flex flex-row gap-3">
-                    <button type="submit"
-                        class="py-3 px-5 text-sm font-medium text-center text-white rounded-lg bg-primary-700 sm:w-fit hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Send
-                        message</button>
-                </div>
+                    <x-primary-button class="ms-3">
+                        Send message
+                    </x-primary-button>
             </form>
             <!-- Modal -->
             <div x-show="open" x-cloak

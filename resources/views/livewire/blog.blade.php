@@ -97,7 +97,7 @@
             class="md:!block col-span-full md:col-span-1 mx-[5%] md:mr-[20%] order-1 md:order-2"
             x-transition:enter="duration-300 esae-out" x-transition:enter-start="opacity-0 -mt-96"
             x-transition:enter-end="opacity-100 -mt-0">
-            <livewire:blog-categories-section />
+            <livewire:category-section model-class="\App\Models\BlogCategory" scope-method="published" />
         </aside>
     </content>
 </div>

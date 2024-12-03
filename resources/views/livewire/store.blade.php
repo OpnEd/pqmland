@@ -17,7 +17,8 @@
                 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
                 Invertimos en el potencial de los droguistas</h1>
             <p class="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
-                Asegura el cumplimiento de la normatividad sanitarias mientras adquieres lo que necesitas para tu bienestar.</p>
+                Asegura el cumplimiento de la normatividad sanitarias mientras adquieres lo que necesitas para tu
+                bienestar.</p>
             <div class="flex flex-col mb-8 lg:mb-16 space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
                 <a href="{{ route('blog') }}"
                     class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
@@ -105,176 +106,67 @@
         </div>
     </section>
 
-    <h2 class="text-2xl md:text-4xl font-bold text-gray-800 text-center mt-8 mb-4">
-        Explora nuestras <span class="bg-blue-500 text-white px-2 rounded-lg">Categorías</span> de productos
-    </h2>
+    <!-- Sección main-index aside-category-->
 
-    <div class="mx-auto my-12 px-4 sm:px-8 md:px-16 lg:px-20">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-screen-lg mx-auto">
-            <div class="relative group -z-10">
-                <img class="h-auto max-w-full rounded-lg transition-opacity duration-300 group-hover:opacity-50"
-                    src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg" alt="">
-                <!-- Texto superior -->
-                <div class="absolute top-4 left-4 text-white bg-gray-800 px-2 rounded-xl opacity-70 sm:opacity-70">
-                    <h3 class="font-bold text-lg">Categoría 1</h3>
-                    <p class="text-sm">Subtítulo 1</p>
+    <div class="max-w-7xl mx-auto mt-6 px-8">
+        <content x-data="{ mobileSidebarOpen: false }" class="grid grid-cols-5 max-w-7xl mx-auto mt-6">
+            <movileSidebarNav class="md:hidden col-span-full mx-auto mb-6 z-10 relative">
+                <a @click="mobileSidebarOpen = !mobileSidebarOpen"
+                    class="flex items-center cursor-pointer select-none font-bold hover:bg-indigo-100 rounded-lg p-3">
+                    <span>Categorías</span>
+                    <img x-bind:class="mobileSidebarOpen && 'rotate-180 duration-300'" class="w-4 ml-1.5"
+                        src="https://img.icons8.com/small/32/777777/expand-arrow.png" />
+                </a>
+            </movileSidebarNav>
+            <main class="col-span-full md:col-span-4 mx-[5%] md:mx-[5%] order-1 md:order-2">
+                <div class="py-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    @foreach ($latestProducts as $product)
+                        <div class="flex w-full">
+                            <x-products.product-card :product="$product" />
+                        </div>
+                    @endforeach
                 </div>
-                <!-- Botón al pasar el mouse -->
-                <button
-                    class="absolute top-3/4 left-1/4 transform -translate-x-1/2 -translate-y-1/2 px-4 py-2 bg-gray-500 text-white font-bold rounded-lg opacity-40 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-300">
-                    Comprar
-                </button>
-            </div>
-        </div>
-    </div>
+                <div class="flex justify-center mt-4">
+                    <a wire:navigate href="{{ route('articulos') }}"
+                        class="inline-flex items-center px-4 py-2 text-sm text-center text-white bg-green-500 rounded-lg hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-gray-300 dark:hover:bg-gray-700 dark:focus:ring-gray-800 font5">
+                        Ver más productos
+                        <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M1 5h12m0 0L9 1m4 4L9 9" />
+                        </svg>
+                    </a>
+                </div>
 
-    <section class="bg-gray-50 py-8 antialiased dark:bg-gray-900 md:py-12">
-        <h2 class="text-2xl md:text-4xl font-bold text-gray-800 text-center my-8">
-            No <span class="text-blue-600">te pierdas</span> estas <span
-                class="bg-blue-800 text-white px-2 rounded-lg">Promociones</span>
-        </h2>
-        <div class="mx-auto max-w-screen-xl px-4 2xl:px-0">
-            <div class="mb-4 grid gap-4 sm:grid-cols-2 md:mb-8 lg:grid-cols-3 xl:grid-cols-4">
-                <div
-                    class="rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
-                    <div class="h-56 w-full">
-                        <a href="#">
-                            <img class="mx-auto h-full dark:hidden"
-                                src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front.svg"
-                                alt="" />
-                            <img class="mx-auto hidden h-full dark:block"
-                                src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front-dark.svg"
-                                alt="" />
-                        </a>
-                    </div>
-                    <div class="pt-6">
-                        <div class="mb-4 flex items-center justify-between gap-4">
-                            <span
-                                class="me-2 rounded bg-primary-100 px-2.5 py-0.5 text-xs font-medium text-primary-800 dark:bg-primary-900 dark:text-primary-300">
-                                Up to 35% off </span>
-
-                            <div class="flex items-center justify-end gap-1">
-                                <button type="button" data-tooltip-target="tooltip-quick-look"
-                                    class="rounded-lg p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                                    <span class="sr-only"> Quick look </span>
-                                    <svg class="h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                        width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                        <path stroke="currentColor" stroke-width="2"
-                                            d="M21 12c0 1.2-4.03 6-9 6s-9-4.8-9-6c0-1.2 4.03-6 9-6s9 4.8 9 6Z" />
-                                        <path stroke="currentColor" stroke-width="2"
-                                            d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                                    </svg>
-                                </button>
-                                <div id="tooltip-quick-look" role="tooltip"
-                                    class="tooltip invisible absolute z-10 inline-block rounded-lg bg-gray-900 px-3 py-2 text-sm font-medium text-white opacity-0 shadow-sm transition-opacity duration-300 dark:bg-gray-700"
-                                    data-popper-placement="top">
-                                    Quick look
-                                    <div class="tooltip-arrow" data-popper-arrow=""></div>
+                <!-- Sección promociones -->
+                <section class="bg-gray-50 py-8 antialiased dark:bg-gray-900 md:py-12">
+                    <h2 class="text-2xl md:text-4xl font-bold text-gray-800 text-center my-8">
+                        No <span class="text-blue-600">te pierdas</span> estas <span
+                            class="bg-blue-800 text-white px-2 rounded-lg">Promociones</span>
+                    </h2>
+                    <div class="mx-auto max-w-screen-xl px-4 2xl:px-0">
+                        <div class="mb-4 grid grid-cols-1 gap-4 sm:grid-cols-2 md:mb-8 lg:grid-cols-3">
+                            @foreach ($featuredProducts as $fProduct)
+                                <div class="flex w-full">
+                                    <x-products.product-card :product="$fProduct" />
                                 </div>
-
-                                <button type="button" data-tooltip-target="tooltip-add-to-favorites"
-                                    class="rounded-lg p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                                    <span class="sr-only"> Add to Favorites </span>
-                                    <svg class="h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                        fill="none" viewBox="0 0 24 24">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M12 6C6.5 1 1 8 5.8 13l6.2 7 6.2-7C23 8 17.5 1 12 6Z" />
-                                    </svg>
-                                </button>
-                                <div id="tooltip-add-to-favorites" role="tooltip"
-                                    class="tooltip invisible absolute z-10 inline-block rounded-lg bg-gray-900 px-3 py-2 text-sm font-medium text-white opacity-0 shadow-sm transition-opacity duration-300 dark:bg-gray-700"
-                                    data-popper-placement="top">
-                                    Add to favorites
-                                    <div class="tooltip-arrow" data-popper-arrow=""></div>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
-
-                        <a href="#"
-                            class="text-lg font-semibold leading-tight text-gray-900 hover:underline dark:text-white">Apple
-                            iMac 27", 1TB HDD, Retina 5K Display, M3 Max</a>
-
-                        <div class="mt-2 flex items-center gap-2">
-                            <div class="flex items-center">
-                                <svg class="h-4 w-4 text-yellow-400" aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                                    <path
-                                        d="M13.8 4.2a2 2 0 0 0-3.6 0L8.4 8.4l-4.6.3a2 2 0 0 0-1.1 3.5l3.5 3-1 4.4c-.5 1.7 1.4 3 2.9 2.1l3.9-2.3 3.9 2.3c1.5 1 3.4-.4 3-2.1l-1-4.4 3.4-3a2 2 0 0 0-1.1-3.5l-4.6-.3-1.8-4.2Z" />
-                                </svg>
-
-                                <svg class="h-4 w-4 text-yellow-400" aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                                    <path
-                                        d="M13.8 4.2a2 2 0 0 0-3.6 0L8.4 8.4l-4.6.3a2 2 0 0 0-1.1 3.5l3.5 3-1 4.4c-.5 1.7 1.4 3 2.9 2.1l3.9-2.3 3.9 2.3c1.5 1 3.4-.4 3-2.1l-1-4.4 3.4-3a2 2 0 0 0-1.1-3.5l-4.6-.3-1.8-4.2Z" />
-                                </svg>
-
-                                <svg class="h-4 w-4 text-yellow-400" aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                                    <path
-                                        d="M13.8 4.2a2 2 0 0 0-3.6 0L8.4 8.4l-4.6.3a2 2 0 0 0-1.1 3.5l3.5 3-1 4.4c-.5 1.7 1.4 3 2.9 2.1l3.9-2.3 3.9 2.3c1.5 1 3.4-.4 3-2.1l-1-4.4 3.4-3a2 2 0 0 0-1.1-3.5l-4.6-.3-1.8-4.2Z" />
-                                </svg>
-
-                                <svg class="h-4 w-4 text-yellow-400" aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                                    <path
-                                        d="M13.8 4.2a2 2 0 0 0-3.6 0L8.4 8.4l-4.6.3a2 2 0 0 0-1.1 3.5l3.5 3-1 4.4c-.5 1.7 1.4 3 2.9 2.1l3.9-2.3 3.9 2.3c1.5 1 3.4-.4 3-2.1l-1-4.4 3.4-3a2 2 0 0 0-1.1-3.5l-4.6-.3-1.8-4.2Z" />
-                                </svg>
-
-                                <svg class="h-4 w-4 text-yellow-400" aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                                    <path
-                                        d="M13.8 4.2a2 2 0 0 0-3.6 0L8.4 8.4l-4.6.3a2 2 0 0 0-1.1 3.5l3.5 3-1 4.4c-.5 1.7 1.4 3 2.9 2.1l3.9-2.3 3.9 2.3c1.5 1 3.4-.4 3-2.1l-1-4.4 3.4-3a2 2 0 0 0-1.1-3.5l-4.6-.3-1.8-4.2Z" />
-                                </svg>
-                            </div>
-
-                            <p class="text-sm font-medium text-gray-900 dark:text-white">5.0</p>
-                            <p class="text-sm font-medium text-gray-500 dark:text-gray-400">(455)</p>
-                        </div>
-
-                        <ul class="mt-2 flex items-center gap-4">
-                            <li class="flex items-center gap-2">
-                                <svg class="h-4 w-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M13 7h6l2 4m-8-4v8m0-8V6a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v9h2m8 0H9m4 0h2m4 0h2v-4m0 0h-5m3.5 5.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Zm-10 0a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Z" />
-                                </svg>
-                                <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Fast Delivery</p>
-                            </li>
-
-                            <li class="flex items-center gap-2">
-                                <svg class="h-4 w-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
-                                        d="M8 7V6c0-.6.4-1 1-1h11c.6 0 1 .4 1 1v7c0 .6-.4 1-1 1h-1M3 18v-7c0-.6.4-1 1-1h11c.6 0 1 .4 1 1v7c0 .6-.4 1-1 1H4a1 1 0 0 1-1-1Zm8-3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
-                                </svg>
-                                <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Best Price</p>
-                            </li>
-                        </ul>
-
-                        <div class="mt-4 flex items-center justify-between gap-4">
-                            <p class="text-2xl font-extrabold leading-tight text-gray-900 dark:text-white">$1,699</p>
-
+                        <div class="w-full text-center">
                             <button type="button"
-                                class="inline-flex items-center rounded-lg bg-primary-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4  focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
-                                <svg class="-ms-2 me-2 h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                    width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M4 4h1.5L8 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm.75-3H7.5M11 7H6.312M17 4v6m-3-3h6" />
-                                </svg>
-                                Add to cart
-                            </button>
+                                class="rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700">Show
+                                more</button>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="w-full text-center">
-                <button type="button"
-                    class="rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700">Show
-                    more</button>
-            </div>
-        </div>
-    </section>
+                </section>
+            </main>
+            <aside x-show="mobileSidebarOpen" x-cloak
+                class="md:!block col-span-full md:col-span-1 mx-[5%] md:mr-[5%] order-2 md:order-1 sticky"
+                x-transition:enter="duration-300 esae-out" x-transition:enter-start="opacity-0 -mt-96"
+                x-transition:enter-end="opacity-100 -mt-0">
+                <livewire:search-box />
+                <livewire:category-section model-class="\App\Models\ProductCategory" />
+            </aside>
+        </content>
+    </div>
 </div>

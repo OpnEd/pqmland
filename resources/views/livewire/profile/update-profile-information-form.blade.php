@@ -8,24 +8,81 @@ use Livewire\Volt\Component;
 use Livewire\WithFileUploads;
 
 new class extends Component {
+
     use WithFileUploads;
 
+    /* // Lista de atributos del modelo User
+    public array $attributes = [
+        'name', 'last_name', 'email', 'degree', 'professional_profile', 'current_position',
+        'city', 'phone_number', 'url', 'linked_in', 'facebook', 'tweeter', 'instagram', 'birth_date'
+    ];
+
+    public $profilePhoto; */
+
+
     public string $name = '';
+    public ?string $last_name = null;
     public string $email = '';
     public $profilePhoto;
-    public string $degree;
-    public string $professional_profile;
+    public ?string $degree = null;
+    public ?string $professional_profile = null;
+    public ?string $current_position = null;
+    public ?string $city = null;
+    public ?string $phone_number = null;
+    public ?string $url = null;
+    public ?string $linked_in = null;
+    public ?string $facebook = null;
+    public ?string $tweeter = null;
+    public ?string $instagram = null;
+    public ?string $birth_date = null;
 
     /**
      * Mount the component.
      */
     public function mount(): void
     {
+        /* // Inicializa los valores de los atributos desde el usuario autenticado
+        $user = Auth::user();
+        foreach ($this->attributes as $attribute) {
+            $this->$attribute = $user->$attribute;
+        } */
         $this->name = Auth::user()->name;
+        $this->last_name = Auth::user()->last_name;
         $this->email = Auth::user()->email;
         $this->degree = Auth::user()->degree;
         $this->professional_profile = Auth::user()->professional_profile;
+        $this->current_position = Auth::user()->current_position;
+        $this->city = Auth::user()->city;
+        $this->phone_number = Auth::user()->phone_number;
+        $this->url = Auth::user()->url;
+        $this->linked_in = Auth::user()->linked_in;
+        $this->facebook = Auth::user()->facebook;
+        $this->tweeter = Auth::user()->tweeter;
+        $this->instagram = Auth::user()->instagram;
+        $this->birth_date = Auth::user()->birth_date;
     }
+
+    /* public function rules(): array
+    {
+        $userId = Auth::id();
+        return [
+            'name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(User::class)->ignore($userId)],
+            'profilePhoto' => ['nullable', 'image', 'max:1024'],
+            'degree' => ['required', 'string', 'max:255'],
+            'professional_profile' => ['required', 'string'],
+            'current_position' => ['nullable', 'string', 'max:255'],
+            'city' => ['required', 'string', 'max:255'],
+            'phone_number' => ['required', 'string', 'max:255'],
+            'url' => ['nullable', 'string', 'max:255'],
+            'linked_in' => ['nullable', 'string', 'max:255'],
+            'facebook' => ['nullable', 'string', 'max:255'],
+            'tweeter' => ['nullable', 'string', 'max:255'],
+            'instagram' => ['nullable', 'string', 'max:255'],
+            'birth_date' => ['nullable', 'string', 'max:255'],
+        ];
+    } */
 
     /**
      * Update the profile information for the currently authenticated user.
@@ -36,11 +93,25 @@ new class extends Component {
 
         $validated = $this->validate([
             'name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(User::class)->ignore($user->id)],
             'profilePhoto' => ['nullable', 'image', 'max:1024'],
-            'degree' => ['required', 'string', 'max:255'],
+            'degree' => ['required','string', 'max:255'],
             'professional_profile' => ['required', 'string'],
+            'current_position' => ['nullable', 'string', 'max:255'],
+            'city' => ['required', 'string', 'max:255'],
+            'phone_number' => ['required', 'string', 'max:255'],
+            'url' => ['nullable', 'string', 'max:255'],
+            'linked_in' => ['nullable', 'string', 'max:255'],
+            'facebook' => ['nullable', 'string', 'max:255'],
+            'tweeter' => ['nullable', 'string', 'max:255'],
+            'instagram' => ['nullable', 'string', 'max:255'],
+            'birth_date' => ['nullable', 'string', 'max:255'],
         ]);
+
+        /* $validated = $this->validate();
+
+        $user = Auth::user(); */
 
         // Asignar los datos validados
         $user->fill(collect($validated)->except('profilePhoto')->toArray());
@@ -120,6 +191,13 @@ new class extends Component {
         </div>
 
         <div>
+            <x-input-label for="last_name" :value="__('Last Name')" />
+            <x-text-input wire:model="last_name" id="last_name" name="last_name" type="text"
+                class="mt-1 block w-full" required autofocus autocomplete="last_name" />
+            <x-input-error class="mt-2" :messages="$errors->get('last_name')" />
+        </div>
+
+        <div>
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input wire:model="email" id="email" name="email" type="email" class="mt-1 block w-full"
                 required autocomplete="username" />
@@ -146,39 +224,24 @@ new class extends Component {
         </div>
         <div>
             <x-input-label for="degree" :value="__('Degree')" />
-            <x-text-input
-                wire:model="degree"
-                id="degree"
-                name="degree"
-                type="text"
-                class="mt-1 block w-full"
-                required
-                autofocus
-                autocomplete="degree"
-            />
+            <x-text-input wire:model="degree" id="degree" name="degree" type="text" class="mt-1 block w-full"
+                required autofocus autocomplete="degree" />
             <x-input-error class="mt-2" :messages="$errors->get('degree')" />
         </div>
 
         <div>
             <x-input-label for="professional_profile" :value="__('Professional Profile')" />
-            <x-textarea-input
-                wire:model="professional_profile"
-                id="professional_profile"
-                name="professional_profile"
-                type="text"
-                class="mt-1 block w-full"
-                required
-                autofocus
-                rows="5"
-                placeholder="Define tu perfil profesional..."
-                autocomplete="professional_profile"
-            ></x-textarea-input>
+            <x-textarea-input wire:model="professional_profile" id="professional_profile" name="professional_profile"
+                type="text" class="mt-1 block w-full" required autofocus rows="5"
+                placeholder="Define tu perfil profesional..." autocomplete="professional_profile"></x-textarea-input>
             <x-input-error class="mt-2" :messages="$errors->get('professional_profile')" />
         </div>
         <div>
             <x-input-label for="current_position" :value="__('Current Position')" />
-            <x-text-input wire:model="current_position" id="current_position" name="current_position" type="text" class="mt-1 block w-full"
-                autofocus placeholder="Escribe así: 'Nombre del cargo' en 'nombre de la empresa'" autocomplete="current_position" />
+            <x-text-input wire:model="current_position" id="current_position" name="current_position" type="text"
+                class="mt-1 block w-full" autofocus
+                placeholder="Escribe así: 'Nombre del cargo' en 'nombre de la empresa'"
+                autocomplete="current_position" />
             <x-input-error class="mt-2" :messages="$errors->get('current_position')" />
         </div>
         <div>
@@ -189,8 +252,8 @@ new class extends Component {
         </div>
         <div>
             <x-input-label for="phone_number" :value="__('Phone Number')" />
-            <x-text-input wire:model="phone_number" id="phone_number" name="phone_number" type="text" class="mt-1 block w-full"
-                required autofocus autocomplete="phone_number" />
+            <x-text-input wire:model="phone_number" id="phone_number" name="phone_number" type="text"
+                class="mt-1 block w-full" required autofocus autocomplete="phone_number" />
             <x-input-error class="mt-2" :messages="$errors->get('phone_number')" />
         </div>
         <div>
@@ -201,45 +264,35 @@ new class extends Component {
         </div>
         <div>
             <x-input-label for="linked_in" :value="__('LinkedIn')" />
-            <x-text-input wire:model="linked_in" id="linked_in" name="linked_in" type="text" class="mt-1 block w-full"
-                autofocus placeholder="https://www.linkedin.com/in/pepito-34a88888/" autocomplete="linked_in" />
+            <x-text-input wire:model="linked_in" id="linked_in" name="linked_in" type="text"
+                class="mt-1 block w-full" autofocus placeholder="https://www.linkedin.com/in/pepito-34a88888/"
+                autocomplete="linked_in" />
             <x-input-error class="mt-2" :messages="$errors->get('linked_in')" />
         </div>
         <div>
             <x-input-label for="facebook" :value="__('Facebook')" />
-            <x-text-input wire:model="facebook" id="facebook" name="facebook" type="text" class="mt-1 block w-full"
-                autofocus placeholder="https://www.facebook.com/profile.php?id=100063906746595" autocomplete="facebook" />
+            <x-text-input wire:model="facebook" id="facebook" name="facebook" type="text"
+                class="mt-1 block w-full" autofocus
+                placeholder="https://www.facebook.com/profile.php?id=100063906746595" autocomplete="facebook" />
             <x-input-error class="mt-2" :messages="$errors->get('facebook')" />
         </div>
         <div>
             <x-input-label for="tweeter" :value="__('Twitter')" />
-            <x-text-input wire:model="tweeter" id="tweeter" name="tweeter" type="text" class="mt-1 block w-full"
-                autofocus placeholder="@pqm" autocomplete="tweeter" />
+            <x-text-input wire:model="tweeter" id="tweeter" name="tweeter" type="text"
+                class="mt-1 block w-full" autofocus placeholder="@pqm" autocomplete="tweeter" />
             <x-input-error class="mt-2" :messages="$errors->get('tweeter')" />
         </div>
         <div>
             <x-input-label for="instagram" :value="__('Instagram')" />
-            <x-text-input wire:model="instagram" id="instagram" name="instagram" type="text" class="mt-1 block w-full"
-                autofocus placeholder="@pqm" autocomplete="instagram" />
+            <x-text-input wire:model="instagram" id="instagram" name="instagram" type="text"
+                class="mt-1 block w-full" autofocus placeholder="@pqm" autocomplete="instagram" />
             <x-input-error class="mt-2" :messages="$errors->get('instagram')" />
         </div>
         <div>
             <x-input-label for="birth_date" :value="__('Birth Date')" />
-            <x-date-input
-                wire:model="birth_date"
-                id="birth_date"
-                name="birth_date"
-                class="mt-1 block w-full"
-                autofocus
-                autocomplete="birth_date"
-            />
+            <x-date-input wire:model="birth_date" id="birth_date" name="birth_date" class="mt-1 block w-full"
+                autofocus autocomplete="birth_date" />
             <x-input-error class="mt-2" :messages="$errors->get('birth_date')" />
-        </div>
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input wire:model="name" id="name" name="name" type="text" class="mt-1 block w-full"
-                required autofocus autocomplete="name" />
-            <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
 
         <div class="flex items-center gap-4">
@@ -250,42 +303,4 @@ new class extends Component {
             </x-action-message>
         </div>
     </form>
-
-    <span>
-        <hr class="solid text-gray-500 mt-6 mb-3">
-    </span>
-
-    <h2 class="text-lg font-medium text-gray-900">
-        {{ __('Curriculum data') }}
-    </h2>
-
-    <p class="mt-1 mb-3 text-sm text-gray-600">
-        {{ __("Update your curriculum's profile information.") }}
-    </p>
-
-    <div class="container mx-auto space-y-4">
-        <livewire:user-profile />
-    </div>
-
-    <span>
-        <hr class="solid text-gray-500 mt-6 mb-3">
-    </span>
-
-    <h2 class="text-lg font-medium text-gray-900">
-        {{ __('Curriculum education and experience') }}
-    </h2>
-
-    <p class="mt-1 mb-3 text-sm text-gray-600">
-        {{ __("Update your curriculum's education and experience.") }}
-    </p>
-    <div class="space-y-8">
-        <!-- Sección: Educación -->
-        <livewire:dynamic-input section="education" :fields="['titulo', 'descripcion', 'año']" :existing-entries="auth()->user()->education->toArray()" />
-
-        <!-- Sección: Experiencia Laboral -->
-        <livewire:dynamic-input section="work_experience" :fields="['empresa', 'puesto', 'descripcion', 'año_inicio', 'año_fin']" :existing-entries="auth()->user()->workExperience->toArray()" />
-
-        <!-- Sección: Proyectos -->
-        <livewire:dynamic-input section="projects" :fields="['nombre', 'descripcion', 'año']" :existing-entries="auth()->user()->projects->toArray()" />
-    </div>
 </section>

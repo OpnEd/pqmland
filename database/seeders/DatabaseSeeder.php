@@ -38,6 +38,8 @@ class DatabaseSeeder extends Seeder
             CommentSeeder::class,
             ProductCategorySeeder::class,
             ProductSeeder::class,
+            TestimonioSeeder::class,
+            WelcomePageSeeder::class,
         ]);
     }
 }

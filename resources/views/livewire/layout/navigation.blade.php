@@ -17,7 +17,7 @@ new class extends Component {
 
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
     <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
@@ -30,22 +30,22 @@ new class extends Component {
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('inicio')" :active="request()->routeIs('inicio')" wire:navigate>
-                        {{ __('Home') }}
+                        {{ __('messages.nav.home') }}
                     </x-nav-link>
                     <x-nav-link :href="route('nosotros')" :active="request()->routeIs('nosotros')" wire:navigate>
-                        {{ __('About') }}
+                        {{ __('messages.nav.about') }}
                     </x-nav-link>
                     <x-nav-link :href="route('blog')" :active="request()->routeIs('blog')" wire:navigate>
                         {{ __('Blog') }}
                     </x-nav-link>
                     <x-nav-link :href="route('tienda')" :active="request()->routeIs('tienda')" wire:navigate>
-                        {{ __('Store') }}
+                        {{ __('messages.nav.store') }}
                     </x-nav-link>
                     <x-nav-link :href="route('contacto')" :active="request()->routeIs('contacto')" wire:navigate>
-                        {{ __('Contact') }}
+                        {{ __('messages.nav.contact') }}
                     </x-nav-link>
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
-                        {{ __('Dashboard') }}
+                        {{ __('messages.nav.dashboard') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -72,13 +72,13 @@ new class extends Component {
 
                     <x-slot name="content">
                         <x-dropdown-link :href="route('profile')" wire:navigate>
-                            {{ __('Profile') }}
+                            {{ __('messages.nav.profile') }}
                         </x-dropdown-link>
 
                         <!-- Authentication -->
                         <button wire:click="logout" class="w-full text-start">
                             <x-dropdown-link>
-                                {{ __('Log Out') }}
+                                {{ __('messages.auth.logout') }}
                             </x-dropdown-link>
                         </button>
                     </x-slot>
@@ -105,22 +105,22 @@ new class extends Component {
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('inicio')" :active="request()->routeIs('inicio')" wire:navigate>
-                {{ __('Home') }}
+                {{ __('messages.nav.home') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('nosotros')" :active="request()->routeIs('nosotros')" wire:navigate>
-                {{ __('About') }}
+                {{ __('messages.nav.about') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('blog')" :active="request()->routeIs('blog')" wire:navigate>
                 {{ __('Blog') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('tienda')" :active="request()->routeIs('tienda')" wire:navigate>
-                {{ __('Store') }}
+                {{ __('messages.nav.store') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('contacto')" :active="request()->routeIs('contacto')" wire:navigate>
-                {{ __('Contact') }}
+                {{ __('messages.nav.contact') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
-                {{ __('Dashboard') }}
+                {{ __('messages.nav.dashboard') }}
             </x-responsive-nav-link>
         </div>
 
@@ -134,13 +134,13 @@ new class extends Component {
 
             <div class="mt-3 space-y-1">
                 <x-responsive-nav-link :href="route('profile')" wire:navigate>
-                    {{ __('Profile') }}
+                    {{ __('messages.nav.profile') }}
                 </x-responsive-nav-link>
 
                 <!-- Authentication -->
                 <button wire:click="logout" class="w-full text-start">
                     <x-responsive-nav-link>
-                        {{ __('Log Out') }}
+                        {{ __('messages.auth.logout') }}
                     </x-responsive-nav-link>
                 </button>
             </div>

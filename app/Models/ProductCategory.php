@@ -22,4 +22,15 @@ class ProductCategory extends Model
     {
         return $this->hasMany(Product::class);
     }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
+    // Retorna la ruta dinámica para esta categoría
+    public function getRouteAttribute()
+    {
+        return route('articulos', ['category' => $this->slug]);
+    }
 }

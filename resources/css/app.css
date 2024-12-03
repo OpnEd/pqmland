@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Tu CSS personalizado y configuraciones de Tailwind */
+
+
 [x-cloak] {
 display: none !important;
 }
@@ -135,3 +138,20 @@ animation: 1s fadeIn;
     opacity: 1;
 }
 
+.parallax-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    transform: translateZ(-1px) scale(2);
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+}
+
+.grid > *:only-child {
+    grid-column: span 3; /* Hace que el único elemento ocupe las 3 columnas */
+    justify-self: center; /* Lo centra horizontalmente */
+  }

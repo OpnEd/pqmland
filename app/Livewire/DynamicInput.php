@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\Education;
 use App\Models\Project;
 use App\Models\WorkExperience;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Str;
 
@@ -14,6 +15,9 @@ class DynamicInput extends Component
     public $fields;   // Campos de la sección (['titulo', 'descripcion', 'año'])
     public $entries = []; // Datos dinámicos ingresados por el usuario
     public $userId;
+    public $educacion = [];
+    public $workExperience = [];
+    public $projects = [];
 
     public function mount(
         $section,
@@ -22,11 +26,15 @@ class DynamicInput extends Component
         //$existingEntries = []
         )
     {
+//        dd(Auth::user()->education[0]->año);
         $this->section = $section;
         $this->fields = $fields;
         //$this->entries = $existingEntries;
-        $this->userId = auth()->id();
+        $this->userId = Auth::user()->id;
         //$this->userId = $userId;
+        $this->educacion = Auth::user()->education->toArray();
+        $this->workExperience = Auth::user()->workExperience->toArray(); // Array con los registros de WorkExperience
+        $this->projects = Auth::user()->projects->toArray();
         $this->loadEntries();
     }
 
@@ -37,6 +45,15 @@ class DynamicInput extends Component
             ->get(['id', ...$this->fields]) // Incluir el ID y los campos necesarios
             //->map(function ($entry) {
             //    return $entry->toArray(); // Asegura que la clave `id` esté presente
+            //})
+            //->map(function ($entry) {
+            //    if (isset($entry['año_inicio'])) {
+            //        $entry['año_inicio'] = optional($entry['año_inicio'])->format('Y-m-d');
+            //    }
+            //    if (isset($entry['año_fin'])) {
+            //        $entry['año_fin'] = optional($entry['año_fin'])->format('Y-m-d');
+            //    }
+            //    return $entry->toArray();
             //})
             ->toArray();
     }

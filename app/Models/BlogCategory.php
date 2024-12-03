@@ -21,4 +21,10 @@ class BlogCategory extends Model
     {
         return $this->hasMany(Blog::class);
     }
+
+    // Retorna la ruta dinámica para esta categoría
+    public function getRouteAttribute()
+    {
+        return route('posts', ['category' => $this->slug]);
+    }
 }

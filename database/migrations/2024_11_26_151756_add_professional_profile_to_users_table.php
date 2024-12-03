@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('last_name')->nullable()->after('name');
-            $table->text('professional_profile')->after('degree');
+            $table->text('professional_profile')->nullable()->after('degree');
             $table->string('current_position')->nullable()->after('professional_profile');
             $table->string('city')->nullable()->after('current_position');
-            $table->string('phone_number')->after('city');
+            $table->string('phone_number')->nullable()->after('city');
             $table->string('url')->nullable()->after('phone_number');
             $table->string('linked_in')->nullable()->after('url');
             $table->string('facebook')->nullable()->after('linked_in');

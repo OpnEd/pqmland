@@ -16,39 +16,11 @@ class ProductCategorySeeder extends Seeder
     {
         $categories = [
             [
-                'name' => 'Electrónica',
-                'description' => 'Encuentra los mejores productos de tecnología y electrónica.',
-                'cover' => 'electronics-cover.jpg',
-                'route' => 'categorias.electronica',
-                'slug' => Str::slug('Electrónica'),
-            ],
-            [
-                'name' => 'Ropa',
-                'description' => 'Moda para todas las estaciones y estilos.',
-                'cover' => 'clothing-cover.jpg',
-                'route' => 'categorias.ropa',
-                'slug' => Str::slug('Ropa'),
-            ],
-            [
-                'name' => 'Hogar',
-                'description' => 'Productos para mejorar y decorar tu hogar.',
-                'cover' => 'home-cover.jpg',
-                'route' => 'categorias.hogar',
-                'slug' => Str::slug('Hogar'),
-            ],
-            [
-                'name' => 'Juguetes',
-                'description' => 'Divertidos juguetes para todas las edades.',
-                'cover' => 'toys-cover.jpg',
-                'route' => 'categorias.juguetes',
-                'slug' => Str::slug('Juguetes'),
-            ],
-            [
-                'name' => 'Deportes',
-                'description' => 'Equipo y accesorios deportivos de alta calidad.',
-                'cover' => 'sports-cover.jpg',
-                'route' => 'categorias.deportes',
-                'slug' => Str::slug('Deportes'),
+            'name' => 'Cannabis',
+            'description' => 'Lo mejor de cannabis sativa en productos naturales, novedosos y efectivos',
+            'cover' => 'cannabis',
+            'route' => 'cannabis',
+            'slug' => 'cannabis',
             ],
         ];
 

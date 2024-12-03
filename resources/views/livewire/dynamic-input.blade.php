@@ -4,19 +4,40 @@
     <!-- Lista de entradas dinámicas -->
     <div class="space-y-4">
         @foreach ($entries as $index => $entry)
+        {{-- {{dd($entries)}} --}}
             <div class="border p-4 rounded-md space-y-2">
                 @foreach ($fields as $field)
                     <div>
                         <label for="{{ $field }}_{{ $index }}" class="block text-sm font-medium text-gray-700">
                             {{ __(ucfirst($field)) }}
                         </label>
-                        <input
-                            type="text"
-                            id="{{ $field }}_{{ $index }}"
-                            wire:model="entries.{{ $index }}.{{ $field }}"
-                            class="mt-1 block w-full border-gray-300 rounded-md"
-                            placeholder="{{ __('Ingrese ') . __(ucfirst($field)) }}"
-                        />
+                        @if ($field === 'año' || $field === 'año_inicio' || $field === 'año_fin')
+                            <input
+                                type="date"
+                                id="{{ $field }}_{{ $index }}"
+                                wire:model="entries.{{ $index }}.{{ $field }}"
+                                class="mt-1 block w-full border-gray-300 rounded-md"
+                                placeholder="{{ __('Ingrese ') . __(ucfirst($field)) }}"
+                            />
+                        @else
+                            @if ($field === 'descripcion')
+                                <x-textarea-input
+                                    type="text"
+                                    id="{{ $field }}_{{ $index }}"
+                                    wire:model="entries.{{ $index }}.{{ $field }}"
+                                    class="mt-1 block w-full border-gray-300 rounded-md"
+                                    placeholder="{{ __('Ingrese ') . __(ucfirst($field)) }}"
+                                ></x-textarea-input>
+                            @else
+                                <input
+                                    type="text"
+                                    id="{{ $field }}_{{ $index }}"
+                                    wire:model="entries.{{ $index }}.{{ $field }}"
+                                    class="mt-1 block w-full border-gray-300 rounded-md"
+                                    placeholder="{{ __('Ingrese ') . __(ucfirst($field)) }}"
+                                />
+                            @endif
+                        @endif
                     </div>
                 @endforeach
                 @if (!isset($entry['id'])) <!-- Solo mostrar si el registro tiene un ID -->

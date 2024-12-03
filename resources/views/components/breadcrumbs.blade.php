@@ -32,7 +32,7 @@
                                     d="m1 9 4-4-4-4" />
                             </svg>
                             <span
-                                class="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">{{ $breadcrumb['name'] }}</span>
+                                class="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">{{ strtolower($breadcrumb['name']) }}</span>
                         </div>
                     </li>
                 @else
