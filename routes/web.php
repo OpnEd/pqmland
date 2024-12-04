@@ -5,6 +5,7 @@ use App\Livewire\Contacto;
 use App\Livewire\Nosotros;
 use App\Livewire\PostList;
 Use App\Http\Controllers\PolicyTermsController;
+use App\Livewire\Carrito;
 use App\Livewire\CurriculumVitae;
 use App\Livewire\ProductList;
 use App\Livewire\ShowPost;
@@ -36,6 +37,8 @@ Route::get('/articulos', ProductList::class)->name('articulos');
 
 Route::get('/articulos/{product}', ShowProduct::class)->name('articulo.show');
 
+Route::get('/carrito', Carrito::class)->name('carrito');
+
 Route::get('/terminos', [PolicyTermsController::class, 'showTerms'])->name('terminos');
 
 Route::get('/privacidad', [PolicyTermsController::class, 'showPolicy'])->name('privacidad');
@@ -65,5 +68,10 @@ Route::view('dashboard', 'dashboard')
 Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
+
+Route::get('/debug-carrito', function () {
+        dd(session('carrito'));
+    });
+
 
 require __DIR__.'/auth.php';

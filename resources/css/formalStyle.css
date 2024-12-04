@@ -1,0 +1,194 @@
+/* 1. Configuración global */
+body {
+    font-family: "Georgia", "Times New Roman", serif; /* Fuentes clásicas y formales */
+    color: #2c2c2c; /* Gris oscuro para menor fatiga visual */
+    background-color: #f9f9f9; /* Fondo suave para contraste delicado */
+    line-height: 1.8; /* Espaciado generoso para facilitar la lectura */
+    margin: 0;
+    padding: 0;
+}
+
+/* 2. Títulos principales */
+h1, h2, h3 {
+    font-family: "Garamond", "Palatino Linotype", serif; /* Fuentes elegantes */
+    font-weight: 400; /* Peso moderado */
+    color: #1a1a1a; /* Más oscuro que el cuerpo del texto */
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 2.5rem; /* Tamaño destacado */
+    text-align: center; /* Centrado para títulos principales */
+    text-transform: uppercase; /* Mayúsculas para formalidad */
+    letter-spacing: 1px; /* Espaciado entre letras */
+    border-bottom: 2px solid #ccc; /* Línea decorativa */
+    padding-bottom: 10px;
+}
+
+h2 {
+    font-size: 2rem;
+    margin-top: 30px;
+    text-transform: capitalize; /* Estilo sobrio */
+}
+
+h3 {
+    font-size: 1.75rem;
+    margin-top: 20px;
+    font-style: italic; /* Toque académico */
+}
+
+/* 3. Texto del párrafo */
+p {
+    font-family: "Georgia", "Times New Roman", serif;
+    font-size: 1.125rem; /* Tamaño ligeramente mayor para legibilidad */
+    text-align: justify; /* Justificado para estilo académico */
+    margin: 15px 0;
+    text-indent: 2em; /* Sangría inicial */
+}
+
+/* 4. Citas */
+blockquote {
+    font-family: "Garamond", serif;
+    font-size: 1.25rem;
+    font-style: italic;
+    color: #555; /* Gris suave */
+    border-left: 4px solid #ccc;
+    margin: 20px 0;
+    padding-left: 15px;
+}
+
+/* 5. Listas */
+ul, ol {
+    font-family: "Georgia", serif;
+    margin: 20px 40px;
+    font-size: 1.125rem;
+}
+
+li {
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+/* 6. Tablas */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 20px 0;
+    font-family: "Georgia", serif;
+    font-size: 1rem;
+    background-color: #ffffff; /* Fondo blanco puro */
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px 15px;
+    text-align: left;
+}
+
+th {
+    font-weight: 700;
+    background-color: #f2f2f2;
+}
+
+/* 7. Enlaces */
+a {
+    color: #1a5dab; /* Azul sobrio */
+    text-decoration: none;
+    font-style: italic;
+}
+
+a:hover {
+    color: #10457c; /* Azul más oscuro en hover */
+    text-decoration: underline;
+}
+
+/* 8. Notas al pie */
+.footnote {
+    font-size: 0.875rem;
+    color: #666; /* Texto más tenue */
+    margin-top: 20px;
+    line-height: 1.5;
+}
+
+/* 9. Código o texto preformateado */
+code, pre {
+    font-family: "Courier New", monospace;
+    background-color: #f4f4f4;
+    color: #333;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+/* 10. Personalización adicional */
+em {
+    font-style: italic;
+    color: #444;
+}
+
+strong {
+    font-weight: bold;
+    color: #000;
+}
+
+/* 11. Encabezado de página */
+header {
+    text-align: center;
+    font-family: "Garamond", serif;
+    margin: 20px 0;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+
+footer {
+    text-align: center;
+    font-size: 0.875rem;
+    font-family: "Georgia", serif;
+    color: #777;
+    margin-top: 40px;
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+}
+
+/**
+### **Descripción y Propósito**
+1. **Fuentes clásicas:** Se utilizan fuentes serif (Georgia, Times New Roman, Garamond) conocidas por su formalidad y legibilidad en contextos académicos.
+2. **Espaciado amplio:** Se da prioridad a la claridad mediante un espaciado generoso en líneas y márgenes.
+3. **Colores sobrios:** Paleta en tonos gris y azul, lejos de colores llamativos, para evocar seriedad y profesionalismo.
+4. **Formato para citas y tablas:** Citas en itálica con líneas decorativas, tablas simples pero elegantes.
+5. **Enlaces destacados:** Colores refinados que no distraen del texto principal.
+
+### **Cómo utilizar**
+- Incluye este CSS en un archivo llamado `styles.css`.
+- Aplica las clases en los elementos correspondientes dentro de tu documento HTML o Blade. Por ejemplo:
+
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Texto Académico</title>
+</head>
+<body>
+    <header>
+        <h1>Ensayo sobre la Literatura Clásica</h1>
+    </header>
+    <article>
+        <h2>Introducción</h2>
+        <p>La literatura clásica constituye uno de los pilares fundamentales del conocimiento humano...</p>
+        <blockquote>
+            "El arte de la literatura no se aprende ni se enseña." — Cicerón
+        </blockquote>
+        <h3>Metodología</h3>
+        <p>Para este análisis, se utilizaron fuentes primarias y secundarias, disponibles en bibliotecas...</p>
+    </article>
+    <footer>
+        &copy; 2024 Ensayos Literarios
+    </footer>
+</body>
+</html>
+```
+
+Esta hoja de estilos está optimizada para contenido textual extenso y de alta calidad. Si necesitas ajustes específicos, puedo ayudarte a personalizarla.*/

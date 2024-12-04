@@ -1,6 +1,8 @@
 @props(['product'])
 
 <div class="rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
+
+    {{-- {{dd($product->category)}} --}}
     @php
         $categoria = strtolower($product->category->name);
         $imagenes = json_decode($product->images);
@@ -17,7 +19,7 @@
             <span
                 class="me-2 rounded bg-primary-100 px-2.5 py-0.5 text-xs font-medium text-primary-800 dark:bg-primary-900 dark:text-primary-300">
                 @if ($product->featured === true)
-                    {!! \Illuminate\Support\Str::markdown($product->featured_description) !!}
+                    {{ $product->featured_description }}
                 @endif
             </span>
 
@@ -57,8 +59,9 @@
             </div>
         </div>
 
-        <a href="#"
-            class="text-lg font-semibold leading-tight text-gray-900 hover:underline dark:text-white">{{ $product->name }}</a>
+        <a href="#" class="text-lg font-semibold leading-tight text-gray-900 hover:underline dark:text-white">
+            {{ $product->name }}
+        </a>
 
         {{-- <div class="mt-2 flex items-center gap-2">
             <div class="flex items-center">
@@ -120,7 +123,7 @@
         <div class="mt-4 flex items-center justify-between gap-2">
             <p class="text-xl font-bold leading-tight text-gray-900 dark:text-white">COP {{ $product->sell_price }}</p>
 
-            <button type="button"
+            <button type="button" wire:click="$dispatchTo('modal-confirm-product','mostrarModalConfirmacion', { productoId: {{ $product->id }} })"
                 class="inline-flex items-center rounded-lg bg-primary-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4  focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
                 <svg class="-ms-2 me-2 h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                     height="24" fill="none" viewBox="0 0 24 24">

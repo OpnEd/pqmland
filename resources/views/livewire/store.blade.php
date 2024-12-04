@@ -126,6 +126,7 @@
                         </div>
                     @endforeach
                 </div>
+                <livewire:modal-confirm-product />
                 <div class="flex justify-center mt-4">
                     <a wire:navigate href="{{ route('articulos') }}"
                         class="inline-flex items-center px-4 py-2 text-sm text-center text-white bg-green-500 rounded-lg hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-gray-300 dark:hover:bg-gray-700 dark:focus:ring-gray-800 font5">
@@ -164,7 +165,6 @@
                 class="md:!block col-span-full md:col-span-1 mx-[5%] md:mr-[5%] order-2 md:order-1 sticky"
                 x-transition:enter="duration-300 esae-out" x-transition:enter-start="opacity-0 -mt-96"
                 x-transition:enter-end="opacity-100 -mt-0">
-                <livewire:search-box />
                 <livewire:category-section model-class="\App\Models\ProductCategory" />
             </aside>
         </content>
