@@ -5,7 +5,7 @@
     {{-- {{dd($product->category)}} --}}
     @php
         $categoria = strtolower($product->category->name);
-        $imagenes = json_decode($product->images);
+        $imagenes = $product->images;
     @endphp
     <div class="h-56 w-full">
         <a href="#">

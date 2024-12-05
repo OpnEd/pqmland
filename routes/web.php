@@ -6,6 +6,7 @@ use App\Livewire\Nosotros;
 use App\Livewire\PostList;
 Use App\Http\Controllers\PolicyTermsController;
 use App\Livewire\Carrito;
+use App\Livewire\CheckoutConfirm;
 use App\Livewire\CurriculumVitae;
 use App\Livewire\ProductList;
 use App\Livewire\ShowPost;
@@ -38,6 +39,8 @@ Route::get('/articulos', ProductList::class)->name('articulos');
 Route::get('/articulos/{product}', ShowProduct::class)->name('articulo.show');
 
 Route::get('/carrito', Carrito::class)->name('carrito');
+
+Route::get('/pago', CheckoutConfirm::class)->name('checkout');
 
 Route::get('/terminos', [PolicyTermsController::class, 'showTerms'])->name('terminos');
 

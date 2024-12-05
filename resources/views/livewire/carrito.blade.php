@@ -1,5 +1,4 @@
-<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-    <h2 class="text-lg font-bold">Carrito de Compras</h2>
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg px-4 md:px-16 max-w-7xl mx-auto mt-6">
     @if (empty($carrito))
         <p>No tienes productos en el carrito.</p>
     @else
@@ -10,65 +9,51 @@
                         <span class="sr-only">Image</span>
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Product
+                        Producto
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Qty
+                        Cantidad
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Price
+                        Precio Unit.
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Action
+                        Precio total
+                    </th>
+                    <th scope="col" class="px-6 py-3">
                     </th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($carrito as $id => $item)
-                    @php
-                        /* $categoria = strtolower($item->category->name);
-                        $imagenes = json_decode($item->images); */
-                    @endphp
-                    <tr
+                    {{-- {{dd($item['imagenes'])}} --}}
+                    <tr {{-- {{dd(Storage::url("images/tienda/{$item['categoria']}/{$item['imagenes'][0] }"))}} --}}
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <td class="p-4">
-                            {{-- <img src="{{ asset('storage/images/tienda/' . $categoria . '/' . $imagenes[0] . '.png') }}"
-                                class="w-16 md:w-32 max-w-full max-h-full" alt="Apple Watch"> --}}
+                            @php
+                                $imageUrl = isset($item['imagenes'])
+                                    ? Storage::url("images/tienda/{$item['categoria']}/{$item['imagenes']}.png")
+                                    : Storage::url('images/tienda/default-image.png');
+                            @endphp
+                            <img src="{{ $imageUrl }}" class="w-12 md:w-28 max-w-full max-h-full"
+                                alt="{{ $item['nombre'] }}">
                         </td>
                         <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
                             {{ $item['nombre'] }}
                         </td>
                         <td class="px-6 py-4">
-                            <div class="flex items-center">
-                                <button
-                                    class="inline-flex items-center justify-center p-1 me-3 text-sm font-medium h-6 w-6 text-gray-500 bg-white border border-gray-300 rounded-full focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
-                                    type="button">
-                                    <span class="sr-only">Quantity button</span>
-                                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                        fill="none" viewBox="0 0 18 2">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                            stroke-width="2" d="M1 1h16" />
-                                    </svg>
-                                </button>
-                                <div>
-                                    <input type="number" id="first_product" value="{{ $item['cantidad'] }}"
-                                        class="bg-gray-50 w-14 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        placeholder="1" required />
-                                </div>
-                                <button
-                                    class="inline-flex items-center justify-center h-6 w-6 p-1 ms-3 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-full focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
-                                    type="button">
-                                    <span class="sr-only">Quantity button</span>
-                                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                        fill="none" viewBox="0 0 18 18">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                            stroke-width="2" d="M9 1v16M1 9h16" />
-                                    </svg>
-                                </button>
-                            </div>
+                            <input
+                                type="number"
+                                min="1"
+                                value="{{ $item['cantidad'] }}"
+                                wire:change="actualizarCantidad({{ $id }}, $event.target.value)"
+                                class="bg-gray-50 w-14 border border-gray-300 text-gray-900 text-sm rounded-lg
+                                       focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1
+                                       dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
+                                       dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                         </td>
                         <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                            {{ $item['precio'] }}
+                            ${{ number_format($item['precio'], 2) }}
                         </td>
                         <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
                             ${{ number_format($item['precio'] * $item['cantidad'], 2) }}
@@ -80,8 +65,20 @@
                     </tr>
                 @endforeach
             </tbody>
+            <tfoot>
+                <tr class="bg-gray-100 dark:bg-gray-800">
+                    <td colspan="4" class="px-6 py-4 font-semibold text-right text-gray-900 dark:text-white">Total:</td>
+                    <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
+                        ${{ number_format($this->total, 2) }}
+                    </td>
+                    <td></td>
+                </tr>
+            </tfoot>
         </table>
-        <button class="bg-green-500 text-white py-2 px-4 mt-4" wire:click="$dispatch('checkout')">Procesar
-            Pedido</button>
+        <div class="flex justify-center mt-6">
+            <a wire:navigate href="{{ route('checkout') }}" class="bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:from-green-500 hover:to-green-700 text-white font-bold py-2 px-6 rounded-full shadow-lg hover:shadow-xl transition duration-300 ease-in-out mt-4 mb-12">
+                Procesar Pedido
+            </a>
+        </div>
     @endif
 </div>

@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Support\Facades\Storage;
 
 class Product extends Model
 {
@@ -50,5 +52,26 @@ class Product extends Model
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+
+    public function imageUrl(): Attribute
+    {
+        return Attribute::make(
+            get: function () {
+                // Obtener la categoría del producto
+                $categoryName = $this->category->name ?? 'default';
+
+                // Obtener la primera imagen del array
+                $imageName = $this->images[0] ?? 'default-image.png';
+
+                // Construir la ruta de la imagen
+                $imagePath = $this->image
+                            ? "images/tienda/{$categoryName}/{$imageName}"
+                            : "images/tienda/default-image.png";
+
+                // Generar URL absoluta usando Storage
+                return Storage::url($imagePath);
+            }
+        );
     }
 }

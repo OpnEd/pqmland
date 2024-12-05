@@ -31,6 +31,7 @@
                     </div>
                 @endforeach
             </div>
+            <livewire:modal-confirm-product />
             <div class="my-3">
                 {{ $this->products->links() }}
             </div>

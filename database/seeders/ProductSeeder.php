@@ -39,10 +39,10 @@ class ProductSeeder extends Seeder
             [
                 'name' => 'Bálsamo con CBD',
                 'description' => 'Nabico Balsamo combina aceites naturales de Cannabis, Caléndula, Árnica y Romero en una delicada presentación ideal para disminuir la tensión muscular, hidratar la piel, estimular la recuperación y el descanso del cuerpo. Su practica presentación en lata de aluminio de 60g con efecto caliente es ideal para dejar en tu mesa de noche y usarla antes de dormir. Lata en aluminio que conserva de forma efectiva los ingredientes. No contiene mentol. Registro Invima NSOC79820-17CO. Producto de uso tópico y venta libre. CALÉNDULA: Contribuye a regenerar la piel y producir colágeno. Es muy recomendable para tratar cicatrices. ÁRNICA: Ayuda a reducir la hinchazón y disminuir el dolor. ROMERO: Tiene propiedades antiinflamatorias y antiespasmódicas.',
-                'product_category_id' => 12,
-                'images' => json_encode([
+                'product_category_id' => 1,
+                'images' => [
                     'balsamo-60-g',
-                ]),
+                ],
                 'slug' => Str::slug('Bálsamo con CBD'),
                 'featured' => true,
                 'featured_description' => 'Descuento hasta del 25%',
@@ -60,10 +60,10 @@ class ProductSeeder extends Seeder
 ALCANFOR: Es un aceite natural utilizado para aliviar dolores musculares.
 MENTOL: Es un alcohol secundario saturado que brinda una sensación de frescura cuando se aplica sobre la piel.
 ACEITE DE PINO: Es un aceite esencial natural que ayuda a limpiar de virus, bacterias y mucosidad las vías respiratorias.',
-                'product_category_id' => 12,
-                'images' => json_encode([
+                'product_category_id' => 1,
+                'images' => [
                     'gel-120-ml',
-                ]),
+                ],
                 'slug' => Str::slug('Gel con CBD'),
                 'featured' => false,
                 'featured_description' => '',
@@ -81,10 +81,10 @@ ACEITE DE PINO: Es un aceite esencial natural que ayuda a limpiar de virus, bact
 ALCANFOR: Es un aceite natural utilizado para aliviar dolores musculares.
 MENTOL: Es un alcohol secundario saturado que brinda una sensación de frescura cuando se aplica sobre la piel.
 ACEITE DE PINO: Es un aceite esencial natural que ayuda a limpiar de virus, bacterias y mucosidad las vías respiratorias.',
-                'product_category_id' => 12,
-                'images' => json_encode([
+                'product_category_id' => 1,
+                'images' => [
                     'sachet-30-ml',
-                ]),
+                ],
                 'slug' => Str::slug('Gel con CBD Sachet'),
                 'featured' => false,
                 'featured_description' => '',
@@ -100,10 +100,10 @@ ACEITE DE PINO: Es un aceite esencial natural que ayuda a limpiar de virus, bact
 Además del aceite de semilla de cannabis sativa, su formula contiene:
 CALÉNDULA : ayuda a regenerar la piel y producir colágeno,
 GINKGO BILOBA: Tiene propiedades antioxidantes que protegen contra el daño celular oxidativo de radicales libres.',
-                'product_category_id' => 12,
-                'images' => json_encode([
+                'product_category_id' => 1,
+                'images' => [
                     'piernas-120-ml',
-                ]),
+                ],
                 'slug' => Str::slug('Crema con CBD para piernas cansadas'),
                 'featured' => false,
                 'featured_description' => '',
@@ -119,10 +119,10 @@ Ingredientes las cuales tienen efectos Antinflamatorio y relajante. Además, tie
 • Registro Invima NSOC13037-22CO
 • Producto de uso tópico y venta libre.
 Este exclusiva formula mezcla Acido Cítrico, Bicarbonato de sodio, Aceite de coco virgen, Mezcla de sales, Aceites Esenciales y CBD.',
-                'product_category_id' => 12,
-                'images' => json_encode([
+                'product_category_id' => 1,
+                'images' => [
                     'efervescente-200-g',
-                ]),
+                ],
                 'slug' => Str::slug('Sales efervescentes'),
                 'featured' => true,
                 'featured_description' => 'Descuento hasta del 15%',
@@ -140,10 +140,10 @@ descanso. También puedes agregarlo en tu rutina diaria de cuidado para tu piel.
 Además del aceite de semilla de cannabis sativa y aceite CBD, su formula contiene:
 Aceite de Limonaria: Este aceite esencial tiene numerosas propiedades terapéuticas y otras tantas aplicaciones. Destacan sus propiedades antimicrobianas, antivirales, ansiolíticas, circulatorias y antiinflamatorias.
 Aceite de almendra dulce. Gracias a su acción emoliente puede aplicarse en el cuerpo para dejar la piel agradablemente suave sin necesidad de usar una crema hidratante.',
-                'product_category_id' => 12,
-                'images' => json_encode([
+                'product_category_id' => 1,
+                'images' => [
                     'oleo-coprporal-120-ml',
-                ]),
+                ],
                 'slug' => Str::slug('Óleo corporal'),
                 'featured' => false,
                 'featured_description' => '',
@@ -159,10 +159,10 @@ Aceite de almendra dulce. Gracias a su acción emoliente puede aplicarse en el c
 • Producto de uso tópico y venta libre.
 Cannabis: Contribuye en la recuperación frente a las agresiones cutáneas Vitamina E : Te ayuda a proteger la piel delicada tiene propiedades antioxidantes.
 Aloe vera: Estimula la producción de colágeno y de elastina en la piel a la vez, también es hidratante.',
-                'product_category_id' => 12,
-                'images' => json_encode([
+                'product_category_id' => 1,
+                'images' => [
                     'crema-cayos-60-ml',
-                ]),
+                ],
                 'slug' => Str::slug('Crema para Callos'),
                 'featured' => false,
                 'featured_description' => '',
@@ -181,10 +181,10 @@ ALCANFOR: Es un aceite natural utilizado para aliviar dolores musculares.
 MENTOL: Es un alcohol secundario saturado que brinda una sensación de frescura cuando se aplica sobre la piel.
 CALÉNDULA: Contribuye a regenerar la piel y producir colágeno. Es muy recomendable para tratar cicatrices.
 ÁRNICA: Ayuda a reducir la hinchazón y disminuir el dolor.',
-                'product_category_id' => 12,
-                'images' => json_encode([
+                'product_category_id' => 1,
+                'images' => [
                     'herbal-250-ml',
-                ]),
+                ],
                 'slug' => Str::slug('Aerosol Herbal'),
                 'featured' => false,
                 'featured_description' => '',

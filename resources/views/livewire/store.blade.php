@@ -120,23 +120,15 @@
             </movileSidebarNav>
             <main class="col-span-full md:col-span-4 mx-[5%] md:mx-[5%] order-1 md:order-2">
                 <div class="py-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    @foreach ($latestProducts as $product)
+                    @foreach ($this->products as $product)
                         <div class="flex w-full">
                             <x-products.product-card :product="$product" />
                         </div>
                     @endforeach
                 </div>
                 <livewire:modal-confirm-product />
-                <div class="flex justify-center mt-4">
-                    <a wire:navigate href="{{ route('articulos') }}"
-                        class="inline-flex items-center px-4 py-2 text-sm text-center text-white bg-green-500 rounded-lg hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-gray-300 dark:hover:bg-gray-700 dark:focus:ring-gray-800 font5">
-                        Ver más productos
-                        <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M1 5h12m0 0L9 1m4 4L9 9" />
-                        </svg>
-                    </a>
+                <div class="my-3">
+                    {{ $this->products->links() }}
                 </div>
 
                 <!-- Sección promociones -->
@@ -152,11 +144,6 @@
                                     <x-products.product-card :product="$fProduct" />
                                 </div>
                             @endforeach
-                        </div>
-                        <div class="w-full text-center">
-                            <button type="button"
-                                class="rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700">Show
-                                more</button>
                         </div>
                     </div>
                 </section>

@@ -42,14 +42,18 @@ class ModalConfirmProduct extends Component
 
     public function agregarProducto($productoId, $cantidad = 1)
     {
-        $producto = Product::findOrFail($productoId);
+        $producto = Product::select('name', 'sell_price', 'images', 'product_category_id')
+            ->with('category:id,name') // Traer nombre de la categoría
+            ->findOrFail($productoId)->toArray();
 
         $this->carrito[$productoId] = [
-            'nombre' => $producto->name,
-            'precio' => $producto->sell_price,
+            'nombre' => $producto['name'],
+            'precio' => $producto['sell_price'],
             'cantidad' => isset($this->carrito[$productoId])
                 ? $this->carrito[$productoId]['cantidad'] + $cantidad
                 : $cantidad,
+            'categoria' => strtolower($producto['category']['name']) ?? 'default',
+            'imagenes' => $producto['images'][0],
         ];
 
         Session::put('carrito', $this->carrito);
