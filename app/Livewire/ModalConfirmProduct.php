@@ -20,12 +20,9 @@ class ModalConfirmProduct extends Component
         $this->carrito = Session::get('carrito', []);
     }
 
-    #[On('mostrarModalConfirmacion')]
-    public function mostrarModalConfirmacion($productoId)
+    #[On('solicitar-logueo')]
+    public function mostrarModalConfirmacion()
     {
-        $this->productoId = $productoId;
-        $this->producto = Product::findOrFail($productoId);
-        $this->productoNombre = $this->producto->name;
         $this->mostrarModal = true;
     }
 
@@ -42,13 +39,14 @@ class ModalConfirmProduct extends Component
 
     public function agregarProducto($productoId, $cantidad = 1)
     {
-        $producto = Product::select('name', 'sell_price', 'images', 'product_category_id')
+        $producto = Product::select('name', 'sell_price', 'tax', 'images', 'product_category_id')
             ->with('category:id,name') // Traer nombre de la categoría
             ->findOrFail($productoId)->toArray();
 
         $this->carrito[$productoId] = [
             'nombre' => $producto['name'],
             'precio' => $producto['sell_price'],
+            'tax' => $producto['tax'],
             'cantidad' => isset($this->carrito[$productoId])
                 ? $this->carrito[$productoId]['cantidad'] + $cantidad
                 : $cantidad,
@@ -65,6 +63,11 @@ class ModalConfirmProduct extends Component
         unset($this->carrito[$productoId]);
         Session::put('carrito', $this->carrito);
         $this->dispatch('carritoActualizado');
+    }
+
+    public function redirectToLogin()
+    {
+        return redirect()->route('login');
     }
 
     public function render()

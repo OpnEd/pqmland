@@ -1,25 +1,20 @@
-<div
-    x-data="{ open: @entangle('mostrarModal') }"
-    x-show="open"
-    x-cloak
-    class="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-75"
->
-    <div class="bg-white rounded-lg shadow-xl max-w-md p-6">
-        <h2 class="text-xl font-bold text-gray-800 mb-4">
-            Desea agregar el producto <span class="text-indigo-600">{{ $productoNombre }}</span> al carrito?
-        </h2>
-        <div class="flex justify-end gap-4">
-            <button
-                wire:click="cerrarModal"
-                class="px-4 py-2 bg-gray-300 text-gray-800 rounded hover:bg-gray-400"
-            >
+<div x-data="{ open: @entangle('mostrarModal') }" x-show="open" x-cloak
+    class="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-75">
+    <div class="bg-white flex flex-col items-center rounded-lg shadow-lg w-96 p-6">
+        <img src="{{ asset('storage/images/tienda/login.png') }}" alt="">
+        <h2 class="text-xl font-semibold text-gray-800">Inicia sesión</h2>
+        <p class="mt-2 text-gray-600">Debes iniciar sesión para agregar productos a tus favoritos.</p>
+
+        <div class="mt-4 flex justify-center space-x-4">
+            <!-- Botón Cancelar -->
+            <button wire:click="cerrarModal"
+                class="bg-gray-200 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-300">
                 Cancelar
             </button>
-            <button
-                wire:click="agregarProductoConfirmado"
-                class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700"
-            >
-                Confirmar
+
+            <!-- Botón para ir a login -->
+            <button wire:click="redirectToLogin" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                Iniciar sesión
             </button>
         </div>
     </div>

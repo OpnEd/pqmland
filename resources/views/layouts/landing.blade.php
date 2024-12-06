@@ -23,9 +23,9 @@
 <body class="font-sans antialiased dark:bg-black dark:text-white/50 bg-gray-50">
 
     <!-- Navbar -->
-
-    <x-landing.nav-bar>
-    </x-landing.nav-bar>
+    <livewire:layout.nav-bar />
+    {{-- <x-landing.nav-bar>
+    </x-landing.nav-bar> --}}
 
     @component('components.breadcrumbs') @endcomponent
 

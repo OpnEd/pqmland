@@ -9,7 +9,7 @@
     );
 @endphp
 
-<a href="{{ route($ruta) }}" wire:navigate.hover
+<a href="{{ route($ruta) }}"
    class="{{ $clase }} {{ $isActive ? 'activo' : '' }}"
    target="{{ $target }}">
     {{ $texto }}

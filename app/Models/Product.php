@@ -23,6 +23,7 @@ class Product extends Model
         'publicity',
         'purchase_price',
         'sell_price',
+        'tax',
     ];
 
     protected $casts = [
@@ -30,6 +31,7 @@ class Product extends Model
         'featured' => 'boolean',
         'purchase_price' => 'decimal:2',
         'sell_price' => 'decimal:2',
+        'tax' => 'decimal:2'
     ];
 
     public function category(): BelongsTo
@@ -74,4 +76,10 @@ class Product extends Model
             }
         );
     }
+
+    public function favoritedByUsers()
+    {
+        return $this->belongsToMany(User::class, 'favorites');
+    }
+
 }

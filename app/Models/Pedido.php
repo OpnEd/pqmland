@@ -16,6 +16,6 @@ class Pedido extends Model
     ];
 
     protected $casts = [
-        'total' => 'decimal, 2',
+        'total' => 'decimal:2',
     ];
 }

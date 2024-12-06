@@ -48,6 +48,7 @@ class ProductSeeder extends Seeder
                 'featured_description' => 'Descuento hasta del 25%',
                 'purchase_price' => 19000.00,
                 'sell_price' => 25000.00,
+                'tax' => 0,19
             ],
             [
                 'name' => 'Gel con CBD',
@@ -69,6 +70,7 @@ ACEITE DE PINO: Es un aceite esencial natural que ayuda a limpiar de virus, bact
                 'featured_description' => '',
                 'purchase_price' => 19000.00,
                 'sell_price' => 25000.00,
+                'tax' => 0,19
             ],
             [
                 'name' => 'Gel con CBD Sachet',
@@ -90,6 +92,7 @@ ACEITE DE PINO: Es un aceite esencial natural que ayuda a limpiar de virus, bact
                 'featured_description' => '',
                 'purchase_price' => 19000.00,
                 'sell_price' => 25000.00,
+                'tax' => 0,19
             ],
             [
                 'name' => 'Crema con CBD para piernas cansadas',
@@ -109,6 +112,7 @@ GINKGO BILOBA: Tiene propiedades antioxidantes que protegen contra el daño celu
                 'featured_description' => '',
                 'purchase_price' => 19000.00,
                 'sell_price' => 25000.00,
+                'tax' => 0,19
             ],
             [
                 'name' => 'Sales efervescentes',
@@ -128,6 +132,7 @@ Este exclusiva formula mezcla Acido Cítrico, Bicarbonato de sodio, Aceite de co
                 'featured_description' => 'Descuento hasta del 15%',
                 'purchase_price' => 19000.00,
                 'sell_price' => 25000.00,
+                'tax' => 0,19
             ],
             [
                 'name' => 'Óleo corporal',
@@ -149,6 +154,7 @@ Aceite de almendra dulce. Gracias a su acción emoliente puede aplicarse en el c
                 'featured_description' => '',
                 'purchase_price' => 19000.00,
                 'sell_price' => 25000.00,
+                'tax' => 0,19
             ],
             [
                 'name' => 'Crema para Callos',
@@ -168,6 +174,7 @@ Aloe vera: Estimula la producción de colágeno y de elastina en la piel a la ve
                 'featured_description' => '',
                 'purchase_price' => 19000.00,
                 'sell_price' => 25000.00,
+                'tax' => 0,19
             ],
             [
                 'name' => 'Aerosol Herbal',
@@ -190,6 +197,7 @@ CALÉNDULA: Contribuye a regenerar la piel y producir colágeno. Es muy recomend
                 'featured_description' => '',
                 'purchase_price' => 19000.00,
                 'sell_price' => 25000.00,
+                'tax' => 0,19
             ],
         ];
 

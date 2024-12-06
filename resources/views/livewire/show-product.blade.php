@@ -1,7 +1,7 @@
 <section class="py-8 bg-white md:py-16 dark:bg-gray-900 antialiased">
     @php
         $categoria = strtolower($product->category->name);
-        $imagenes = json_decode($product->images);
+        $imagenes = $product->images;
         use League\CommonMark\CommonMarkConverter;
         $converter = new CommonMarkConverter([
             'html_input' => 'strip',
@@ -23,7 +23,7 @@
                 </h1>
                 <div class="mt-4 sm:items-center sm:gap-4 sm:flex">
                     <p class="text-2xl font-extrabold text-gray-900 sm:text-3xl dark:text-white">
-                        COP {{ $product->sell_price }}
+                        $ {{ number_format($product->sell_price) }}
                     </p>
 
                     <div class="flex items-center gap-2 mt-2 sm:mt-0">
@@ -76,7 +76,7 @@
                                     d="M4 4h1.5L8 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm.75-3H7.5M11 7H6.312M17 4v6m-3-3h6" />
                             </svg>
 
-                            Comprar
+                            Agregar
                         </button>
 
                     </div>
@@ -89,7 +89,7 @@
             </div>
         </div>
     </div>
-    <div x-data="{ open: @entangle('mostrarModalExito') }"
+    <div x-data="{ open: @entangle('modalExito') }"
         x-show="open"
         x-cloak
         x-transition
