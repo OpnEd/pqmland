@@ -122,7 +122,7 @@
                 <div class="py-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                     @foreach ($this->products as $product)
                         <div class="flex w-full">
-                            <x-products.product-card :product="$product" />
+                            <livewire:product-card :product="$product" :key="'product-card-' . $product->id" />
                         </div>
                     @endforeach
                 </div>

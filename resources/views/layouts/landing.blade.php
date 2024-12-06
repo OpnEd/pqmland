@@ -47,25 +47,7 @@
     <x-landing.footer>
     </x-landing.footer>
 
-    @livewire('wire-elements-modal')
     @livewireScripts
-    {{-- <script>
-        function carousel() {
-            return {
-                current: 0,
-                items: [0, 1, 2], // Cambia este arreglo si agregas más imágenes
-                next() {
-                    this.current = (this.current + 1) % this.items.length;
-                },
-                prev() {
-                    this.current = (this.current - 1 + this.items.length) % this.items.length;
-                },
-                goTo(index) {
-                    this.current = index;
-                },
-            };
-        }
-    </script> --}}
 </body>
 
 </html>

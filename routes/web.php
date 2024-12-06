@@ -34,9 +34,9 @@ Route::get('/contacto', Contacto::class)->name('contacto');
 
 Route::get('/tienda', Store::class)->name('tienda');
 
-Route::get('/articulos', ProductList::class)->name('articulos');
+/* Route::get('/articulos', ProductList::class)->name('articulos'); */
 
-Route::get('/articulos/{product}', ShowProduct::class)->name('articulo.show');
+Route::get('/tienda/{product}', ShowProduct::class)->name('articulo.show');
 
 Route::get('/carrito', Carrito::class)->name('carrito');
 

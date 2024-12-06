@@ -1,11 +1,18 @@
 <section x-data="{ showAll: @entangle('showAll') }" class="py-6">
-    <h2>Categorías</h2>
-    <hr class="border-1 border-gray-300">
+
+        <div class="text-center pb-3">
+            <h2>Categorías</h2>
+        </div>
+        <hr class="border-1 border-gray-300">
+
     <ul class="hoverlist">
         @foreach ($categories as $index => $category)
+        @php
+            $categoryIcon = $category->icon;
+        @endphp
             <li x-show="showAll || {{ $index }} < 3" x-transition>
                 <a wire:navigate href="{{ $category->route }}"> <!-- ruta definida mediante un accessor en cada modelo que lo requiere -->
-                    <img class="w-8 h-8 object-cover mr-2" src="{{ $category->icon ?? asset('images/default-icon.png') }}" alt="{{ $category->name }}">
+                    <img class="w-8 h-8 object-cover mr-2" src="{{ asset('storage/images/categorias/'.$categoryIcon.'.png') ?? asset('images/default-icon.png') }}" alt="{{ $category->name }}">
                     <span class="font-bold text-sm">{{ $category->name }}</span>
                 </a>
             </li>

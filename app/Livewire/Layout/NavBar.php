@@ -2,9 +2,13 @@
 
 namespace App\Livewire\Layout;
 
+use App\Models\Product;
+use App\Models\ProductCategory;
 use Livewire\Component;
 use Illuminate\Support\Facades\Session;
+use Livewire\Attributes\Computed;
 use Livewire\Attributes\On;
+use Livewire\Attributes\Url;
 
 use function Livewire\Volt\{on};
 
@@ -13,6 +17,10 @@ class NavBar extends Component
     public $links;
     public $carrito = [];
     public $mostrarDropdown = false; // Controla el estado del dropdown
+
+    #[Url()]
+    public $category = '';
+
     /**
      * Create a new component instance.
      */
@@ -34,6 +42,17 @@ class NavBar extends Component
     public function actualizarCarrito()
     {
         $this->carrito = session('carrito', []);
+    }
+
+    #[Computed()]
+    public function products ()
+    {
+        return Product::orderBy('created_at', $this->sort)
+            ->when(ProductCategory::where('slug', $this->category)->first(), function ($query) {
+                $query->withCategory($this->category);
+            })
+            ->where('name', 'like', "%{$this->search}%")
+            ->simplePaginate(6);
     }
 
     public function render()

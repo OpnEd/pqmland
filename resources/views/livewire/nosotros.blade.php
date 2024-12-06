@@ -1,6 +1,5 @@
 <div>
     @section('pageDescription', 'Esta es una descripción específica para la página Nosotros')
-
     {{-- <section class="bg-white dark:bg-gray-900 relative overflow-hidden">
         <div class="parallax-bg bg-fixed bg-center bg-cover" style="background-image: url('/storage/images/nosotros/dt-farmacia.jpg');"></div>
         <div class="relative z-10 py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12">

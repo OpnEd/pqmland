@@ -67,7 +67,7 @@ class ModalConfirmProduct extends Component
 
     public function redirectToLogin()
     {
-        return redirect()->route('login');
+        return $this->redirect('/login');
     }
 
     public function render()

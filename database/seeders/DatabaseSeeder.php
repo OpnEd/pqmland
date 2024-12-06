@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
                                         Cuento con experiencias laborales en un amplio rango de ocupaciones profesionales:
                                         Centrales de Mezclas Parenterales, IPSs de alta complejidad, Depósitos de Medicamentos,
                                         Entes Regulatorios e Instituciones Educativas.',
+            'colaborator' => 1,
             'current_position' => 'CEO y Fundador de PQM, Q.F., Ex-Inspector SDS.',
             'phone_number' => '+57 314 309 5251',
             'birth_date' => '13-10-2024',

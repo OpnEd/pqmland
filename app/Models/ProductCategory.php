@@ -31,6 +31,6 @@ class ProductCategory extends Model
     // Retorna la ruta dinámica para esta categoría
     public function getRouteAttribute()
     {
-        return route('articulos', ['category' => $this->slug]);
+        return route('tienda', ['category' => $this->slug]);
     }
 }

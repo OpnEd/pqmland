@@ -21,7 +21,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         // Carga las categorías de la base de datos
-        $categories = ProductCategory::all(['name'])->toArray();
+        $categories = ProductCategory::all(['name', 'slug'])->toArray();
 
         // Fusiona las categorías en la configuración
         config(['categories' => $categories]);
