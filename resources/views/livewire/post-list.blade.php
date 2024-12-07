@@ -32,6 +32,7 @@
                     <hr class="border-1 border-gray-300">
                 @endforeach
             </div>
+            <livewire:modal-logueo-lectura />
             <div class="my-3">
                 {{ $this->posts->links() }}
             </div>

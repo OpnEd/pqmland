@@ -22,7 +22,7 @@ class FavoriteProducts extends Component
     {
         // Verificar si el usuario está autenticado
         if (!auth()->check()) {
-            $this->dispatch('solicitar-logueo')->to(ModalConfirmProduct::class); // Mostrar el modal
+            $this->dispatch('solicitar-logueo-favoritos')->to(ModalConfirmProduct::class); // Mostrar el modal
             return;
         }
 

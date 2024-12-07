@@ -2,17 +2,18 @@
     @section('pageDescription', 'Esta es una descripción específica para la página Blog')
     <section class="bg-gray-700 dark:bg-gray-900 text-white">
         <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12">
-            <a href="#"
+            {{-- <a href="{{ route('post.show', ['post' => $featuredPost[0]]) }}" --}}
+            <button wire:click="readMore"
                 class="inline-flex justify-between items-center py-1 px-1 pr-4 mb-7 text-sm text-gray-700 bg-gray-100 rounded-full dark:bg-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700"
                 role="alert">
-                <span class="text-xs bg-primary-600 rounded-full text-white px-4 py-1.5 mr-3">New</span> <span
-                    class="text-sm font-medium">Flowbite is out! See what's new</span>
+                <span class="text-xs bg-primary-600 rounded-full text-white px-4 py-1.5 mr-3">Nuevo</span> <span
+                    class="text-sm font-medium">PQM al día! Dale un vistazo a lo último</span>
                 <svg class="ml-2 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd"
                         d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
                         clip-rule="evenodd"></path>
                 </svg>
-            </a>
+            </button>
             <p class="mb-4 text-lg font-normal text-gray-200 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
                 ¿Quieres saber <strong>cómo pasar fácilmente</strong> la...</p>
             <h1
@@ -44,15 +45,6 @@
             </div>
         </div>
     </section>
-    {{-- <hero
-        class="grid bg-gray-500 text-white text-center bg-cover bg-[url('https://live.staticflickr.com/65535/49909538937_3255dcf9e7_b.jpg')] overflow-hidden max-w-full">
-        <div class="col-start-1 row-start-1 bg-gray-800 bg-opacity-40 h-full w-full"></div>
-        <div class="col-start-1 row-start-1 py-24 overflow-hidden">
-            <p class="text-lg font-bold">Curso para pasar la visita de la secretaría de salud</p>
-            <h1 class="text-3xl font-bold"><strong>Reqerimientos locativos, dotación y recurso humano</strong></h1>
-            <p>Fecha de publicación:</p>
-        </div>
-    </hero> --}}
     <content x-data="{ mobileSidebarOpen: false }" class="grid grid-cols-3 max-w-7xl mx-auto mt-6">
         <movileSidebarNav class="md:hidden col-span-full mx-auto mb-6 z-10 relative">
             <a @click="mobileSidebarOpen = !mobileSidebarOpen"
@@ -91,6 +83,31 @@
                     </svg>
                 </a>
             </div>
+            {{-- Modal --}}
+            @if ($modalLogueoLectura)
+                <div class="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-75">
+                    <div class="bg-white flex flex-col items-center rounded-lg shadow-lg w-96 p-6">
+                        <img src="{{ asset('storage/images/tienda/login.png') }}" alt="">
+                        <h2 class="text-xl font-semibold text-gray-800">Inicia sesión</h2>
+                        <p class="mt-2 text-gray-600">Debes iniciar sesión para acceder al contenido!</p>
+
+                        <div class="mt-4 flex justify-center space-x-4">
+                            <!-- Botón Cancelar -->
+                            <button wire:click="cerrarModal"
+                                class="bg-gray-200 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-300">
+                                Cancelar
+                            </button>
+
+                            <!-- Botón para ir a login -->
+                            <a href="{{ route('post.show', $lastPost) }}"
+                                class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                                Iniciar sesión
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            @endif
+            {{-- <livewire:modal-logueo-lectura /> --}}
         </main>
 
         <aside x-show="mobileSidebarOpen" x-cloak

@@ -20,7 +20,7 @@ class ModalConfirmProduct extends Component
         $this->carrito = Session::get('carrito', []);
     }
 
-    #[On('solicitar-logueo')]
+    #[On('solicitar-logueo-favoritos')]
     public function mostrarModalConfirmacion()
     {
         $this->mostrarModal = true;

@@ -9,6 +9,31 @@ use App\Livewire\BaseComponent;
 #[Title('PQM - Blog')]
 class Blog extends  BaseComponent
 {
+    public bool $canReadMore = false;
+    public bool $modalLogueoLectura = false;
+    public $lastPost;
+
+    public function mount()
+    {
+        $this->canReadMore = auth()->check();
+        $this->lastPost = ModelsBlog::published()->orderBy('created_at', 'desc')->first();
+    }
+
+    public function readMore()
+    {
+        if (!$this->canReadMore) {
+            $this->modalLogueoLectura = true; // Mostrar el modal
+            //return;
+        } else {
+            return $this->redirect('/posts/' . $this->lastPost->slug);
+        }
+    }
+
+    public function closeModal()
+    {
+        $this->modalLogueoLectura = false; // Oculta el modal
+    }
+
     public function render()
     {
         return view('livewire.blog', [
