@@ -7,8 +7,13 @@
             'html_input' => 'strip',
             'allow_unsafe_links' => false,
         ]);
+        $descuentos = [];
+        if ($product->discounts->isNotEmpty()) {
+            foreach ($product->discounts as $discount) {
+                $descuentos[] = $discount->name;
+            }
+        }
     @endphp
-
     <div class="max-w-screen-xl mt-3 px-4 mx-auto 2xl:px-0">
         <div class="lg:grid lg:grid-cols-2 lg:gap-8 xl:gap-16">
             <div class="shrink-0 max-w-md lg:max-w-lg mx-auto">
@@ -23,8 +28,20 @@
                 </h1>
                 <div class="mt-4 sm:items-center sm:gap-4 sm:flex">
                     <p class="text-2xl font-extrabold text-gray-900 sm:text-3xl dark:text-white">
-                        $ {{ number_format($product->sell_price) }}
+                        $ {{ number_format( $this->viewPrice() ) }}
                     </p>
+                    @if ($product->taxes->contains(fn($tax) => $tax->name === 'IVA'))
+                        <p>(Precio sin IVA)</p>
+                    @else
+                        <p>(Exento de IVA)</p>
+                    @endif
+
+                    @foreach ($discountsActivos as $discount)
+                        <span
+                            class="me-2 rounded bg-primary-100 px-2.5 py-0.5 text-xs font-medium text-primary-800 dark:bg-primary-900 dark:text-primary-300">
+                            {{ $discount->name }}
+                        </span>
+                    @endforeach
 
                     <div class="flex items-center gap-2 mt-2 sm:mt-0">
                     </div>
@@ -89,13 +106,9 @@
             </div>
         </div>
     </div>
-    <div x-data="{ open: @entangle('modalExito') }"
-        x-show="open"
-        x-cloak
-        x-transition
-        x-init="$watch('open', value => {
-            if (value) setTimeout(() => open = false, 5000);
-        })"
+    <div x-data="{ open: @entangle('modalExito') }" x-show="open" x-cloak x-transition x-init="$watch('open', value => {
+        if (value) setTimeout(() => open = false, 5000);
+    })"
         class="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-50">
         <div class="bg-white rounded-lg shadow-lg p-6 max-w-sm text-center">
             <!-- Ícono de éxito -->

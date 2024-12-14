@@ -11,8 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('products', function (Blueprint $table) {
-            $table->decimal('tax', 10,2);
+        Schema::table('blogs', function (Blueprint $table) {
+            $table->string('introduction')->nullable();
+            $table->json('objectives')->nullable();
+            $table->json('conclusions')->nullable();
         });
     }
 
@@ -21,8 +23,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('products', function (Blueprint $table) {
-            $table->dropColumn('tax');
+        Schema::table('blogs', function (Blueprint $table) {
+            // ...
         });
     }
 };

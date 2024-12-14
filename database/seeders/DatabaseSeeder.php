@@ -41,6 +41,9 @@ class DatabaseSeeder extends Seeder
             ProductSeeder::class,
             TestimonioSeeder::class,
             WelcomePageSeeder::class,
+            TaxSeeder::class,
+            DiscountSeeder::class,
+            ProductRelationsSeeder::class,
         ]);
     }
 }

@@ -43,6 +43,7 @@ class PostList extends BaseComponent
                 $query->withCategory($this->category);
             })
             ->where('title', 'like', "%{$this->search}%")
+            ->withCount('favoritedByUsers')
             ->paginate(3);
     }
 

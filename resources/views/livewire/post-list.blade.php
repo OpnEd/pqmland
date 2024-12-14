@@ -27,12 +27,12 @@
             <div class="py-4">
                 @foreach ($this->posts as $post)
                     <div class="flex w-full mb-5">
-                        <x-posts.post-card :post="$post" />
+                        <livewire:post-card :post="$post" :key="'post-card-' . $post->id"/>
                     </div>
                     <hr class="border-1 border-gray-300">
                 @endforeach
             </div>
-            <livewire:modal-logueo-lectura />
+            {{-- <livewire:modal-logueo-lectura /> --}}
             <div class="my-3">
                 {{ $this->posts->links() }}
             </div>

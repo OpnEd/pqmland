@@ -44,11 +44,7 @@ class ProductSeeder extends Seeder
                     'balsamo-60-g',
                 ],
                 'slug' => Str::slug('Bálsamo con CBD'),
-                'featured' => true,
-                'featured_description' => 'Descuento hasta del 25%',
-                'purchase_price' => 19000.00,
-                'sell_price' => 25000.00,
-                'tax' => 0,19
+                'base_price' => 1250.00,
             ],
             [
                 'name' => 'Gel con CBD',
@@ -66,11 +62,7 @@ ACEITE DE PINO: Es un aceite esencial natural que ayuda a limpiar de virus, bact
                     'gel-120-ml',
                 ],
                 'slug' => Str::slug('Gel con CBD'),
-                'featured' => false,
-                'featured_description' => '',
-                'purchase_price' => 19000.00,
-                'sell_price' => 25000.00,
-                'tax' => 0,19
+                'base_price' => 1250.00,
             ],
             [
                 'name' => 'Gel con CBD Sachet',
@@ -88,11 +80,7 @@ ACEITE DE PINO: Es un aceite esencial natural que ayuda a limpiar de virus, bact
                     'sachet-30-ml',
                 ],
                 'slug' => Str::slug('Gel con CBD Sachet'),
-                'featured' => false,
-                'featured_description' => '',
-                'purchase_price' => 19000.00,
-                'sell_price' => 25000.00,
-                'tax' => 0,19
+                'base_price' => 1250.00,
             ],
             [
                 'name' => 'Crema con CBD para piernas cansadas',
@@ -108,11 +96,7 @@ GINKGO BILOBA: Tiene propiedades antioxidantes que protegen contra el daño celu
                     'piernas-120-ml',
                 ],
                 'slug' => Str::slug('Crema con CBD para piernas cansadas'),
-                'featured' => false,
-                'featured_description' => '',
-                'purchase_price' => 19000.00,
-                'sell_price' => 25000.00,
-                'tax' => 0,19
+                'base_price' => 1250.00,
             ],
             [
                 'name' => 'Sales efervescentes',
@@ -128,11 +112,7 @@ Este exclusiva formula mezcla Acido Cítrico, Bicarbonato de sodio, Aceite de co
                     'efervescente-200-g',
                 ],
                 'slug' => Str::slug('Sales efervescentes'),
-                'featured' => true,
-                'featured_description' => 'Descuento hasta del 15%',
-                'purchase_price' => 19000.00,
-                'sell_price' => 25000.00,
-                'tax' => 0,19
+                'base_price' => 1250.00,
             ],
             [
                 'name' => 'Óleo corporal',
@@ -150,11 +130,7 @@ Aceite de almendra dulce. Gracias a su acción emoliente puede aplicarse en el c
                     'oleo-coprporal-120-ml',
                 ],
                 'slug' => Str::slug('Óleo corporal'),
-                'featured' => false,
-                'featured_description' => '',
-                'purchase_price' => 19000.00,
-                'sell_price' => 25000.00,
-                'tax' => 0,19
+                'base_price' => 1250.00,
             ],
             [
                 'name' => 'Crema para Callos',
@@ -170,11 +146,7 @@ Aloe vera: Estimula la producción de colágeno y de elastina en la piel a la ve
                     'crema-cayos-60-ml',
                 ],
                 'slug' => Str::slug('Crema para Callos'),
-                'featured' => false,
-                'featured_description' => '',
-                'purchase_price' => 19000.00,
-                'sell_price' => 25000.00,
-                'tax' => 0,19
+                'base_price' => 1250.00,
             ],
             [
                 'name' => 'Aerosol Herbal',
@@ -193,11 +165,7 @@ CALÉNDULA: Contribuye a regenerar la piel y producir colágeno. Es muy recomend
                     'herbal-250-ml',
                 ],
                 'slug' => Str::slug('Aerosol Herbal'),
-                'featured' => false,
-                'featured_description' => '',
-                'purchase_price' => 19000.00,
-                'sell_price' => 25000.00,
-                'tax' => 0,19
+                'base_price' => 1250.00,
             ],
         ];
 

@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->decimal('tax', 10,2);
+            $table->dropColumn(['featured', 'featured_description', 'purchase_price', 'sale_price', 'tax']);
         });
     }
 
@@ -22,7 +22,10 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->dropColumn('tax');
+            $table->boolean('featured')->default(false);
+            $table->string('featured_description')->nullable();
+            $table->decimal('sale_price', 10, 2);
+            $table->decimal('tax', 10,2);
         });
     }
 };

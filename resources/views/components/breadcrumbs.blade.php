@@ -22,7 +22,7 @@
                     Home
                 </a>
             </li>
-            @foreach ($breadcrumbs as $breadcrumb)
+            @foreach ($breadcrumbs->slice(-3) as $breadcrumb)
                 @if ($loop->last)
                     <li aria-current="page">
                         <div class="flex items-center">

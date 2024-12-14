@@ -4,6 +4,12 @@
     @php
         $categoria = strtolower($product->category->name);
         $imagenes = $product->images;
+        $descuentos = [];
+        if ($product->discounts->isNotEmpty()) {
+            foreach ($product->discounts as $discount) {
+                $descuentos[] = $discount->name;
+            }
+        }
     @endphp
 
     <!-- Imagen del producto con ícono sobrepuesto -->
@@ -27,13 +33,12 @@
     </div>
 
     <!-- Contenido de la card -->
-    <div class="pt-6 transition-opacity duration-300 group-hover:opacity-40">
+    {{-- <div class="pt-6 transition-opacity duration-300 group-hover:opacity-40"> --}}
+    <div class="pt-6">
         <div class="mb-4 flex items-center justify-center gap-4">
             <span
                 class="me-2 rounded bg-primary-100 px-2.5 py-0.5 text-xs font-medium text-primary-800 dark:bg-primary-900 dark:text-primary-300">
-                @if ($product->featured === true)
-                    {{ $product->featured_description }}
-                @endif
+                {{ implode(', ', $descuentos) }}
             </span>
         </div>
         <div class="mb-4 flex items-center justify-center gap-4">
@@ -44,7 +49,7 @@
 
         <div class="mt-4 flex items-center justify-between gap-2">
             <p class="text-xl font-bold leading-tight text-gray-900 dark:text-white">
-                ${{ number_format($product->sell_price) }}</p>
+                ${{ number_format( $this->viewPrice() ) }}</p>
 
             <div class="flex items-center justify-end gap-1">
                 <livewire:favorite-products :product="$product" />

@@ -23,7 +23,12 @@ class Blog extends Model
         'cover',
         'tags',
         'abstract',
+        'introduction',
+        'objectives',
+        'ilustrations',
         'content',
+        'conclusions',
+        'references',
         'slug',
         'is_featured',
     ];
@@ -31,6 +36,10 @@ class Blog extends Model
     protected $casts = [
         'is_featured' => 'boolean',
         'tags' => 'array',
+        'objectives' => 'array',
+        'ilustrations' => 'array',
+        'references' => 'array',
+        'conclusions' => 'array',
     ];
 
     public function author(): BelongsTo
@@ -65,6 +74,11 @@ class Blog extends Model
         });
     }
 
+    public function scopeLatestPost($query)
+    {
+        return $query->where('created_at', '<=', Carbon::now())->orderBy('created_at', 'desc')->first();
+    }
+
     public function getExcerpt ()
     {
         return Str::limit(strip_tags($this->body), 150);
@@ -82,5 +96,16 @@ class Blog extends Model
     {
         return 'slug';
     }
+
+    public function favoritedByUsers()
+    {
+        return $this->belongsToMany(User::class, 'favorite_posts')->withTimestamps();
+    }
+
+    public function favoritesCount()
+    {
+        return $this->favoritedByUsers()->count();
+    }
+
 
 }

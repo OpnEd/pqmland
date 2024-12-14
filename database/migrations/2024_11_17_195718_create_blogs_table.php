@@ -15,12 +15,12 @@ return new class extends Migration
     {
         Schema::create('blogs', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class);
-            $table->foreignIdFor(BlogCategory::class);
+            $table->foreignIdFor(User::class)->constrained()->onDelete('cascade');
+            $table->foreignIdFor(BlogCategory::class)->constrained()->onDelete('cascade');
             $table->string('title')->unique();
             $table->string('video')->nullable();
-            $table->string('cover');
-            $table->json('tags');
+            $table->string('cover')->nullable();
+            $table->json('tags')->nullable();
             $table->string('abstract');
             $table->longText('content');
             $table->string('slug')->unique();

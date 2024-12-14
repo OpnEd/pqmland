@@ -16,31 +16,31 @@ class BlogCategorySeeder extends Seeder
         BlogCategory::create([
             'name' => 'Gestión de Calidad',
             'description' => 'Gestión de calidad en las droguerías.',
-            'icon' => 'https://img.icons8.com/?size=100&id=24285&format=png&color=000000',
+            'icon' => 'qualityCategoryIcon',
             'slug' => 'gestion-de-calidad'
         ]);
         BlogCategory::create([
             'name' => 'Calibración de equipos',
             'description' => 'Calibración de equipos en las droguerías.',
-            'icon' => 'https://img.icons8.com/?size=100&id=82535&format=png&color=000000',
+            'icon' => 'meterCategoryIcon',
             'slug' => 'calibracion-de-equipos'
         ]);
         BlogCategory::create([
             'name' => 'Control de plagas',
             'description' => 'Control de plagas en las droguerías.',
-            'icon' => 'https://img.icons8.com/?size=100&id=16135&format=png&color=000000',
+            'icon' => 'bugCategoryIcon',
             'slug' => 'control-de-plagas'
         ]);
         BlogCategory::create([
             'name' => 'Autoinspecciones',
             'description' => 'Autoinspecciones en las droguerías.',
-            'icon' => 'https://img.icons8.com/?size=100&id=W5ufHFPFwaDN&format=png&color=000000',
+            'icon' => 'auditCategoryIcon',
             'slug' => 'autoinspecciones'
         ]);
         BlogCategory::create([
             'name' => 'Promoción del uso racional',
             'description' => 'Promoción del uso racional en las droguerías.',
-            'icon' => 'https://img.icons8.com/?size=100&id=sVbJpuZsX9Wg&format=png&color=000000',
+            'icon' => 'medicineCategoryIcon',
             'slug' => 'promocion-del-uso-racional-de-los-medicamentos'
         ]);
     }

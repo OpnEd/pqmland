@@ -25,7 +25,7 @@ class Store extends BaseComponent
     #[Url()]
     public $category = '';
 
-    public function setSort ($sort)
+    public function setSort($sort)
     {
         $this->sort = ($sort === 'desc') ? 'desc' : 'asc';
     }
@@ -37,7 +37,7 @@ class Store extends BaseComponent
     }
 
     #[Computed()]
-    public function products ()
+    public function products()
     {
         return Product::orderBy('created_at', $this->sort)
             ->when(ProductCategory::where('slug', $this->category)->first(), function ($query) {
@@ -51,24 +51,12 @@ class Store extends BaseComponent
     public function render()
     {
         return view('livewire.store', [
-            'featuredProducts' => Product::with('category')->featured()
+            'featuredProducts' => Product::with(['category', 'discounts' => function ($query) {
+                    $query->where('is_active', true);
+                }])->featured()
                 ->latest('created_at')
                 ->take(9)
                 ->get(),
         ])->layout($this->getLayout());
     }
-    /* public function render()
-    {
-        return view('livewire.store', [
-            'latestProducts' => Product::with('category')
-                ->where('featured', false)
-                ->latest('created_at')
-                ->take(6)
-                ->get(),
-            'featuredProducts' => Product::with('category')->featured()
-                ->latest('created_at')
-                ->take(9)
-                ->get(),
-        ])->layout($this->getLayout());
-    } */
 }

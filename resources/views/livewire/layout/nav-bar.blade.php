@@ -83,7 +83,7 @@
                                     <a href="#" class="truncate text-sm font-semibold leading-none text-gray-900 dark:text-white hover:underline">
                                         {{ $item['nombre'] }}
                                     </a>
-                                    <p class="mt-0.5 truncate text-sm font-normal text-gray-500 dark:text-gray-400">${{ number_format($item['precio'], 2) }}</p>
+                                    <p class="mt-0.5 truncate text-sm font-normal text-gray-500 dark:text-gray-400">${{ number_format($item['subtotal'], 2) }}</p>
                                 </div>
 
                                 <div class="flex items-center justify-end gap-6">
@@ -137,22 +137,22 @@
         <div id="ecommerce-navbar-menu-1"
             class="bg-gray-50 dark:bg-gray-700 dark:border-gray-600 border border-gray-200 rounded-lg py-3 hidden px-4 mt-4">
             <ul class="text-gray-900 text-sm font-medium dark:text-white space-y-3">
-                <x-responsive-nav-link :href="route('inicio')" :active="request()->routeIs('inicio')" wire:navigate>
+                <x-responsive-nav-link :href="route('inicio')" :active="request()->routeIs('inicio')">
                     {{ __('messages.nav.home') }}
                 </x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('nosotros')" :active="request()->routeIs('nosotros')" wire:navigate>
+                <x-responsive-nav-link :href="route('nosotros')" :active="request()->routeIs('nosotros')">
                     {{ __('messages.nav.about') }}
                 </x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('blog')" :active="request()->routeIs('blog')" wire:navigate>
+                <x-responsive-nav-link :href="route('blog')" :active="request()->routeIs('blog')">
                     {{ __('Blog') }}
                 </x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('tienda')" :active="request()->routeIs('tienda')" wire:navigate>
+                <x-responsive-nav-link :href="route('tienda')" :active="request()->routeIs('tienda')">
                     {{ __('messages.nav.store') }}
                 </x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('contacto')" :active="request()->routeIs('contacto')" wire:navigate>
+                <x-responsive-nav-link :href="route('contacto')" :active="request()->routeIs('contacto')">
                     {{ __('messages.nav.contact') }}
                 </x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
+                <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                     {{ __('messages.nav.dashboard') }}
                 </x-responsive-nav-link>
             </ul>

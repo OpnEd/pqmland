@@ -1,33 +1,18 @@
 <div>
     @section('pageDescription', 'Esta es una descripción específica para la página Nosotros')
-    {{-- <section class="bg-white dark:bg-gray-900 relative overflow-hidden">
-        <div class="parallax-bg bg-fixed bg-center bg-cover" style="background-image: url('/storage/images/nosotros/dt-farmacia.jpg');"></div>
-        <div class="relative z-10 py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12">
-            <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
-                ¿Quiénes somos y qué Hacemos?
-            </h1>
-            <p class="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
-                Promovemos el uso responsable de medicamentos con soluciones tecnológicas, formación y un firme compromiso con el bienestar social.
-            </p>
-            <div class="flex flex-col mb-8 lg:mb-16 space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
-            </div>
-        </div>
-    </section> --}}
 
+    <section class="relative bg-fixed bg-center bg-cover bg-no-repeat bg-white dark:bg-gray-900"
+        style="background-image: url('/storage/images/nosotros/dt-farmacia.jpg');">
+        <!-- Overlay para oscurecer la imagen si es necesario -->
+        <div class="absolute inset-0 bg-black bg-opacity-60"></div>
 
-    {{-- <section class="bg-white dark:bg-gray-900"> --}}
-        <section class="relative bg-fixed bg-center bg-cover bg-no-repeat bg-white dark:bg-gray-900"
-            style="background-image: url('/storage/images/nosotros/dt-farmacia.jpg');">
-            <!-- Overlay para oscurecer la imagen si es necesario -->
-            <div class="absolute inset-0 bg-black bg-opacity-60"></div>
-
-        {{-- <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12"> --}}
-            <div class="relative py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12">
+        <div class="relative py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12">
             <h1
                 class="mb-4 text-gray-100 text-4xl font-extrabold tracking-tight leading-none md:text-5xl lg:text-6xl dark:text-white">
                 Quiénes somos y qué Hacemos?</h1>
             <p class="mb-8 text-lg font-normal text-gray-300 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
-                Promovemos el uso responsable de medicamentos con soluciones tecnológicas, formación y un firme compromiso con el bienestar social.</p>
+                Promovemos el uso responsable de medicamentos con soluciones tecnológicas, formación y un firme
+                compromiso con el bienestar social.</p>
             <div class="flex flex-col mb-8 lg:mb-16 space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
             </div>
         </div>
@@ -47,7 +32,8 @@
                 <!-- Misión -->
                 <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
                     <div class="flex items-center mb-4">
-                        <span class="inline-block p-3 bg-primary-100 text-primary-800 rounded-full dark:bg-primary-900 dark:text-primary-200">
+                        <span
+                            class="inline-block p-3 bg-primary-100 text-primary-800 rounded-full dark:bg-primary-900 dark:text-primary-200">
                             <!-- Icono de la Misión -->
                             <img src="{{ asset('storage/images/mision-vision/mision.png') }}" alt="M">
                         </span>
@@ -64,7 +50,8 @@
                 <!-- Visión -->
                 <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
                     <div class="flex items-center mb-4">
-                        <span class="inline-block p-3 bg-primary-100 text-primary-800 rounded-full dark:bg-primary-900 dark:text-primary-200">
+                        <span
+                            class="inline-block p-3 bg-primary-100 text-primary-800 rounded-full dark:bg-primary-900 dark:text-primary-200">
                             <!-- Icono de la Visión -->
                             <img src="{{ asset('storage/images/mision-vision/vision.png') }}" alt="V">
                         </span>
@@ -85,40 +72,45 @@
     <section class="bg-white dark:bg-gray-900">
         <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-6">
             <div class="mx-auto mb-8 max-w-screen-sm lg:mb-16">
-                <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Nuestro equipo</h2>
-                <p class="font-light text-gray-500 sm:text-xl dark:text-gray-400">Equipo pequeño aún, pero de profesionales calificados y comprometidos</p>
+                <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Nuestro equipo
+                </h2>
+                <p class="font-light text-gray-500 sm:text-xl dark:text-gray-400">Equipo pequeño aún, pero de
+                    profesionales calificados y comprometidos</p>
             </div>
             {{-- <div class="grid gap-8 lg:gap-16 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"> --}}
             <div class="flex flex-row justify-center gap-8 lg:gap-16">
                 @foreach ($colaboradores as $colaborador)
-                <div class="text-center text-gray-500 dark:text-gray-400">
-                    <img class="mx-auto mb-4 w-36 h-36 rounded-full" src="{{ $colaborador->getProfilePhotoUrlAttribute() }}" alt="{{ $colaborador->name }}">
-                    <h3 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                        @if ($colaborador->cv_published)
-                            <a href="{{ route('curriculo.user', $colaborador->slug) }}">{{ $colaborador->name .' '. $colaborador->last_name }}</a>
-                        @else
-                            <a href="#">{{ $colaborador->name .' '. $colaborador->last_name }}</a>
+                    <div class="text-center text-gray-500 dark:text-gray-400">
+                        <img class="mx-auto mb-4 w-36 h-36 rounded-full"
+                            src="{{ $colaborador->getProfilePhotoUrlAttribute() }}" alt="{{ $colaborador->name }}">
+                        <h3 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                            @if ($colaborador->cv_published)
+                                <a
+                                    href="{{ route('curriculo.user', $colaborador->slug) }}">{{ $colaborador->name . ' ' . $colaborador->last_name }}</a>
+                            @else
+                                <a href="#">{{ $colaborador->name . ' ' . $colaborador->last_name }}</a>
+                            @endif
+                        </h3>
+                        <p>{{ $colaborador->current_position }}</p>
+                        @if (!empty($colaborador->socialMediaLinks))
+                            <ul class="flex justify-center mt-4 space-x-4">
+                                @foreach ($colaborador->socialMediaLinks as $platform => $url)
+                                    @if ($url)
+                                        <!-- Mostrar solo si hay URL -->
+                                        <li>
+                                            <a href="{{ $url }}" target="_blank" rel="noopener noreferrer"
+                                                class="hover:opacity-75 pr-8">
+                                                <img src="{{ asset('storage/images/redes-sociales/' . $platform . '.png') }}"
+                                                    alt="{{ ucfirst($platform) }}" class="w-10 h-10">
+                                            </a>
+                                        </li>
+                                    @endif
+                                @endforeach
+                            </ul>
                         @endif
-                    </h3>
-                    <p>{{ $colaborador->current_position }}</p>
-                    @if (!empty($colaborador->socialMediaLinks))
-                        <ul class="flex justify-center mt-4 space-x-4">
-                            @foreach ($colaborador->socialMediaLinks as $platform => $url)
-                                @if ($url) <!-- Mostrar solo si hay URL -->
-                                    <li>
-                                        <a href="{{ $url }}" target="_blank" rel="noopener noreferrer" class="hover:opacity-75 pr-8">
-                                            <img src="{{ asset('storage/images/redes-sociales/' . $platform . '.png') }}"
-                                                alt="{{ ucfirst($platform) }}"
-                                                class="w-10 h-10">
-                                        </a>
-                                    </li>
-                                @endif
-                            @endforeach
-                        </ul>
-                    @endif
-                </div>
+                    </div>
                 @endforeach
             </div>
         </div>
-      </section>
+    </section>
 </div>

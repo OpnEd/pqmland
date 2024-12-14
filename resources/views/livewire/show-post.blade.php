@@ -12,21 +12,43 @@ URL: https://flowbite.com/docs/components/typography/
                 class="prose mx-auto w-full max-w-2xl format format-sm sm:format-base lg:format-lg format-blue dark:format-invert">
                 <header class="mb-4 lg:mb-6 not-format">
                     <address class="flex items-center mb-6 not-italic">
-                        <div class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
-                            <img class="mr-4 w-16 h-16 rounded-full"
+                        <div class="flex flex-row justify-between items-center w-full">
+                            <img class="mr-4 mt-4 w-16 h-16 rounded-full"
                                 src="{{ $post->author->getProfilePhotoUrlAttribute() }}" alt="{{ $post->author->name }}">
-                            <div>
+                            <div class="flex flex-col">
                                 <a href="{{ route('curriculo.user', $post->author) }}" rel="author"
-                                    class="text-xl font-bold text-gray-900 dark:text-white">{{ $post->author->name }}</a>
-                                <p class="text-base text-gray-500 dark:text-gray-400">{{ $post->author->degree }}</p>
-                                <p class="text-base text-gray-500 dark:text-gray-400"><time pubdate
-                                        datetime="{{ $post->created_at }}" title="{{ \Carbon\Carbon::parse($post->created_at)->translatedFormat('d M Y') }}">{{ \Carbon\Carbon::parse($post->created_at)->translatedFormat('d M Y') }}</time></p>
+                                    class="text-xl font-bold text-gray-900 dark:text-white">{{ $post->author->name . ' ' . $post->author->last_name }}</a>
+                                <p class="text-gray-500 dark:text-gray-400">{{ $post->author->degree }}</p>
+                            </div>
+                            <div class="ml-auto">
+                                <livewire:favorite-posts :post="$post" />
                             </div>
                         </div>
+
+                        {{-- <div class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
+                            <img class="mr-4 w-16 h-16 rounded-full"
+                                src="{{ $post->author->getProfilePhotoUrlAttribute() }}" alt="{{ $post->author->name }}">
+                            <div class="flex flex-row justify-between items-end w-max">
+                                <div>
+                                    <a href="{{ route('curriculo.user', $post->author) }}" rel="author"
+                                        class="text-xl font-bold text-gray-900 dark:text-white">{{ $post->author->name .' '. $post->author->last_name }}</a>
+                                    <p class="text-base text-gray-500 dark:text-gray-400">{{ $post->author->degree }}</p>
+                                    <p class="text-base text-gray-500 dark:text-gray-400"><time pubdate
+                                            datetime="{{ $post->created_at }}" title="{{ \Carbon\Carbon::parse($post->created_at)->translatedFormat('d M Y') }}">{{ \Carbon\Carbon::parse($post->created_at)->translatedFormat('d M Y') }}</time></p>
+                                </div>
+                                <div>
+                                    <livewire:favorite-posts :post="$post" />
+                                </div>
+                            </div>
+                        </div> --}}
                     </address>
                     <h1
                         class="mb-4 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl dark:text-white">
                         {{ $post->title }}</h1>
+                    <time pubdate datetime="{{ $post->created_at }}"
+                        title="{{ \Carbon\Carbon::parse($post->created_at)->translatedFormat('d M Y') }}">
+                        {{ \Carbon\Carbon::parse($post->created_at)->translatedFormat('d M Y') }}
+                    </time>
                 </header>
                 @if ($post->video != null)
                     <div>
@@ -36,7 +58,55 @@ URL: https://flowbite.com/docs/components/typography/
                             allowfullscreen></iframe>
                     </div>
                 @endif
+                <!-- -->
+                @if ($post->objectives != null)
+                    <h2>Objetivos</h2>
+                    <ol>
+                        @foreach ($post->objectives as $objective)
+                            <li>{!! $objective !!}</li>
+                        @endforeach
+                    </ol>
+                @endif
 
+
+                <!-- -->
+                @if ($post->abstract != null)
+                    <h2>Resumen</h2>
+                    {!! $post->abstract !!}
+                @endif
+
+
+                <!-- -->
+                @if ($post->introduction != null)
+                    <h2>Introducción</h2>
+                    {!! $post->introduction !!}
+                @endif
+
+
+                <!-- -->
+                {!! $post->content !!}
+
+
+                <!-- -->
+                @if ($post->conclusions != null)
+                    <h2>Conclusiones</h2>
+                    <ul>
+                        @foreach ($post->conclusions as $conclusion)
+                            <li>{!! $conclusion !!}</li>
+                        @endforeach
+                    </ul>
+                @endif
+
+
+                <!-- -->
+                @if ($post->references != null)
+                    <h2>Objetivos</h2>
+                    <ol>
+                        @foreach ($post->references as $reference)
+                            <li>{!! $reference !!}</li>
+                        @endforeach
+                    </ol>
+                @endif
                 <livewire:post-comments :key="'comments' . $post->id" :$post />
             </article>
         </div>
@@ -68,9 +138,12 @@ URL: https://flowbite.com/docs/components/typography/
     <section class="bg-white dark:bg-gray-900">
         <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
             <div class="mx-auto max-w-screen-md sm:text-center">
-                <h2 class="mb-4 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl dark:text-white">Suscríbete a nuestro boletín</h2>
-                <p class="mx-auto max-w-2xl  text-gray-500 sm:text-xl dark:text-gray-400">Te informaremos cada vez que hagamos una nueva publicación.</p>
-                <p class="mx-auto mb-8 max-w-2xl  text-gray-500 md:mb-12 sm:text-xl dark:text-gray-400">Te mantendremos al tanto de noticias del sector de droguerías y otros temas de interés para tí y tus usuarios.</p>
+                <h2 class="mb-4 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl dark:text-white">
+                    Suscríbete a nuestro boletín</h2>
+                <p class="mx-auto max-w-2xl  text-gray-500 sm:text-xl dark:text-gray-400">Te informaremos cada vez que
+                    hagamos una nueva publicación.</p>
+                <p class="mx-auto mb-8 max-w-2xl  text-gray-500 md:mb-12 sm:text-xl dark:text-gray-400">Te mantendremos
+                    al tanto de noticias del sector de droguerías y otros temas de interés para tí y tus usuarios.</p>
                 <form action="#">
                     <div class="items-center mx-auto mb-3 space-y-4 max-w-screen-sm sm:flex sm:space-y-0">
                         <div class="relative w-full">
@@ -105,3 +178,22 @@ URL: https://flowbite.com/docs/components/typography/
         </div>
     </section>
 </div>
+
+{{--@if (!empty($post->references) && is_array($post->references))
+    <ul>
+        @foreach ($post->references as $reference)
+            <li>
+                <h3 class="text-lg font-bold">{{ $reference['title'] ?? 'Sin título' }}</h3>
+                <p class="text-sm text-gray-500">
+                    <a href="{{ $reference['url'] ?? '#' }}" target="_blank" class="text-blue-500 underline">
+                        {{ $reference['url'] ?? 'Enlace no disponible' }}
+                    </a>
+                </p>
+                <p class="text-sm text-gray-400">{{ $reference['description'] ?? 'Sin descripción' }}</p>
+            </li>
+        @endforeach
+    </ul>
+@else
+    <p>No hay referencias disponibles.</p>
+@endif
+--}}

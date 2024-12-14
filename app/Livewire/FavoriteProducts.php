@@ -3,26 +3,23 @@
 namespace App\Livewire;
 
 use App\Models\Product;
-use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class FavoriteProducts extends Component
 {
-    public $productId; // ID del producto seleccionado
-    public $isFavorited = false; // Estado de favorito
+    public $product; // ID del producto seleccionado
     public $showModal = false;
 
     public function mount(Product $product)
     {
-        $this->productId = $product->id;
-        //$this->isFavorited = Auth::user()->favoriteProducts->contains($product->id);
+        $this->product = $product->id;
     }
 
     public function toggleFavorite()
     {
         // Verificar si el usuario está autenticado
         if (!auth()->check()) {
-            $this->dispatch('solicitar-logueo-favoritos')->to(ModalConfirmProduct::class); // Mostrar el modal
+            $this->showModal = true; // Mostrar el modal
             return;
         }
 
@@ -30,23 +27,23 @@ class FavoriteProducts extends Component
         $user = auth()->user();
 
 
-        if ($this->isFavorited) {
+        if ($user->favoriteProducts()->where('product_id', $this->product)->exists()) {
             // Eliminar de favoritos
-            $user->favoriteProducts()->detach($this->productId);
-            $this->isFavorited = false;
+            $user->favoriteProducts()->detach($this->product);
+            return response()->json(['status' => 'removed']);
         } else {
             // Agregar a favoritos
-            $user->favoriteProducts()->attach($this->productId);
-            $this->isFavorited = true;
+            $user->favoriteProducts()->attach($this->product);
+            return response()->json(['status' => 'added']);
         }
 
         // Opción: puedes emitir un evento para notificar cambios globales
         $this->dispatch('favoritesUpdated');
     }
 
-    public function redirectToLogin()
+    public function cerrarModal()
     {
-        return redirect()->route('login');
+        $this->showModal = false;
     }
 
     public function render()

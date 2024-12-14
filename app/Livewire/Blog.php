@@ -49,3 +49,30 @@ class Blog extends  BaseComponent
         ])->layout($this->getLayout());
     }
 }
+
+/*
+// Consulta básica con eloquent
+$latestPost = Blog::orderBy('created_at', 'desc')->first();
+
+// Consulta con filtros adicionales
+$latestPost = Blog::where('status', 'published') // Solo posts publicados
+    ->orderBy('created_at', 'desc')
+    ->first();
+
+// Uso de 'scope'
+// En el modelo Blog
+public function scopeLatestPost($query)
+{
+    return $query->orderBy('created_at', 'desc')->first();
+}
+// Luego en el controlador o en otro lugar
+$latestPost = Blog::latestPost();
+
+// El post más reciente de un usuario específico
+$user = User::find($userId);
+$latestPost = $user->posts()->orderBy('created_at', 'desc')->first();
+
+
+
+
+*/

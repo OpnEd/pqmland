@@ -11,9 +11,6 @@ class Carrito extends BaseComponent
 {
     public $carrito = [];
     public $productoId; // Producto seleccionado para agregar al carrito
-    public $productoNombre = ''; // Nombre del producto para mostrar en el modal
-
-    public $mostrarModal = false; // Controla la visibilidad del modal
 
     public function mount()
     {
@@ -27,10 +24,50 @@ class Carrito extends BaseComponent
         } else {
             // Actualiza la cantidad en el carrito
             $this->carrito[$productoId]['cantidad'] = $cantidad;
+            $producto = Product::with(['category:id,name', 'taxes:id,name,rate', 'discounts' => function ($query) {
+                $query->where('is_active', true);
+            }])->findOrFail($productoId);
+
+            $basePrice = $producto->base_price;
+
+            // Calcular descuentos
+            $descuentoTotal = 0;
+
+            $producto->discounts->whenNotEmpty(function ($discounts) use ($basePrice, &$descuentoTotal) {
+                foreach ($discounts as $discount) {
+                    $descuentoTotal += $discount->type === 'percentaje'
+                        ? $basePrice * ($discount->value / 100)
+                        : $discount->value;
+                }
+            });
+
+            $precioConDescuento = max($basePrice - $descuentoTotal, 0);
+
+            // Calcular impuestos exclusivos
+            $impuestosTotales = 0;
+            foreach ($producto->taxes as $tax) {
+                $impuestosTotales += $tax->rate / 100 * $precioConDescuento;
+            }
+
+            // Precio final por unidad
+            $precioFinal = $precioConDescuento + $impuestosTotales;
+
+            // Actualizar carrito
+            $this->carrito[$productoId] = [
+                'nombre' => $producto->name,
+                'precio_unitario' => $precioFinal,
+                'cantidad' => $this->carrito[$productoId]['cantidad'] ?? 0,
+                'subtotal' => ($this->carrito[$productoId]['cantidad'] ?? 0) * $precioFinal,
+                'categoria' => strtolower($producto->category->name ?? 'default'),
+                'imagenes' => $producto->images[0] ?? null,
+                'impuestos' => $impuestosTotales * $this->carrito[$productoId]['cantidad'] ?? 0,
+                'descuentos' => $descuentoTotal * $this->carrito[$productoId]['cantidad'] ?? 0,
+            ];
         }
 
         // Actualiza la sesión
         Session::put('carrito', $this->carrito);
+        $this->dispatch('carritoActualizado');
     }
 
     public function eliminarProducto($productoId)
@@ -42,10 +79,38 @@ class Carrito extends BaseComponent
 
     public function getTotalProperty()
     {
-        // Calcula la suma de los precios totales de todos los productos
-        return array_reduce($this->carrito, function ($total, $item) {
-            return $total + ($item['precio'] * $item['cantidad']);
-        }, 0);
+        // Inicializa los totales
+        $subtotal = 0;
+        $totalDescuentos = 0;
+        $totalImpuestos = 0;
+
+        // Itera sobre los productos en el carrito
+        foreach ($this->carrito as $item) {
+            $subtotal += $item['subtotal']; // Suma el subtotal de cada producto
+            $totalDescuentos += $item['descuentos']; // Suma los descuentos totales
+            $totalImpuestos += $item['impuestos']; // Suma los impuestos totales
+        }
+
+        // Calcula el total final
+        $total = $subtotal + $totalImpuestos - $totalDescuentos;
+
+        // Asegura que el total no sea negativo
+        return max(0, $total);
+    }
+
+    public function getSubtotalProperty()
+    {
+        return array_sum(array_column($this->carrito, 'subtotal'));
+    }
+
+    public function getTotalDescuentosProperty()
+    {
+        return array_sum(array_column($this->carrito, 'descuentos'));
+    }
+
+    public function getTotalImpuestosProperty()
+    {
+        return array_sum(array_column($this->carrito, 'impuestos'));
     }
 
     public function render()

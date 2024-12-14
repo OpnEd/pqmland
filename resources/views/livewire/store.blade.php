@@ -1,12 +1,15 @@
 <div>
+    @php
+        $ultimoProducto = App\Models\Product::orderBy('created_at', 'desc')->first();
+    @endphp
     @section('pageDescription', 'Esta es una descripción específica para la página Tienda')
     <section class="bg-white dark:bg-gray-900">
         <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12">
-            <a href="#"
+            <a href="{{ route('articulo.show', $ultimoProducto )}}"
                 class="inline-flex justify-between items-center py-1 px-1 pr-4 mb-7 text-sm text-gray-700 bg-gray-100 rounded-full dark:bg-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700"
                 role="alert">
-                <span class="text-xs bg-primary-600 rounded-full text-white px-4 py-1.5 mr-3">New</span> <span
-                    class="text-sm font-medium">Flowbite is out! See what's new</span>
+                <span class="text-xs bg-primary-600 rounded-full text-white px-4 py-1.5 mr-3">Nuevo</span> <span
+                    class="text-sm font-medium">Dale un vistazo a nuestro nuevo producto!</span>
                 <svg class="ml-2 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd"
                         d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
@@ -118,7 +121,7 @@
                         src="https://img.icons8.com/small/32/777777/expand-arrow.png" />
                 </a>
             </movileSidebarNav>
-            <main class="col-span-full md:col-span-4 mx-[5%] md:mx-[5%] order-1 md:order-2">
+            <main class="col-span-full md:col-span-4 mx-[5%] md:mx-[5%] order-2 md:order-2">
                 <div class="py-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                     @foreach ($this->products as $product)
                         <div class="flex w-full">
@@ -141,7 +144,7 @@
                         <div class="mb-4 grid grid-cols-1 gap-4 sm:grid-cols-2 md:mb-8 lg:grid-cols-3">
                             @foreach ($featuredProducts as $fProduct)
                                 <div class="flex w-full">
-                                    <x-products.product-card :product="$fProduct" />
+                                    <livewire:product-card :product="$fProduct" :key="'fproduct-card-' . $fProduct->id" />
                                 </div>
                             @endforeach
                         </div>
@@ -149,7 +152,7 @@
                 </section>
             </main>
             <aside x-show="mobileSidebarOpen" x-cloak
-                class="md:!block col-span-full md:col-span-1 mx-[5%] md:mr-[5%] order-2 md:order-1 sticky"
+                class="md:!block col-span-full md:col-span-1 mx-[5%] md:mr-[5%] order-1 md:order-1 sticky"
                 x-transition:enter="duration-300 esae-out" x-transition:enter-start="opacity-0 -mt-96"
                 x-transition:enter-end="opacity-100 -mt-0">
                 <livewire:category-section model-class="\App\Models\ProductCategory" />

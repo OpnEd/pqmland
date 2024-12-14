@@ -18,7 +18,7 @@ class ProductCategorySeeder extends Seeder
             [
             'name' => 'Cannabis',
             'description' => 'Lo mejor de cannabis sativa en productos naturales, novedosos y efectivos',
-            'cover' => 'cannabis',
+            'cover' => 'cannabisCategoryIcon',
             'route' => 'cannabis',
             'slug' => 'cannabis',
             ],
