@@ -78,7 +78,7 @@
                         <p>No tienes productos en el carrito.</p>
                     @else
                         @foreach ($carrito as $id => $item)
-                            <div class="grid grid-cols-2">
+                            <div class="grid grid-cols-2 mb-4">
                                 <div>
                                     <a href="#" class="truncate text-sm font-semibold leading-none text-gray-900 dark:text-white hover:underline">
                                         {{ $item['nombre'] }}
@@ -107,6 +107,9 @@
                                 </div>
                             </div>
                         @endforeach
+                        <span class="bg-green-200 px-4 py-2 mt-3 text-green-800 rounded-lg">
+                            <a href="{{ route('carrito') }}">Ver carrito</a>
+                        </span>
                         <a href="{{ route('checkout') }}"
                             class="mb-2 me-2 inline-flex w-full items-center justify-center rounded-lg bg-primary-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                             role="button"> Ir a pagar </a>

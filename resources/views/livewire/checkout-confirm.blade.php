@@ -251,27 +251,24 @@
                     <div class="-my-3 divide-y divide-gray-200 dark:divide-gray-800">
                         <dl class="flex items-center justify-between gap-4 py-3">
                             <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Subtotal</dt>
-                            <dd class="text-base font-medium text-gray-900 dark:text-white">$8,094.00</dd>
+                            <dd class="text-base font-medium text-gray-900 dark:text-white">${{ number_format($this->getSubtotalProperty(), 2) }}</dd>
                         </dl>
 
                         <dl class="flex items-center justify-between gap-4 py-3">
-                            <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Savings</dt>
-                            <dd class="text-base font-medium text-green-500">0</dd>
+                            <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Total
+                                Descuentos</dt>
+                            <dd class="text-base font-medium text-green-500">-${{ number_format($this->getTotalDescuentosProperty(), 2) }}</dd>
                         </dl>
 
                         <dl class="flex items-center justify-between gap-4 py-3">
-                            <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Store Pickup</dt>
-                            <dd class="text-base font-medium text-gray-900 dark:text-white">$99</dd>
-                        </dl>
-
-                        <dl class="flex items-center justify-between gap-4 py-3">
-                            <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Tax</dt>
-                            <dd class="text-base font-medium text-gray-900 dark:text-white">$199</dd>
+                            <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Total
+                                Impuestos</dt>
+                            <dd class="text-base font-medium text-gray-900 dark:text-white">${{ number_format($this->getTotalImpuestosProperty(), 2) }}</dd>
                         </dl>
 
                         <dl class="flex items-center justify-between gap-4 py-3">
                             <dt class="text-base font-bold text-gray-900 dark:text-white">Total</dt>
-                            <dd class="text-base font-bold text-gray-900 dark:text-white">$8,392.00</dd>
+                            <dd class="text-base font-bold text-gray-900 dark:text-white">${{ number_format($this->getTotalProperty(), 2) }}</dd>
                         </dl>
                     </div>
                 </div>
