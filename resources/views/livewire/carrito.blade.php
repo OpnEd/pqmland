@@ -342,10 +342,10 @@
                             </div>
 
                             <!-- Botón para pagar -->
-                            <a href="{{ route('checkout') }}"
+                            <button wire:click="checkOut"
                                 class="flex w-full items-center justify-center rounded-lg bg-primary-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
                                 Ir a pagar
-                            </a>
+                            </button>
 
                             <!-- Link para continuar seleccionando -->
                             <div class="flex items-center justify-center gap-2">
@@ -384,5 +384,39 @@
                 </div>
             @endif
         </div>
+        <!-- Modal que informa que debes loguearte para darle like a un post -->
+
+        @if ($registOrNot)
+            <div class="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-75">
+                <div class="relative bg-white flex flex-col items-center rounded-lg shadow-lg w-96 p-6">
+                    <!-- Botón de cierre (X) -->
+                    <button wire:click="cerrarModal"
+                        class="absolute top-2 right-2 text-gray-500 hover:text-gray-800 focus:outline-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                            stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                    <img src="{{ asset('storage/images/tienda/login.png') }}" alt="">
+                    <h2 class="text-xl font-semibold text-gray-800">¿Deseas registrarte antes de comprar?</h2>
+                    <p>Beneficios al registrarte:</p>
+                    <ul class="list-disc list-inside text-gray-600">
+                        <li>Historial de compras</li>
+                        <li>Ofertas exclusivas</li>
+                        <li>Agilidad en compras futuras</li>
+                    </ul>
+                    <div class="mt-4 flex justify-center space-x-4">
+                    <a href="{{ route('checkout') }}"
+                        class="bg-gray-200 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-300">
+                            Continuar sin registrarse
+                    </a>
+                    <a href="{{ route('register') }}"
+                        class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                            Registrarse y continuar
+                    </a>
+                    </div>
+                </div>
+            </div>
+        @endif
     </div>
 </section>

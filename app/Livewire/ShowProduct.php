@@ -85,6 +85,7 @@ class ShowProduct extends BaseComponent
 
         // Actualizar carrito
         $this->carrito[$productoId] = [
+            'producto_id' => $productoId,
             'nombre' => $producto->name,
             'precio_unitario' => $precioFinal,
             'cantidad' => ($this->carrito[$productoId]['cantidad'] ?? 0) + $cantidad,

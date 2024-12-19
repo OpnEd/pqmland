@@ -7,12 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Pedido extends Model
+class GuestPedido extends Model
 {
+    /** @use HasFactory<\Database\Factories\GuestPedidoFactory> */
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
+        'guest_id',
         'total',
         'estado',
         'transaccion_id'
@@ -22,13 +23,13 @@ class Pedido extends Model
         'total' => 'decimal:2',
     ];
 
-    public function user(): BelongsTo
+    public function guest(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Guest::class);
     }
 
-    public function detalles(): HasMany
+    public function guestDetalles(): HasMany
     {
-        return $this->hasMany(DetallePedido::class);
+        return $this->hasMany(GuestDetallePedido::class);
     }
 }

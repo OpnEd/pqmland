@@ -6,13 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class DetallePedido extends Model
+class GuestDetallePedido extends Model
 {
+    /** @use HasFactory<\Database\Factories\GuestDetallePedidoFactory> */
     use HasFactory;
 
     protected $fillable = [
-        'pedido_id',
-        'producto_id',
+        'guest_pedido_id',
+        'product_id',
         'cantidad',
         'precio_unitario',
         'subtotal',
@@ -29,6 +30,6 @@ class DetallePedido extends Model
 
     public function pedido(): BelongsTo
     {
-        return $this->belongsTo(Pedido::class);
+        return $this->belongsTo(GuestPedido::class);
     }
 }

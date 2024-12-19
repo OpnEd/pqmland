@@ -16,7 +16,8 @@ return new class extends Migration
             $table->text('professional_profile')->nullable()->after('degree');
             $table->string('current_position')->nullable()->after('professional_profile');
             $table->string('city')->nullable()->after('current_position');
-            $table->string('phone_number')->nullable()->after('city');
+            $table->string('address')->nullable()->after('city');
+            $table->string('phone_number')->nullable()->after('address');
             $table->string('url')->nullable()->after('phone_number');
             $table->string('linked_in')->nullable()->after('url');
             $table->string('facebook')->nullable()->after('linked_in');

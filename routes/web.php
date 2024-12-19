@@ -8,6 +8,7 @@ Use App\Http\Controllers\PolicyTermsController;
 use App\Livewire\Carrito;
 use App\Livewire\CheckoutConfirm;
 use App\Livewire\CurriculumVitae;
+use App\Livewire\PaginaAgradecimiento;
 use App\Livewire\ProductList;
 use App\Livewire\ShowPost;
 use App\Livewire\ShowProduct;
@@ -42,6 +43,8 @@ Route::get('/carrito', Carrito::class)->name('carrito');
 
 Route::get('/pago', CheckoutConfirm::class)->name('checkout');
 
+Route::get('/te-lo-agradecemos/{pedido_id}', PaginaAgradecimiento::class)->name('gracias');
+
 Route::get('/terminos', [PolicyTermsController::class, 'showTerms'])->name('terminos');
 
 Route::get('/privacidad', [PolicyTermsController::class, 'showPolicy'])->name('privacidad');
@@ -72,8 +75,8 @@ Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
 
-Route::get('/debug-carrito', function () {
-        dd(session('carrito'));
+Route::get('/debug-session', function () {
+        dd(session());
     });
 
 

@@ -31,6 +31,7 @@ class User extends Authenticatable// implements MustVerifyEmail
         'professional_profile',
         'current_position',
         'city',
+        'address',
         'phone_number',
         'url',
         'linked_in',

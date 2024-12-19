@@ -11,6 +11,7 @@ class Carrito extends BaseComponent
 {
     public $carrito = [];
     public $productoId; // Producto seleccionado para agregar al carrito
+    public $registOrNot = false;
 
     public function mount()
     {
@@ -111,6 +112,16 @@ class Carrito extends BaseComponent
     public function getTotalImpuestosProperty()
     {
         return array_sum(array_column($this->carrito, 'impuestos'));
+    }
+
+    public function checkOut()
+    {
+        $this->registOrNot = true;
+    }
+
+    public function cerrarModal()
+    {
+        $this->registOrNot = false;
     }
 
     public function render()

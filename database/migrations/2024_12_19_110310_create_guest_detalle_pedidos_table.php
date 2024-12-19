@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Pedido;
+use App\Models\GuestPedido;
 use App\Models\Product;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('detalle_pedidos', function (Blueprint $table) {
+        Schema::create('guest_detalle_pedidos', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Pedido::class)->constrained()->onDelete('cascade');
+            $table->foreignIdFor(GuestPedido::class)->constrained()->onDelete('cascade');
             $table->foreignIdFor(Product::class)->constrained()->onDelete('cascade');
             $table->integer('cantidad');
             $table->decimal('precio_unitario', 10, 2);
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('detalle_pedidos');
+        Schema::dropIfExists('guest_detalle_pedidos');
     }
 };

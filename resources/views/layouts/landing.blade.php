@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge" />
     <link
         href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Audiowide&family=Goldman&family=Michroma&family=Inter&display=swap"
         rel="stylesheet">
@@ -14,6 +15,8 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <script src="https://sandbox.paypal.com/sdk/js?client-id=AW-lD0P1kxLaziUolu0DY_EBvTQHViFrDLI7tinDOmqiUVoIvkLMNOIQZzuk_a3a77Wq_nmeAgN-5Oob&currency=USD&components=buttons"></script>
+
 
     <!-- Styles / Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
