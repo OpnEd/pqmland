@@ -29,8 +29,8 @@
             </p>
             <div class="bg-white text-gray-900 rounded-lg shadow-lg p-6 w-full max-w-2xl">
                 <h2 class="text-2xl font-semibold mb-4">Detalles del Pedido</h2>
-                <p class="mb-2"><strong>Número de Pedido:</strong> {{ $pedido->id }}</p>
-                <p class="mb-2"><strong>Total Pagado:</strong> ${{ number_format($pedido->total, 2) }}</p>
+                <p class="mb-2"><strong>Número de Pedido:</strong> {{ $guest_pedido->id }}</p>
+                <p class="mb-2"><strong>Total Pagado:</strong> ${{ number_format($guest_pedido->total, 2) }}</p>
 
                 <h3 class="text-xl font-semibold mt-6 mb-4">Productos:</h3>
                 <table class="w-full border-collapse border border-dashed border-gray-400">
@@ -43,7 +43,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($pedido->detalles as $index => $detalle)
+                        @foreach ($guest_pedido->guestDetalles as $index => $detalle)
                             <tr>
                                 <td class="border border-dashed border-gray-400 px-4 py-2 text-center">{{ $index + 1 }}</td>
                                 <td class="border border-dashed border-gray-400 px-4 py-2 text-center">{{ $detalle->cantidad }}</td>

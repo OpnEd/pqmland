@@ -15,7 +15,8 @@ return new class extends Migration
             $table->string('last_name')->nullable()->after('name');
             $table->text('professional_profile')->nullable()->after('degree');
             $table->string('current_position')->nullable()->after('professional_profile');
-            $table->string('city')->nullable()->after('current_position');
+            $table->string('company_name')->nullable()->after('current_position');
+            $table->string('city')->nullable()->after('company_name');
             $table->string('address')->nullable()->after('city');
             $table->string('phone_number')->nullable()->after('address');
             $table->string('url')->nullable()->after('phone_number');

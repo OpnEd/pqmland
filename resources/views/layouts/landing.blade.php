@@ -51,6 +51,7 @@
     </x-landing.footer>
 
     @livewireScripts
+    @stack('scripts')
 </body>
 
 </html>

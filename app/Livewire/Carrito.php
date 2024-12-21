@@ -115,9 +115,13 @@ class Carrito extends BaseComponent
     }
 
     public function checkOut()
-    {
+{
+    if (\Illuminate\Support\Facades\Auth::check()) {
+        return redirect()->route('dashboard');
+    } else {
         $this->registOrNot = true;
     }
+}
 
     public function cerrarModal()
     {

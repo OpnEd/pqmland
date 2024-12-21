@@ -12,7 +12,7 @@ class DetallePedido extends Model
 
     protected $fillable = [
         'pedido_id',
-        'producto_id',
+        'product_id',
         'cantidad',
         'precio_unitario',
         'subtotal',
@@ -29,6 +29,11 @@ class DetallePedido extends Model
 
     public function pedido(): BelongsTo
     {
-        return $this->belongsTo(Pedido::class);
+        return $this->belongsTo(Pedido::class, 'pedido_id');
+    }
+
+    public function producto(): BelongsTo
+    {
+        return $this->belongsTo(Product::class, 'product_id');
     }
 }

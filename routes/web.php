@@ -4,11 +4,12 @@ use App\Livewire\Blog;
 use App\Livewire\Contacto;
 use App\Livewire\Nosotros;
 use App\Livewire\PostList;
-Use App\Http\Controllers\PolicyTermsController;
+use App\Http\Controllers\PolicyTermsController;
 use App\Livewire\Carrito;
 use App\Livewire\CheckoutConfirm;
 use App\Livewire\CurriculumVitae;
 use App\Livewire\PaginaAgradecimiento;
+use App\Livewire\PaginaAgradecimientoGuest;
 use App\Livewire\ProductList;
 use App\Livewire\ShowPost;
 use App\Livewire\ShowProduct;
@@ -43,7 +44,9 @@ Route::get('/carrito', Carrito::class)->name('carrito');
 
 Route::get('/pago', CheckoutConfirm::class)->name('checkout');
 
-Route::get('/te-lo-agradecemos/{pedido_id}', PaginaAgradecimiento::class)->name('gracias');
+Route::get('/compra-usuario-realizada/{pedido_id}', PaginaAgradecimiento::class)->name('gracias.usuario');
+
+Route::get('/compra-invitado-realizada/{guest_pedido_id}', PaginaAgradecimientoGuest::class)->name('gracias.guest');
 
 Route::get('/terminos', [PolicyTermsController::class, 'showTerms'])->name('terminos');
 
@@ -76,8 +79,23 @@ Route::view('profile', 'profile')
     ->name('profile');
 
 Route::get('/debug-session', function () {
-        dd(session());
-    });
+    dd(session());
+});
 
+Route::get('/insert-status', function (Request $request) {
+    // Insertar datos en la sesión
+    $request->session()->put('orderStatus', 'COMPLETED');
 
-require __DIR__.'/auth.php';
+    // Retornar una respuesta
+    return back()->with('message', 'Datos insertados en la sesión!');
+});
+
+Route::get('/insert-mensaje', function (Request $request) {
+    // Insertar datos en la sesión
+    $request->session()->put('mensaje', 'Compra realizada con éxito!');
+
+    // Retornar una respuesta
+    return back()->with('message', 'Datos insertados en la sesión!');
+});
+
+require __DIR__ . '/auth.php';

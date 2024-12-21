@@ -20,6 +20,6 @@ class PaginaAgradecimiento extends BaseComponent
     {
         return view('livewire.pagina-agradecimiento', [
             'pedido' => $this->pedido,
-            ])->layout($this->getLayout());
+        ])->layout($this->getLayout());
     }
 }

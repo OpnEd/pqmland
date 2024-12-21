@@ -51,6 +51,14 @@
             <!-- Rest of your checkout view -->
             <div class="space-y-4">
                 <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Detalles para la entrega</h2>
+
+                <!-- Mensaje de error -->
+                @if (session()->has('mensaje'))
+                    <div class="mt-4 w-full rounded-lg bg-green-100 p-4 text-sm font-thin text-center text-green-700">
+                        {{ session('error') }}
+                    </div>
+                @endif
+
                 <livewire:gest-checkout-form />
             </div>
         </div>

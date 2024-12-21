@@ -10,6 +10,15 @@
                     placeholder="Juan Ramón Vargas" required />
                     @error('form.your_name') <span class="text-red-500">{{ $message }}</span> @enderror
             </div>
+            <!-- Apellido -->
+            <div>
+                <label for="your_lastname" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
+                    Tu apellido </label>
+                <input type="text" id="your_lastname" wire:model.blur="form.your_lastname"
+                    class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
+                    placeholder="Juan Ramón Vargas" required />
+                    @error('form.your_lastname') <span class="text-red-500">{{ $message }}</span> @enderror
+            </div>
             <!-- Email -->
             <div>
                 <label for="your_email"
@@ -37,9 +46,9 @@
                         class="block text-sm font-medium text-gray-900 dark:text-white"> Ciudad </label>
                 </div>
                 <div class="relative">
+                    <!-- Select con las opciones filtradas -->
                     <select id="your_city" wire:model.blur="form.your_city"
                         class="block w-full mt-2 rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500">
-                        <option value="" disabled>Selecciona tu ciudad</option>
                         @if (count($filteredCities) > 0)
                             @foreach ($filteredCities as $city)
                                 <option value="{{ $city['city'] }}">
@@ -86,4 +95,3 @@
         </div>
     @endif
 </div>
-{{-- [{"id":0,"departamento":"Amazonas","ciudades":["Leticia","Puerto Nari\u00f1o"]},{"id":1,"departamento":"Antioquia","ciudades":["Abejorral",...]},] --}}

@@ -10,6 +10,7 @@
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+        <script src="https://sandbox.paypal.com/sdk/js?client-id=AW-lD0P1kxLaziUolu0DY_EBvTQHViFrDLI7tinDOmqiUVoIvkLMNOIQZzuk_a3a77Wq_nmeAgN-5Oob&currency=USD&components=buttons"></script>
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -41,24 +42,7 @@
         <x-landing.footer>
         </x-landing.footer>
 
-        @livewire('wire-elements-modal')
         @livewireScripts
-        {{-- <script>
-            function carousel() {
-                return {
-                    current: 0,
-                    items: [0, 1, 2], // Cambia este arreglo si agregas más imágenes
-                    next() {
-                        this.current = (this.current + 1) % this.items.length;
-                    },
-                    prev() {
-                        this.current = (this.current - 1 + this.items.length) % this.items.length;
-                    },
-                    goTo(index) {
-                        this.current = index;
-                    },
-                };
-            }
-        </script> --}}
+        @stack('scripts')
     </body>
 </html>

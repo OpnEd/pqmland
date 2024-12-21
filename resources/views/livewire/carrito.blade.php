@@ -398,6 +398,7 @@
                         </svg>
                     </button>
                     <img src="{{ asset('storage/images/tienda/login.png') }}" alt="">
+
                     <h2 class="text-xl font-semibold text-gray-800">¿Deseas registrarte antes de comprar?</h2>
                     <p>Beneficios al registrarte:</p>
                     <ul class="list-disc list-inside text-gray-600">
@@ -406,15 +407,20 @@
                         <li>Agilidad en compras futuras</li>
                     </ul>
                     <div class="mt-4 flex justify-center space-x-4">
-                    <a href="{{ route('checkout') }}"
-                        class="bg-gray-200 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-300">
+                        <a href="{{ route('checkout') }}"
+                            class="inline-block bg-gray-200 text-gray-800 px-3 py-1 rounded-lg text-xs font-semibold hover:bg-gray-300">
                             Continuar sin registrarse
-                    </a>
-                    <a href="{{ route('register') }}"
-                        class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                        </a>
+                        <a href="{{ route('register') }}"
+                            class="inline-block bg-blue-600 text-white px-3 py-1 rounded-lg text-xs font-semibold hover:bg-blue-700">
                             Registrarse y continuar
-                    </a>
+                        </a>
+                        <a href="{{ route('login') }}"
+                            class="inline-block bg-green-600 text-white px-3 py-1 rounded-lg text-xs font-semibold hover:bg-green-700">
+                            Ya estoy registrado
+                        </a>
                     </div>
+
                 </div>
             </div>
         @endif

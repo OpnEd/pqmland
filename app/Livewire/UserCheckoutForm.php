@@ -2,24 +2,37 @@
 
 namespace App\Livewire;
 
-use Illuminate\Support\Facades\Session;
 use Livewire\Component;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
-class GestCheckoutForm extends Component
+class UserCheckoutForm extends Component
 {
     public $filteredCities = []; // Ciudades filtradas
     public $allCities = []; // Todas las ciudades disponibles
+    public $form = [
+        'your_name' => '',
+        'your_lastname' => '',
+        'your_email' => '',
+        'your_phone' => '',
+        'your_city' => '',
+        'address' => '',
+        'company_name' => ''
+    ];
 
     public function mount()
     {
-        $sessionData = Session::get('checkoutForm', []);
+        $user = Auth::user();
+        $sessionData = Session::get('checkoutForm');
 
-        $this->form['your_name'] = $sessionData['your_name'] ?? '';
-        $this->form['your_email'] = $sessionData['your_email'] ?? '';
-        $this->form['your_phone'] = $sessionData['your_phone'] ?? '';
-        $this->form['your_city'] = $sessionData['your_city'] ?? '';
-        $this->form['address'] = $sessionData['address'] ?? '';
-        $this->form['company_name'] = $sessionData['company_name'] ?? '';
+        $this->form['your_name'] = $user->name;
+        $this->form['your_lastname'] = $sessionData['your_lastname'] ?? $user->last_name;
+        $this->form['your_email'] = $user->email;
+        $this->form['your_phone'] = $sessionData['your_phone'] ?? $user->phone_number;
+        $this->form['your_city'] = $sessionData['your_city'] ?? $user->city;
+        $this->form['address'] = $sessionData['address'] ?? $user->address;
+        $this->form['company_name'] = $sessionData['company_name'] ?? $user->company_name;
+
         // Cargar el archivo JSON desde config
         $departments = config('colombia');
 
@@ -40,29 +53,21 @@ class GestCheckoutForm extends Component
         $this->filteredCities = $this->allCities;
     }
 
-    // Campos del formulario
-    public $form = [
-        'your_name' => '',
-        'your_email' => '',
-        'your_phone' => '',
-        'address' => '',
-        'your_city' => '',
-        'company_name' => '',
-    ];
-
     // Reglas de validación
     protected $rules = [
         'form.your_name' => 'required|string|max:255',
+        'form.your_lastname' => 'required|string|max:255',
         'form.your_email' => 'required|email|unique:guests,email|max:255',
         'form.your_phone' => 'required|string|max:15',
         'form.address' => 'required|string|max:255',
-        'form.your_city' => 'required|string|min:3|max:100',
+        'form.your_city' => 'required|string|max:100',
         'form.company_name' => 'nullable|string|max:255',
     ];
 
     // Mensajes de validación personalizados
     protected $messages = [
         'form.your_name.required' => 'El nombre es obligatorio.',
+        'form.your_lastname.required' => 'El nombre es obligatorio.',
         'form.your_email.required' => 'El correo electrónico es obligatorio.',
         'form.your_email.email' => 'El correo electrónico debe ser una dirección válida.',
         'form.your_email.unique' => 'El correo electrónico ya está registrado.',
@@ -101,6 +106,6 @@ class GestCheckoutForm extends Component
 
     public function render()
     {
-        return view('livewire.gest-checkout-form');
+        return view('livewire.user-checkout-form');
     }
 }
