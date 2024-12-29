@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Transaccion extends Model
 {
@@ -18,7 +19,7 @@ class Transaccion extends Model
         'datos' => 'array',
     ];
 
-    public function guestPedido()
+    public function guestPedido(): BelongsTo
     {
         return $this->belongsTo(GuestPedido::class, 'guest_pedido_id');
     }

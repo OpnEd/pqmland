@@ -1,0 +1,132 @@
+/* Estilo Global */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7f9; /* Color claro, asociado a limpieza y profesionalismo */
+    color: #333; /* Texto oscuro para legibilidad */
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+/* Encabezados */
+h1, h2, h3 {
+    margin: 0 0 15px;
+    font-weight: bold;
+}
+
+h1 {
+    font-size: 24px;
+    color: #1a73e8; /* Azul médico para inspirar confianza */
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #1a73e8;
+    padding-bottom: 10px;
+}
+
+h2 {
+    font-size: 20px;
+    color: #333;
+}
+
+h3 {
+    font-size: 18px;
+    color: #555;
+}
+
+/* Párrafos */
+p {
+    margin: 10px 0;
+    color: #555; /* Gris oscuro para no ser demasiado fuerte */
+    font-size: 16px;
+}
+
+/* Links */
+a {
+    color: #1a73e8; /* Azul confiable */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Botones */
+.button {
+    display: inline-block;
+    padding: 12px 25px;
+    font-size: 16px;
+    color: #ffffff; /* Blanco sobre fondo azul */
+    background-color: #1a73e8; /* Azul médico */
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.button:hover {
+    background-color: #155bb5; /* Azul más oscuro al pasar el mouse */
+}
+
+/* Contenedor Principal */
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    background: #ffffff;
+    border: 1px solid #e6e6e6;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Encabezado del correo */
+.email-header {
+    text-align: center;
+    background-color: #1a73e8; /* Fondo azul médico */
+    color: #ffffff;
+    padding: 15px;
+    border-radius: 8px 8px 0 0;
+}
+
+.email-header h1 {
+    margin: 0;
+    font-size: 22px;
+}
+
+/* Pie de Página */
+.email-footer {
+    text-align: center;
+    font-size: 14px;
+    color: #777;
+    margin-top: 20px;
+    padding-top: 10px;
+    border-top: 1px solid #e6e6e6;
+}
+
+.email-footer a {
+    color: #1a73e8;
+    font-weight: normal;
+}
+
+/* Tabla de Detalles */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+.table th, .table td {
+    border: 1px solid #e6e6e6;
+    padding: 12px;
+    text-align: left;
+}
+
+.table th {
+    background-color: #f4f7f9;
+    color: #333;
+    font-weight: bold;
+}
+
+.table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}

@@ -7,6 +7,8 @@
     "require": {
         "php": "^8.2",
         "erusev/parsedown": "^1.7",
+        "fedeisas/laravel-mail-css-inliner": "^5.3",
+        "guzzlehttp/guzzle": "^7.9",
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
         "league/commonmark": "^2.5",

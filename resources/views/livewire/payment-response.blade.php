@@ -1,4 +1,64 @@
-@php
+<div class="container mx-auto py-10">
+    {{-- @if ($estadoTx === 'Error validando la firma digital.')
+        <h1>Error validando la firma digital.</h1>
+    @else --}}
+    <h2>Resumen de la transacción</h2>
+    <table>
+        <tr>
+            <td>Estado de la transacción</td>
+            <td>{{ $estadoTx }}</td>
+        </tr>
+        <tr>
+            <td>ID de la transacción</td>
+            <td>{{ $payuResponse['transactionId'] ?? 'N/A' }}</td>
+        </tr>
+        <tr>
+            <td>Referencia de venta</td>
+            <td>{{ $payuResponse['reference_pol'] ?? 'N/A' }}</td>
+        </tr>
+        <tr>
+            <td>Referencia de la transacción</td>
+            <td>{{ $payuResponse['referenceCode'] ?? 'N/A' }}</td>
+        </tr>
+        @if (!empty($payuResponse['pseBank']))
+            <tr>
+                <td>cus</td>
+                <td>{{ $payuResponse['cus'] ?? 'N/A' }}</td>
+            </tr>
+            <tr>
+                <td>Banco</td>
+                <td>{{ $payuResponse['pseBank'] }}</td>
+            </tr>
+        @endif
+        <tr>
+            <td>Valor total</td>
+            <td>${{ number_format($payuResponse['TX_VALUE'] ?? 0, 2) }}</td>
+        </tr>
+        <tr>
+            <td>Moneda</td>
+            <td>{{ $payuResponse['currency'] ?? 'N/A' }}</td>
+        </tr>
+        <tr>
+            <td>Descripción</td>
+            <td>{{ $payuResponse['description'] ?? 'N/A' }}</td>
+        </tr>
+        <tr>
+            <td>Entidad</td>
+            <td>{{ $payuResponse['lapPaymentMethod'] ?? 'N/A' }}</td>
+        </tr>
+        <tr>
+            <td>Validaciód de firma</td>
+            @if ($validacionFirma)
+                <td style="background-color: green; color: white">Firma validada exitosamente!</td>
+            @else
+                <td style="background-color: red; color: white">No se ha podido validar la firma</td>
+            @endif
+        </tr>
+    </table>
+    {{-- @endif --}}
+</div>
+
+{{-- @php
     $status = session('orderStatus');
     $message = session('mensaje');
 @endphp
@@ -88,3 +148,4 @@
     </div>
 
 </div>
+ --}}

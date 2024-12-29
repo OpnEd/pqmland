@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('guest_pedido_id')->constrained('guest_pedidos')->cascadeOnDelete();
             $table->string('transaccion_id')->unique();
             $table->decimal('monto', 10, 2);
-            $table->enum('estado', ['En proceso', 'Pagado', 'Rechazado'])->default('En proceso');
+            $table->string('estado');
             $table->json('datos');
             $table->timestamps();
         });

@@ -14,6 +14,8 @@ class Guest extends Model
     protected $fillable = [
         'name',
         'email',
+        'document_type',
+        'document',
         'city',
         'address',
         'phone_number',

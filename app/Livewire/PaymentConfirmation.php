@@ -2,45 +2,40 @@
 
 namespace App\Livewire;
 
-use App\Helpers\StatusMapper;
-use App\Models\GuestPedido;
-use App\Models\GuestDetallePedido;
+use Livewire\Component;
 use Illuminate\Support\Facades\DB;
-use App\Livewire\BaseComponent;
 use Illuminate\Support\Facades\Log;
-use App\Models\Guest;
-use Exception;
-use App\Mail\OrderConfirmed;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
+use App\Models\Guest;
+use App\Models\GuestPedido;
+use App\Models\GuestDetallePedido;
 use App\Models\Transaccion;
+use App\Mail\OrderConfirmed;
 
-class CheckoutConfirm extends BaseComponent
+class PaymentConfirmation extends Component
 {
-    public $query = ''; // Texto ingresado por el usuario
+    public $orderData;
     public $carrito = [];
     public $checkoutForm = [];
-    public $email = '';
 
     public function mount()
     {
+        // Recuperar los datos enviados por PayU a través de POST
+        $this->orderData = request()->all();
         $this->carrito = Session::get('carrito', []);
         $this->checkoutForm = session('checkoutForm');
-
-        if (empty($this->checkoutForm)) {
-            // Set default values or handle the absence of form data
-            $this->checkoutForm = [
-                'your_name' => '',
-                'your_email' => '',
-                'your_pnone' => '',
-                'your_city' => '',
-                'address' => '',
-                'company_name' => null,
-            ];
-            session()->flash('warning', 'Aún no están tus datos en el formulario. No olvides diligenciarlos!.');
+        //$this->finalizarCompra($this->orderData);
+        // Validar la firma (opcional pero recomendado)
+        if ($this->validarFirma($this->orderData)) {
+            // Llamar al método para procesar el pedido
+            $this->finalizarCompra($this->orderData);
+        } else {
+            // Registro del error en logs si la firma no es válida
+            \Log::error('Firma no válida en notificación PayU', $this->orderData);
         }
-
-        $this->email = $this->checkoutForm['your_email'];
+        // Retorna una respuesta JSON (se requiere Livewire v3 para respuestas HTTP en mount)
+        // return response()->json(['message' => 'Confirmación recibida']);
     }
 
     public function getTotalProperty()
@@ -68,27 +63,33 @@ class CheckoutConfirm extends BaseComponent
     {
         try {
             DB::transaction(function () use ($orderData) {
-                // Map PayPal status to your application's status
-                $orderStatus = StatusMapper::mapPayPalStatus($orderData['status']);
+                \Log::info('Iniciando transacción.');
 
-                // 1. Guardar la información del cliente
-                // Crear el objeto Guest con los datos de la sesión
+                // 1. Validar la respuesta de PayU
+                /* if ($orderData['response_code_pol'] != 4) {
+                    throw new \Exception('La transacción no fue exitosa.');
+                } */
+
+                // 2. Guardar la información del cliente
                 $guest = Guest::create([
                     'name' => $this->checkoutForm['your_name'], // Datos obtenidos de la sesión
                     'email' => $this->checkoutForm['your_email'],
                     'phone_number' => $this->checkoutForm['your_phone'],
+                    'document_type' => $this->checkoutForm['document_type'],
+                    'document' => $this->checkoutForm['document_number'],
                     'city' => $this->checkoutForm['your_city'],
                     'address' => $this->checkoutForm['address'],
                     'company_name' => $this->checkoutForm['company_name'] ?? null, // Campo opcional
                 ]);
+                \Log::info('Cliente creado:', $guest->toArray());
 
                 // 2. Crear el pedido
                 $pedido = GuestPedido::create([
                     'guest_id' => $guest->id,
                     'total' => $this->getTotalProperty(),
                     'estado' => 'En proceso', // Puedes ajustar según tus necesidades
-                    'transaccion_id' => $orderData['id'], // ID de transacción de PayPal
                 ]);
+                \Log::info('Pedido creado:', $pedido->toArray());
 
                 // 3. Guardar los detalles del pedido
                 foreach ($this->carrito as $item) {
@@ -101,21 +102,24 @@ class CheckoutConfirm extends BaseComponent
                         'impuestos' => $item['impuestos'],
                         'descuentos' => $item['descuentos'],
                     ]);
+                    \Log::info('Detalle creado:', $detalle->toArray());
                 }
 
                 // 4. Guardar los datos de la transacción de PayPal
                 Transaccion::create([
                     'guest_pedido_id' => $pedido->id,
-                    'transaccion_id' => $orderData['id'],
-                    'monto' => $orderData['purchase_units'][0]['amount']['value'],
-                    'estado' => $orderStatus, // "COMPLETED" para pagos exitosos
+                    'transaccion_id' => $orderData['transaction_id'],
+                    'monto' => $orderData['value'],
+                    'estado' => $orderData['response_message_pol'], // "COMPLETED" para pagos exitosos
                     'datos' => $orderData, // Guarda todo el objeto de transacción si es necesario
                 ]);
+                \Log::info('Transacción guardada.');
 
                 Mail::to($this->email)->send(new OrderConfirmed($guest->id, $pedido->id));
 
                 // Limpiar el carrito después del guardado exitoso
                 Session::forget(['carrito', 'checkoutForm']);
+                \Log::info('Carrito limpiado.');
 
                 // Limpiar el carrito y el formulario de checkout después del guardado exitoso
                 $this->carrito = [];
@@ -133,9 +137,7 @@ class CheckoutConfirm extends BaseComponent
                         'mensaje' => 'Compra realizada con éxito!',
                     ],
                 );
-                session()->flash('mensaje', 'Compra realizada con éxito.');
-                // Redirigir a la página de agradecimiento
-                return redirect(url()->route('gracias.guest', ['guest_pedido_id' => $pedido->id]));
+                /* session()->flash('mensaje', 'Compra realizada con éxito.'); */
             });
         } catch (\Exception $e) {
             Log::error('Error al guardar el pedido: ' . $e->getMessage());
@@ -144,23 +146,24 @@ class CheckoutConfirm extends BaseComponent
         }
     }
 
-    public function getSubtotalProperty()
+    private function validarFirma($data)
     {
-        return array_sum(array_column($this->carrito, 'subtotal'));
-    }
+        $apiKey = env('PAYU_API_KEY'); // Tu API Key de PayU
+        $merchantId = $data['merchant_id'];
+        $referenceSale = $data['reference_sale'];
+        $value = number_format($data['value'] ?? 0, 2, '.', ''); // Formato numérico con 2 decimales
+        if (substr($value, -1) == '0') {
+            $value = number_format($data['value'] ?? 0, 1, '.', ''); // Formato numérico con 1 decimal si el segundo decimal es cero
+        }
+        $currency = $data['currency'];
+        $statePol = $data['state_pol'];
 
-    public function getTotalDescuentosProperty()
-    {
-        return array_sum(array_column($this->carrito, 'descuentos'));
-    }
+        // Construcción de la cadena de firma
+        $firma_cadena = "$apiKey~$merchantId~$referenceSale~$value~$currency~$statePol";
+        $firma_calculada = md5($firma_cadena);
 
-    public function getTotalImpuestosProperty()
-    {
-        return array_sum(array_column($this->carrito, 'impuestos'));
-    }
+        $sign = $data['sign'];
 
-    public function render()
-    {
-        return view('livewire.checkout-confirm')->layout($this->getLayout());
+        return $firma_calculada === $sign;
     }
 }

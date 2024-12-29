@@ -15,9 +15,14 @@ use App\Livewire\ShowPost;
 use App\Livewire\ShowProduct;
 use App\Livewire\Store;
 use App\Livewire\Welcome;
+use App\Mail\OrderConfirmed;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Livewire\Payment;
+use App\Http\Controllers\PaymentController;
+use App\Livewire\PaymentConfirmation;
+use App\Livewire\PaymentResponse;
 
 Route::get('/', Welcome::class)->name('inicio');
 
@@ -42,11 +47,18 @@ Route::get('/tienda/{product}', ShowProduct::class)->name('articulo.show');
 
 Route::get('/carrito', Carrito::class)->name('carrito');
 
-Route::get('/pago', CheckoutConfirm::class)->name('checkout');
+//Route::get('/pago', CheckoutConfirm::class)->name('checkout');
+
+Route::get('/pago', Payment::class)->name('checkout');
+
+//Route::post('/confirmation', PaymentConfirmation::class)->name('payment.confirmation');
+Route::post('/payment/confirmation', [PaymentController::class, 'confirmation'])->name('payment.confirmation');
+/* Route::get('/response', PaymentResponse::class)->name('payment.response'); */
 
 Route::get('/compra-usuario-realizada/{pedido_id}', PaginaAgradecimiento::class)->name('gracias.usuario');
 
-Route::get('/compra-invitado-realizada/{guest_pedido_id}', PaginaAgradecimientoGuest::class)->name('gracias.guest');
+/* Route::get('/compra-invitado-realizada/{guest_pedido_id}', PaginaAgradecimientoGuest::class)->name('gracias.guest'); */
+Route::get('/compra-realizada', PaginaAgradecimientoGuest::class)->name('payment.response');
 
 Route::get('/terminos', [PolicyTermsController::class, 'showTerms'])->name('terminos');
 
@@ -97,5 +109,12 @@ Route::get('/insert-mensaje', function (Request $request) {
     // Retornar una respuesta
     return back()->with('message', 'Datos insertados en la sesión!');
 });
+
+/* Route::get('/testroute', function() {
+    $name = "Funny Coder";
+
+    // The email sending is done using the to method on the Mail facade
+    Mail::to('rialmon@gmail.com')->send(new OrderConfirmed($name));
+}); */
 
 require __DIR__ . '/auth.php';

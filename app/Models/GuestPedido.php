@@ -16,7 +16,6 @@ class GuestPedido extends Model
         'guest_id',
         'total',
         'estado',
-        'transaccion_id'
     ];
 
     protected $casts = [
@@ -31,5 +30,10 @@ class GuestPedido extends Model
     public function guestDetalles(): HasMany
     {
         return $this->hasMany(GuestDetallePedido::class);
+    }
+
+    public function transacciones(): HasMany
+    {
+        return $this->hasMany(Transaccion::class);
     }
 }

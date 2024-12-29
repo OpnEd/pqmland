@@ -39,7 +39,7 @@ class Product extends Model
 
     public function discounts(): BelongsToMany
     {
-        return $this->belongsToMany(Discount::class, 'product_discount')->withTimestamps();
+        return $this->belongsToMany(Discount::class, 'discount_product')->withTimestamps();
     }
 
     public function scopeFeatured($query)

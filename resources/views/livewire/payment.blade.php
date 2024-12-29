@@ -1,4 +1,5 @@
 <section class="bg-white py-8 mx-8 antialiased dark:bg-gray-900 md:py-16 md:px-16">
+    {{-- {{dd($buyerFullName)}} --}}
     <div class="mx-auto max-w-screen-xl px-4 2xl:px-0">
         <ol
             class="items-center flex w-full max-w-2xl text-center text-sm font-medium text-gray-500 dark:text-gray-400 sm:text-base">
@@ -62,7 +63,7 @@
 
                     <livewire:gest-checkout-form />
                 </div>
-                <div class="space-y-4">
+                {{-- <div class="space-y-4">
                     <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Payment</h3>
 
                     <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
@@ -77,10 +78,12 @@
                                 </div>
 
                                 <div class="ms-4 text-sm">
-                                    <label for="credit-card" class="font-medium leading-none text-gray-900 dark:text-white">
+                                    <label for="credit-card"
+                                        class="font-medium leading-none text-gray-900 dark:text-white">
                                         Credit
                                         Card </label>
-                                    <p id="credit-card-text" class="mt-1 text-xs font-normal text-gray-500 dark:text-gray-400">
+                                    <p id="credit-card-text"
+                                        class="mt-1 text-xs font-normal text-gray-500 dark:text-gray-400">
                                         Pay
                                         with your credit card</p>
                                 </div>
@@ -138,10 +141,12 @@
                                 </div>
 
                                 <div class="ms-4 text-sm">
-                                    <label for="paypal-2" class="font-medium leading-none text-gray-900 dark:text-white">
+                                    <label for="paypal-2"
+                                        class="font-medium leading-none text-gray-900 dark:text-white">
                                         Paypal
                                         account </label>
-                                    <p id="paypal-text" class="mt-1 text-xs font-normal text-gray-500 dark:text-gray-400">
+                                    <p id="paypal-text"
+                                        class="mt-1 text-xs font-normal text-gray-500 dark:text-gray-400">
                                         Connect
                                         to your account</p>
                                 </div>
@@ -158,7 +163,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
 
             <div class="mt-6 w-full space-y-6 sm:mt-8 lg:mt-0 lg:max-w-xs xl:max-w-md">
@@ -193,57 +198,61 @@
                     <!-- Contenedor del botón de PayPal -->
                     {{-- <div id="paypal-button-container"></div> --}}
                     {{-- <a href="https://biz.payulatam.com/B0f8a9a99F6D5B7"><img src="https://ecommerce.payulatam.com/img-secure-2015/boton_pagar_mediano.png"></a> --}}
-                    <form method="post" action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/">
+                    <form id="payu-form" method="post"
+                        action="{{ config('app.env') === 'prod' ? 'https://checkout.payulatam.com/ppp-web-gateway-payu/' : 'https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/' }}">
 
-                        <input name="merchantId"         type="hidden"  value="1018522"   >
+                        <input name="merchantId" type="hidden" value="{{ $merchantId }}">
 
-                        <input name="accountId"          type="hidden"  value="1027515" >
+                        <input name="accountId" type="hidden" value="{{ $accountId }}">
 
-                        <input name="description"        type="hidden"  value="Compra en PQM"  >
+                        <input name="description" type="hidden" value="{{ $description }}">
 
-                        <input name="referenceCode"      type="hidden"  value="TestPayU" >
+                        <input name="referenceCode" type="hidden" value="{{ $referenceCode }}">
 
-                        <input name="amount"             type="hidden"  value="{{$this->getTotalProperty()}}"   >
+                        <input name="amount" type="hidden" value="{{ $amount }}">
 
-                        <input name="tax"                type="hidden"  value=""  >
+                        <input name="tax" type="hidden" value="{{ $tax }}">
 
-                        <input name="taxReturnBase"      type="hidden"  value="16806" >
+                        <input name="taxReturnBase" type="hidden" value="{{ $taxReturnBase }}">
 
-                        <input name="currency"           type="hidden"  value="COP" >
+                        <input name="currency" type="hidden" value="{{ $currency }}">
 
-                        <input name="signature"          type="hidden"  value="7ee7cf808ce6a39b17481c54f2c57acc"  >
+                        <input name="signature" type="hidden" value="{{ $signature }}">
 
-                        <input name="test"               type="hidden"  value="0" >
+                        <input name="test" type="hidden" value="{{ $test }}">
 
-                        <input name="buyerEmail"         type="hidden"  wire:model="buyerEmail" >
+                        <input name="buyerEmail" type="hidden" value="{{ $buyerEmail }}">
 
-                        <input name="telephone"          type="hidden"  wire:model="telephone" >
+                        <input name="telephone" type="hidden" value="{{ $telephone }}">
 
-                        <input name="buyerFullName"      type="hidden"  wire:model="buyerFullName" >
+                        <input name="buyerFullName" type="hidden" value="{{ $buyerFullName }}">
 
-                        <input name="payerEmail"         type="hidden"  wire:model="payerEmail" >
+                        <input name="payerEmail" type="hidden" value="{{ $payerEmail }}">
 
-                        <input name="payerPhone"         type="hidden"  wire:model="payerPhone" >
+                        <input name="payerPhone" type="hidden" value="{{ $payerPhone }}">
 
-                        <input name="payerFullName"      type="hidden"  wire:model="payerFullName" >
+                        <input name="payerFullName" type="hidden" value="{{ $payerFullName }}">
 
-                        <input name="payerDocument"      type="hidden"  wire:model="payerDocument" >
+                        <input name="payerDocument" type="hidden" value="{{ $payerDocument }}">
 
-                        <input name="payerDocumentType"  type="hidden"  wire:model="payerDocumentType" >
+                        <input name="payerDocumentType" type="hidden" value="{{ $payerDocumentType }}">
 
-                        <input name="shippingAddress"    type="hidden"  value="calle 93 n 47 - 65"   >
+                        <input name="shippingAddress" type="hidden" value="{{ $shippingAddress }}">
 
-                        <input name="shippingCity"       type="hidden"  value="Bogotá" >
+                        <input name="shippingCity" type="hidden" value="{{ $shippingCity }}">
 
-                        <input name="shippingCountry"    type="hidden"  value="CO"  >
+                        <input name="responseUrl" type="hidden" value="http://127.0.0.1:8000/compra-realizada">
 
-                        <input name="responseUrl"        type="hidden"  value="http://www.test.com/response" >
+                        <input name="confirmationUrl" type="hidden" value="http://127.0.0.1:8000/payment/confirmation">
 
-                        <input name="confirmationUrl"    type="hidden"  value="http://www.test.com/confirmation" >
+                        <!-- Botón de pago -->
+                        <button type="submit" class="w-full" {{ !$botonHabilitado ? 'disabled hidden' : '' }}>
+                            <img src="https://prod-developers.s3.amazonaws.com/latam/images/VerdeClaro/Medios_Pago_Verde_Claro_468x60.jpg"
+                                title="PayU - Medios de pago" alt="PayU - Medios de pago" width="468"
+                                height="60" />
+                        </button>
 
-                        <input name="Submit"             type="submit"  value="Enviar" >
-
-                      </form>
+                    </form>
 
                 </div>
 
@@ -262,7 +271,17 @@
         </div>
     </div>
 </section>
+
 <script>
+    // Escucha el evento emitido por Livewire para redirigir al usuario
+    document.addEventListener('DOMContentLoaded', function() {
+        Livewire.on('redirectToPayU', () => {
+            document.getElementById('payu-form').submit();
+        });
+    });
+</script>
+
+{{-- <script>
     function initPayPalButton() {
         paypal.Buttons({
             style: {
@@ -299,7 +318,7 @@
         }).render('#paypal-button-container');
     }
     initPayPalButton();
-</script>
+</script> --}}
 
 {{-- //alert('Pago exitoso!')
 // Full available details

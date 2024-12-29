@@ -17,7 +17,6 @@ return new class extends Migration
             $table->foreignIdFor(Guest::class)->constrained()->cascadeOnDelete();
             $table->decimal('total', 10, 2);
             $table->enum('estado', ['En proceso', 'Pagado - No enviado', 'Enviado - No pagado', 'Enviado - Pagado', 'Entregado', 'Finalizado'])->default('En proceso');
-            $table->string('transaccion_id');
             $table->timestamps();
         });
     }
