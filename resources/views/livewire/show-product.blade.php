@@ -2,11 +2,6 @@
     @php
         $categoria = strtolower($product->category->name);
         $imagenes = $product->images;
-        use League\CommonMark\CommonMarkConverter;
-        $converter = new CommonMarkConverter([
-            'html_input' => 'strip',
-            'allow_unsafe_links' => false,
-        ]);
         $descuentos = [];
         if ($product->discounts->isNotEmpty()) {
             foreach ($product->discounts as $discount) {
@@ -19,6 +14,7 @@
             <div class="shrink-0 max-w-md lg:max-w-lg mx-auto">
                 <img class="w-full dark:hidden"
                     src="{{ asset('storage/images/tienda/' . $categoria . '/' . $imagenes[0] . '.png') }}"
+                    {{-- src="{{ 'https://www.pqm-pharmaquality.com.co/storage/app/public/' . $imagenes[0] }}" --}}
                     alt="{{ $product->name }}" />
             </div>
 
@@ -100,9 +96,7 @@
                 </div>
 
                 <hr class="my-6 md:my-8 border-gray-200 dark:border-gray-800" />
-                @php
-                    echo $converter->convert($product->description);
-                @endphp
+                    {!! $product->description !!}
             </div>
         </div>
     </div>
@@ -114,6 +108,7 @@
             <!-- Ícono de éxito -->
             <div class="text-green-500 mb-4 rounded-full items-center justify-center">
                 <img src="{{ asset('storage/images/tienda/success.png') }}" alt="Agregado!">
+                {{-- <img src="https://www.pqm-pharmaquality.com.co/storage/app/public/success.png" alt="Agregado!"> --}}
             </div>
 
             <!-- Mensaje -->

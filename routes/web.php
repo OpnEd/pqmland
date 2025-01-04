@@ -24,6 +24,31 @@ use App\Http\Controllers\PaymentController;
 use App\Livewire\PaymentConfirmation;
 use App\Livewire\PaymentResponse;
 
+/* Route::get('/clear-cache', function () {
+    Artisan::call('config:clear');
+    Artisan::call('route:clear');
+    Artisan::call('view:clear');
+    Artisan::call('cache:clear');
+    //Artisan::call('filament:clear-components');
+    //Artisan::call('icons:clear');
+
+    return '¡Caché limpia exitosamente!';
+});
+
+Route::get('/optimize-cache', function () {
+    Artisan::call('config:cache');
+    Artisan::call('route:cache');
+    Artisan::call('view:cache');
+    Artisan::call('optimize');
+
+    return '¡Caché generada exitosamente!';
+});
+
+
+Route::get('/create-symlink', function () {
+    Artisan::call('storage:link');
+});*/
+
 Route::get('/', Welcome::class)->name('inicio');
 
 Route::get('/nosotros', Nosotros::class)->name('nosotros');

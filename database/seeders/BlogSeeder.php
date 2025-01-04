@@ -10,6 +10,7 @@ use App\Models\BlogCategory;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
+use Faker\Factory;
 
 class BlogSeeder extends Seeder
 {
@@ -18,7 +19,7 @@ class BlogSeeder extends Seeder
      */
     public function run(): void
     {
-        $faker = \Faker\Factory::create();
+        //$faker = Factory::create();
         //1
         Blog::create([
             'user_id' => 1,
@@ -76,7 +77,7 @@ class BlogSeeder extends Seeder
         ]);
 
         // Crear 20 registros
-        for ($i = 0; $i < 20; $i++) {
+        /* for ($i = 0; $i < 20; $i++) {
             // Obtener un usuario y una categoría aleatoria
             $user = User::inRandomOrder()->first();
             $category = BlogCategory::inRandomOrder()->first();
@@ -103,7 +104,7 @@ class BlogSeeder extends Seeder
                 'created_at' => $created_at,
                 'updated_at' => $created_at,
             ]);
-        }
+        }*/
     }
 }
 

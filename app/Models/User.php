@@ -71,7 +71,7 @@ class User extends Authenticatable// implements MustVerifyEmail
     public function getProfilePhotoUrlAttribute()
     {
         return $this->profile_photo_path
-            ? asset('storage/' . $this->profile_photo_path)
+            ? 'https://www.pqm-pharmaquality.com.co/storage/app/public/profile-photos/' . $this->profile_photo_path
             : null;
     }
 

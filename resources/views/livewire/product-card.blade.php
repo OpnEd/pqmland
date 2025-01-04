@@ -16,6 +16,7 @@
     <div class="relative h-56 w-full">
         <img class="mx-auto h-full transition-opacity duration-300 group-hover:opacity-40"
             src="{{ asset('storage/images/tienda/' . $categoria . '/' . $imagenes[0] . '.png') }}"
+            {{-- src="{{ 'https://www.pqm-pharmaquality.com.co/storage/app/public/' . $imagenes[0] }}" --}}
             alt="{{ $product->name }}" />
         <!-- Botón con ícono centrado -->
         <div

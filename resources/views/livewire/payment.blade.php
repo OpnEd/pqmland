@@ -241,9 +241,9 @@
 
                         <input name="shippingCity" type="hidden" value="{{ $shippingCity }}">
 
-                        <input name="responseUrl" type="hidden" value="http://127.0.0.1:8000/compra-realizada">
+                        <input name="responseUrl" type="hidden" value="https://www.pqm-pharmaquality.com.co/compra-realizada">
 
-                        <input name="confirmationUrl" type="hidden" value="http://127.0.0.1:8000/payment/confirmation">
+                        <input name="confirmationUrl" type="hidden" value="https://www.pqm-pharmaquality.com.co/payment/confirmation">
 
                         <!-- Botón de pago -->
                         <button type="submit" class="w-full" {{ !$botonHabilitado ? 'disabled hidden' : '' }}>

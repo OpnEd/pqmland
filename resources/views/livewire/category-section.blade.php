@@ -11,8 +11,9 @@
             $categoryIcon = $category->icon;
         @endphp
             <li x-show="showAll || {{ $index }} < 3" x-transition>
-                <a wire:navigate href="{{ $category->route }}"> <!-- ruta definida mediante un accessor en cada modelo que lo requiere -->
+                <a href="{{ $category->route }}"> <!-- ruta definida mediante un accessor en cada modelo que lo requiere -->
                     <img class="w-8 h-8 object-cover mr-2" src="{{ asset('storage/images/categorias/'.$categoryIcon.'.png') ?? asset('images/default-icon.png') }}" alt="{{ $category->name }}">
+                    {{-- <img class="w-8 h-8 object-cover mr-2" src="{{ $categoryIcon ? 'https://www.pqm-pharmaquality.com.co/images/categorias/' . $categoryIcon . '.png' : 'https://www.pqm-pharmaquality.com.co/images/default-icon.png' }}" alt="{{ $category->name }}"> --}}
                     <span class="font-bold text-sm">{{ $category->name }}</span>
                 </a>
             </li>

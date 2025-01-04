@@ -4,7 +4,7 @@
     </div>
     <div class="">
         <a href="#">
-            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+            <h5 class="mb-2 text-xl font-bold tracking-wider text-gray-900 dark:text-white">
                 {{ $post->title }}</h5>
         </a>
         <div class="flex justify-between items-center py-3">
@@ -72,7 +72,7 @@
     @if ($modalLogReadMore)
         <div class="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-75">
             <div class="bg-white flex flex-col items-center rounded-lg shadow-lg w-96 p-6">
-                <img src="{{ asset('storage/images/tienda/login.png') }}" alt="">
+                <img src="https://www.pqm-pharmaquality.com.co/storage/app/public/login.png" alt="">
                 <h2 class="text-xl font-semibold text-gray-800">Inicia sesión</h2>
                 <p class="mt-2 text-gray-600">Debes iniciar sesión para leer el resto del contenido!</p>
 

@@ -150,6 +150,11 @@ class Payment extends BaseComponent
         return true; // Todos los campos están completos
     }
 
+    public function pedidoFinalizado()
+    {
+        $this->dispatch('pedidoFinalizado')->to(PaymentConfirmation::class);
+    }
+
     public function render()
     {
         return view('livewire.payment')->layout($this->getLayout());

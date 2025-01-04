@@ -44,7 +44,7 @@
                             clip-rule="evenodd"></path>
                     </svg>
                 </a>
-                <a href="#"
+                {{-- <a href="#"
                     class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-gray-500 rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
                     <svg class="mr-2 -ml-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg">
@@ -53,7 +53,7 @@
                         </path>
                     </svg>
                     Mira este video
-                </a>
+                </a> --}}
             </div>
         </div>
     </section>
@@ -122,34 +122,6 @@
             </div>
 
             <!-- Fin del botón -->
-
-            <!-- Modal que informa que debes loguearte para acceder al contenido de las publicaciones -->
-
-            @if ($modalLogueoLectura)
-                <div class="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-75">
-                    <div class="bg-white flex flex-col items-center rounded-lg shadow-lg w-96 p-6">
-                        <img src="{{ asset('storage/images/tienda/login.png') }}" alt="">
-                        <h2 class="text-xl font-semibold text-gray-800">Inicia sesión</h2>
-                        <p class="mt-2 text-gray-600">Debes iniciar sesión para acceder al contenido!</p>
-
-                        <div class="mt-4 flex justify-center space-x-4">
-                            <!-- Botón Cancelar -->
-                            <button wire:click="closeModal"
-                                class="bg-gray-200 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-300">
-                                Cancelar
-                            </button>
-
-                            <!-- Botón para ir a login -->
-                            <a href="{{ route('post.show', $lastPost) }}"
-                                class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
-                                Iniciar sesión
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            @endif
-
-            <!-- Fin del modal -->
 
         </main>
 

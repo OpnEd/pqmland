@@ -1,11 +1,11 @@
 <div>
+<div>
+    @php
+        $objectives = is_string($post['objectives']) ? json_decode($post['objectives'], true) : $post['objectives'];
+        $conclusions = is_string($post['conclusions']) ? json_decode($post['conclusions'], true) : $post['conclusions'];
+        $references = is_string($post['references']) ? json_decode($post['references'], true) : $post['references'];
+    @endphp
     @section('pageDescription', 'Esta es una descripción específica para la página Post')
-    <!--
-Install the "flowbite-typography" NPM package to apply styles and format the article content:
-
-URL: https://flowbite.com/docs/components/typography/
--->
-
     <main class="pt-8 pb-16 lg:pt-16 lg:pb-24 bg-white dark:bg-gray-900 antialiased">
         <div class="flex justify-between px-4 mx-auto max-w-screen-xl ">
             <article
@@ -50,20 +50,29 @@ URL: https://flowbite.com/docs/components/typography/
                         {{ \Carbon\Carbon::parse($post->created_at)->translatedFormat('d M Y') }}
                     </time>
                 </header>
-                @if ($post->video != null)
+                @if ($post->video != null && $post->cover == null)
                     <div>
                         <iframe class="mx-auto w-full lg:max-w-xl h-64 rounded-lg sm:h-96 shadow-xl"
-                            src="https://www.youtube.com/embed/KaLxCiilHns" title="YouTube video player" frameborder="0"
+                            src="{{ $post->video }}" title="{{ $post->title }}" frameborder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                             allowfullscreen></iframe>
+                    </div>
+                @elseif ($post->cover != null && $post->video == null)
+                    <div>
+                        <img class="mx-auto w-full lg:max-w-xl h-64 rounded-lg sm:h-96 shadow-xl"
+                            src="{{ Storage::url($post->cover) }}" alt="{{ $post->title }}">
+{{--                         <img class="mx-auto w-full lg:max-w-xl h-64 rounded-lg sm:h-96 shadow-xl"
+                            src="{{ 'https://www.pqm-pharmaquality.com.co/storage/app/public/' . $post->cover }}" alt="{{ $post->title }}"> --}}
                     </div>
                 @endif
                 <!-- -->
                 @if ($post->objectives != null)
                     <h2>Objetivos</h2>
                     <ol>
-                        @foreach ($post->objectives as $objective)
-                            <li>{!! $objective !!}</li>
+                        @foreach ($objectives as $objective)
+                            @if (is_array($objective) && isset($objective['content']))
+                            <li>{!! $objective['content'] !!}</li>
+                            @endif
                         @endforeach
                     </ol>
                 @endif
@@ -78,8 +87,10 @@ URL: https://flowbite.com/docs/components/typography/
 
                 <!-- -->
                 @if ($post->introduction != null)
+                <div class="mt-8">
                     <h2>Introducción</h2>
                     {!! $post->introduction !!}
+                </div>
                 @endif
 
 
@@ -91,8 +102,10 @@ URL: https://flowbite.com/docs/components/typography/
                 @if ($post->conclusions != null)
                     <h2>Conclusiones</h2>
                     <ul>
-                        @foreach ($post->conclusions as $conclusion)
-                            <li>{!! $conclusion !!}</li>
+                        @foreach ($conclusions as $conclusion)
+                            @if (is_array($conclusion) && isset($conclusion['content']))
+                            <li>{!! $conclusion['content'] !!}</li>
+                            @endif
                         @endforeach
                     </ul>
                 @endif
@@ -100,10 +113,12 @@ URL: https://flowbite.com/docs/components/typography/
 
                 <!-- -->
                 @if ($post->references != null)
-                    <h2>Objetivos</h2>
+                    <h2>Referencias</h2>
                     <ol>
-                        @foreach ($post->references as $reference)
-                            <li>{!! $reference !!}</li>
+                        @foreach ($references as $reference)
+                            @if (is_array($reference) && isset($reference['content']))
+                            <li>{!! $reference['content'] !!}</li>
+                            @endif
                         @endforeach
                     </ol>
                 @endif
@@ -112,7 +127,7 @@ URL: https://flowbite.com/docs/components/typography/
         </div>
     </main>
 
-    <aside aria-label="Related articles" class="py-8 lg:py-24 bg-gray-50 dark:bg-gray-800">
+    <!-- <aside aria-label="Related articles" class="py-8 lg:py-24 bg-gray-50 dark:bg-gray-800">
         <div class="px-4 mx-auto max-w-screen-xl">
             <h2 class="mb-8 text-2xl font-bold text-gray-900 dark:text-white">Related articles</h2>
             <div class="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
@@ -133,9 +148,9 @@ URL: https://flowbite.com/docs/components/typography/
                 </article>
             </div>
         </div>
-    </aside>
+    </aside> -->
 
-    <section class="bg-white dark:bg-gray-900">
+    <!-- <section class="bg-white dark:bg-gray-900">
         <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
             <div class="mx-auto max-w-screen-md sm:text-center">
                 <h2 class="mb-4 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl dark:text-white">
@@ -176,10 +191,10 @@ URL: https://flowbite.com/docs/components/typography/
                 </form>
             </div>
         </div>
-    </section>
+    </section> -->
 </div>
 
-{{--@if (!empty($post->references) && is_array($post->references))
+{{-- @if (!empty($post->references) && is_array($post->references))
     <ul>
         @foreach ($post->references as $reference)
             <li>
@@ -197,3 +212,4 @@ URL: https://flowbite.com/docs/components/typography/
     <p>No hay referencias disponibles.</p>
 @endif
 --}}
+</div>

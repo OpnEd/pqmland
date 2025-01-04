@@ -9,7 +9,7 @@
     </div>
     <figure>
         <div>
-            <img class="w-full" src="https://live.staticflickr.com/65535/50618365686_36f887ab88_c.jpg"
+            <img class="w-full" src="{{ 'https://www.pqm-pharmaquality.com.co/storage/app/public/' . $featuredPost->cover }}"
                 alt="">
 
                 <div class="absolute top-16 left-8 bg-black bg-opacity-50 text-white rounded px-2 py-1 flex flex-col items-center">
@@ -19,7 +19,7 @@
         </div>
     </figure>
     <div class="p-4 pb-2">
-        <p class="text-3xl mb-5 px-4 font1">{{ $featuredPost->title }}</p>
+        <p class="text-3xl mb-5 px-4 font5 tracking-wider">{{ $featuredPost->title }}</p>
         <a class="flex items-center gap-1 mb-6" href="{{ route('curriculo.user', $featuredPost->author->slug) }}">
             <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.99 9H15M8.99 9H9m12 3a9 9 0 1 1-18 0 9 9 0 0 1 18 0ZM7 13c0 1 .507 2.397 1.494 3.216a5.5 5.5 0 0 0 7.022 0C16.503 15.397 17 14 17 13c0 0-1.99 1-4.995 1S7 13 7 13Z"/>

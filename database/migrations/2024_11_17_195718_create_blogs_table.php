@@ -20,9 +20,14 @@ return new class extends Migration
             $table->string('title')->unique();
             $table->string('video')->nullable();
             $table->string('cover')->nullable();
+            $table->json('ilustrations')->nullable();
             $table->json('tags')->nullable();
             $table->string('abstract');
+            $table->string('introduction')->nullable();
+            $table->json('objectives')->nullable();
             $table->longText('content');
+            $table->json('conclusions')->nullable();
+            $table->json('references')->nullable();
             $table->string('slug')->unique();
             $table->boolean('is_featured')->default(false);
             $table->timestamps();

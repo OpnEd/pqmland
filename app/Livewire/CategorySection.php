@@ -2,7 +2,6 @@
 
 namespace App\Livewire;
 
-use App\Models\BlogCategory;
 use Livewire\Component;
 
 class CategorySection extends Component
@@ -23,30 +22,56 @@ class CategorySection extends Component
     {
         $this->showAll = !$this->showAll;
 
-        if ($this->showAll) {
-            $this->categories = $this->fetchCategories(); // Cargar todas las categorías
-        } else {
-            $this->categories = $this->fetchCategories(limit: 3); // Limitar nuevamente a 3 categorías
-        }
+        // Cargar todas o limitar a 3 categorías según el estado de `showAll`.
+        $this->categories = $this->showAll
+            ? $this->fetchCategories()
+            : $this->fetchCategories(limit: 3);
     }
 
-    private function fetchCategories(?int $limit = null, ?int $offset = null)
+    //private function fetchCategories(?int $limit = null, ?int $offset = null)
+    private function fetchCategories(?int $limit = null)
     {
+        // Crear una consulta basada en el modelo configurado dinámicamente.
         $query = $this->modelClass::query();
 
-        if ($this->scopeMethod && method_exists($this->modelClass, $this->scopeMethod)) { // Aplicar el scope si está definido.
+        // Aplicar el scope si está definido.
+        if ($this->scopeMethod && method_exists($this->modelClass, $this->scopeMethod)) {
             $query->{$this->scopeMethod}();
         }
 
-        if (!is_null($offset)) {
+        // Filtrar categorías con relaciones asociadas dinámicamente.
+        $relationName = $this->getRelationNameFromModel($this->modelClass);
+
+        if ($relationName) {
+            $query->whereHas($relationName);
+        }
+
+        // Aplicar límite si está definido.
+        if (!is_null($limit)) {
+            $query->limit($limit);
+        }
+
+        // Incluir solo categorías con modelos asociados
+        //$query->whereHas($this->modelClass::getRelationName()); // Ajusta dinámicamente al nombre de la relación adecuada
+
+        /* if (!is_null($offset)) {
             $query->skip($offset);
         }
 
         if (!is_null($limit)) {
             $query->take($limit);
-        }
+        } */
 
         return $query->get();
+    }
+
+    private function getRelationNameFromModel($modelClass)
+    {
+        // Detectar dinámicamente el nombre de la relación asociada.
+        // Se asume que existe un método `getRelationName()` en cada modelo.
+        return method_exists($modelClass, 'getRelationName')
+            ? $modelClass::getRelationName()
+            : null;
     }
 
     public function render()

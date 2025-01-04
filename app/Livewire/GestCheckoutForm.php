@@ -25,7 +25,7 @@ class GestCheckoutForm extends Component
     // Reglas de validación
     protected $rules = [
         'form.your_name' => 'required|string|max:255',
-        'form.your_email' => 'required|email|unique:guests,email|max:255',
+        'form.your_email' => 'required|email|max:255',
         'form.your_phone' => 'required|string|max:15',
         'form.document_type' => 'required|string|max:15',
         'form.document_number' => 'required|string|max:15',
@@ -39,7 +39,6 @@ class GestCheckoutForm extends Component
         'form.your_name.required' => 'El nombre es obligatorio.',
         'form.your_email.required' => 'El correo electrónico es obligatorio.',
         'form.your_email.email' => 'El correo electrónico debe ser una dirección válida.',
-        'form.your_email.unique' => 'El correo electrónico ya está registrado.',
         'form.your_phone.required' => 'El número de teléfono es obligatorio.',
         'form.document_type' => 'Debes seleccionar un tipo de documento.',
         'form.document_number' => 'El número de documento es obligatorio.',

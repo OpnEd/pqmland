@@ -51,7 +51,8 @@ class Carrito extends BaseComponent
             }
 
             // Precio final por unidad
-            $precioFinal = $precioConDescuento + $impuestosTotales;
+            // $precioFinal = $precioConDescuento + $impuestosTotales;
+            $precioFinal = $precioConDescuento;
 
             // Actualizar carrito
             $this->carrito[$productoId] = [
@@ -116,11 +117,12 @@ class Carrito extends BaseComponent
 
     public function checkOut()
 {
-    if (\Illuminate\Support\Facades\Auth::check()) {
+    /* if (\Illuminate\Support\Facades\Auth::check()) {
         return redirect()->route('dashboard');
     } else {
         $this->registOrNot = true;
-    }
+    } */
+    return redirect()->route('checkout');
 }
 
     public function cerrarModal()

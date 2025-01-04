@@ -124,7 +124,7 @@
                     @foreach ($socialMediaLinks as $platform => $url)
                         @if ($url) <!-- Mostrar solo si hay URL -->
                             <a href="{{ $url }}" target="_blank" rel="noopener noreferrer" class="hover:opacity-75 pr-8">
-                                <img src="{{ asset('storage/images/redes-sociales/' . $platform . '.png') }}"
+                                <img src="{{ 'https://www.pqm-pharmaquality.com.co/images/redes-sociales/' . $platform . '.png' }}"
                                     alt="{{ ucfirst($platform) }}"
                                     class="w-10 h-10">
                             </a>

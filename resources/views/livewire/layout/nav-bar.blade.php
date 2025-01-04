@@ -43,11 +43,6 @@
                                     class="absolute mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
                                     <div class="py-1" role="menu" aria-orientation="vertical"
                                         aria-labelledby="options-menu">
-                                        {{--@foreach ($categories as $category)
-                                            <a href="{{ $category['slug'] }}"
-                                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-100"
-                                                role="menuitem">{{ $category['name'] }}</a>
-                                        @endforeach --}}
                                     <livewire:category-section model-class="\App\Models\ProductCategory" />
                                     </div>
                                 </div>

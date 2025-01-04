@@ -43,11 +43,16 @@ font-family: var(--futuristic2);
 }
 
 .font5 {
-font-family: var(--futuristic3);
+@apply font-[var(--futuristic3)] tracking-wider;
 }
 
 .fontBlog {
 font-family: var(--blog);
+}
+
+.font5space {
+    letter-spacing: 2px;
+    word-spacing: 10px;
 }
 
 .navitems>li>a {

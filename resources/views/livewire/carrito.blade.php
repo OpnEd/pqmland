@@ -57,6 +57,11 @@
                                             ? Storage::url("images/tienda/{$item['categoria']}/{$item['imagenes']}.png")
                                             : Storage::url('images/tienda/default-image.png');
                                     @endphp
+                                    {{-- @php
+                                    $imageUrl = isset($item['imagenes'])
+                                        ? "https://www.pqm-pharmaquality.com.co/images/tienda/{$item['categoria']}/{$item['imagenes']}.png"
+                                        : "https://www.pqm-pharmaquality.com.co/images/tienda/default-image.png" ;
+                                    @endphp --}}
                                     <div
                                         class="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0">
                                         <a href="#" class="shrink-0 md:order-1">
@@ -363,7 +368,7 @@
                         </div>
 
 
-                        <div
+                        <!-- <div
                             class="space-y-4 rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 sm:p-6">
                             <form class="space-y-4">
                                 <div>
@@ -379,7 +384,7 @@
                                     class="flex w-full items-center justify-center rounded-lg bg-primary-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Apply
                                     Code</button>
                             </form>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             @endif

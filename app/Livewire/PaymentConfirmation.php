@@ -2,7 +2,7 @@
 
 namespace App\Livewire;
 
-use Livewire\Component;
+use App\Livewire\BaseComponent;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
@@ -12,12 +12,15 @@ use App\Models\GuestPedido;
 use App\Models\GuestDetallePedido;
 use App\Models\Transaccion;
 use App\Mail\OrderConfirmed;
+use Livewire\Attributes\On;
 
-class PaymentConfirmation extends Component
+class PaymentConfirmation extends BaseComponent
 {
     public $orderData;
     public $carrito = [];
     public $checkoutForm = [];
+    public $pedido;
+    public $detallesPedido;
 
     public function mount()
     {
@@ -25,15 +28,15 @@ class PaymentConfirmation extends Component
         $this->orderData = request()->all();
         $this->carrito = Session::get('carrito', []);
         $this->checkoutForm = session('checkoutForm');
-        //$this->finalizarCompra($this->orderData);
+        $this->finalizarCompra($this->orderData);
         // Validar la firma (opcional pero recomendado)
-        if ($this->validarFirma($this->orderData)) {
+        /* if ($this->validarFirma($this->orderData)) {
             // Llamar al método para procesar el pedido
             $this->finalizarCompra($this->orderData);
         } else {
             // Registro del error en logs si la firma no es válida
             \Log::error('Firma no válida en notificación PayU', $this->orderData);
-        }
+        } */
         // Retorna una respuesta JSON (se requiere Livewire v3 para respuestas HTTP en mount)
         // return response()->json(['message' => 'Confirmación recibida']);
     }
@@ -81,7 +84,7 @@ class PaymentConfirmation extends Component
                     'address' => $this->checkoutForm['address'],
                     'company_name' => $this->checkoutForm['company_name'] ?? null, // Campo opcional
                 ]);
-                \Log::info('Cliente creado:', $guest->toArray());
+                //\Log::info('Cliente creado:', $guest->toArray());
 
                 // 2. Crear el pedido
                 $pedido = GuestPedido::create([
@@ -89,7 +92,7 @@ class PaymentConfirmation extends Component
                     'total' => $this->getTotalProperty(),
                     'estado' => 'En proceso', // Puedes ajustar según tus necesidades
                 ]);
-                \Log::info('Pedido creado:', $pedido->toArray());
+                //\Log::info('Pedido creado:', $pedido->toArray());
 
                 // 3. Guardar los detalles del pedido
                 foreach ($this->carrito as $item) {
@@ -102,8 +105,12 @@ class PaymentConfirmation extends Component
                         'impuestos' => $item['impuestos'],
                         'descuentos' => $item['descuentos'],
                     ]);
-                    \Log::info('Detalle creado:', $detalle->toArray());
+                    //\Log::info('Detalle creado:', $detalle->toArray());
                 }
+
+                // Obtener los detalles del pedido para renderizar en la vista
+                $this->pedido = $pedido;
+                $this->detallesPedido = GuestDetallePedido::where('guest_pedido_id', $pedido->id)->get();
 
                 // 4. Guardar los datos de la transacción de PayPal
                 Transaccion::create([
@@ -113,31 +120,33 @@ class PaymentConfirmation extends Component
                     'estado' => $orderData['response_message_pol'], // "COMPLETED" para pagos exitosos
                     'datos' => $orderData, // Guarda todo el objeto de transacción si es necesario
                 ]);
-                \Log::info('Transacción guardada.');
+                //\Log::info('Transacción guardada.');
 
                 Mail::to($this->email)->send(new OrderConfirmed($guest->id, $pedido->id));
 
                 // Limpiar el carrito después del guardado exitoso
-                Session::forget(['carrito', 'checkoutForm']);
-                \Log::info('Carrito limpiado.');
+                Session::forget(['carrito']);
+                //\Log::info('Carrito limpiado.');
 
                 // Limpiar el carrito y el formulario de checkout después del guardado exitoso
                 $this->carrito = [];
-                $this->checkoutForm = [
+                /* $this->checkoutForm = [
                     'your_name' => '',
                     'your_email' => '',
                     'your_phone' => '',
+                    'document_type' => '',
+                    'document_number' => '',
                     'your_city' => '',
                     'address' => '',
                     'company_name' => null,
-                ];
+                ]; */
                 session(
                     [
-                        'orderStatus' => $orderData['status'],
+                        //'orderStatus' => $orderData['status'],
                         'mensaje' => 'Compra realizada con éxito!',
                     ],
                 );
-                /* session()->flash('mensaje', 'Compra realizada con éxito.'); */
+                session()->flash('mensaje', 'Compra realizada con éxito.');
             });
         } catch (\Exception $e) {
             Log::error('Error al guardar el pedido: ' . $e->getMessage());
@@ -146,7 +155,7 @@ class PaymentConfirmation extends Component
         }
     }
 
-    private function validarFirma($data)
+    /* private function validarFirma($data)
     {
         $apiKey = env('PAYU_API_KEY'); // Tu API Key de PayU
         $merchantId = $data['merchant_id'];
@@ -165,5 +174,13 @@ class PaymentConfirmation extends Component
         $sign = $data['sign'];
 
         return $firma_calculada === $sign;
+    } */
+
+    public function render()
+    {
+        return view('livewire.payment-confirmation', [
+            'pedido' => $this->pedido,
+            'detallesPedido' => $this->detallesPedido,
+        ])->layout($this->getLayout());
     }
 }

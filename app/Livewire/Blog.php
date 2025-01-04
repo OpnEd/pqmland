@@ -38,10 +38,12 @@ class Blog extends  BaseComponent
     {
         return view('livewire.blog', [
             'latestPosts' => ModelsBlog::published()
+                ->where('is_featured', false)
                 ->latest('created_at')
                 ->take(3)
                 ->get(),
-            'featuredPost' => ModelsBlog::published()
+            'featuredPost' => ModelsBlog::with('author')
+                ->published()
                 ->featured()
                 ->latest('created_at')
                 ->take(3)

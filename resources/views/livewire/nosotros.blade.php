@@ -1,6 +1,8 @@
 <div>
     @section('pageDescription', 'Esta es una descripción específica para la página Nosotros')
 
+    <!-- Sección hero -->
+
     <section class="relative bg-fixed bg-center bg-cover bg-no-repeat bg-white dark:bg-gray-900"
         style="background-image: url('/storage/images/nosotros/dt-farmacia.jpg');">
         <!-- Overlay para oscurecer la imagen si es necesario -->
@@ -36,6 +38,7 @@
                             class="inline-block p-3 bg-primary-100 text-primary-800 rounded-full dark:bg-primary-900 dark:text-primary-200">
                             <!-- Icono de la Misión -->
                             <img src="{{ asset('storage/images/mision-vision/mision.png') }}" alt="M">
+                            {{-- <img src="https://www.pqm-pharmaquality.com.co/images/mision-vision/mision.png" alt="M"> --}}
                         </span>
                         <h3 class="text-xl font-bold text-gray-900 dark:text-white ml-4">Misión</h3>
                     </div>
@@ -54,6 +57,7 @@
                             class="inline-block p-3 bg-primary-100 text-primary-800 rounded-full dark:bg-primary-900 dark:text-primary-200">
                             <!-- Icono de la Visión -->
                             <img src="{{ asset('storage/images/mision-vision/vision.png') }}" alt="V">
+                            {{-- <img src="https://www.pqm-pharmaquality.com.co/images/mision-vision/vision.png" alt="V"> --}}
                         </span>
                         <h3 class="text-xl font-bold text-gray-900 dark:text-white ml-4">Visión</h3>
                     </div>
@@ -92,7 +96,7 @@
                             @endif
                         </h3>
                         <p>{{ $colaborador->current_position }}</p>
-                        @if (!empty($colaborador->socialMediaLinks))
+                        {{-- @if (!empty($colaborador->socialMediaLinks))
                             <ul class="flex justify-center mt-4 space-x-4">
                                 @foreach ($colaborador->socialMediaLinks as $platform => $url)
                                     @if ($url)
@@ -102,12 +106,14 @@
                                                 class="hover:opacity-75 pr-8">
                                                 <img src="{{ asset('storage/images/redes-sociales/' . $platform . '.png') }}"
                                                     alt="{{ ucfirst($platform) }}" class="w-10 h-10">
-                                            </a>
+                                                    {{-- <img src="{{ 'https://www.pqm-pharmaquality.com.co/images/redes-sociales/' . $platform . '.png' }}"
+                                                    alt="{{ ucfirst($platform) }}" class="w-10 h-10"> --}}
+                                            {{--</a>
                                         </li>
                                     @endif
                                 @endforeach
                             </ul>
-                        @endif
+                        @endif --}}
                     </div>
                 @endforeach
             </div>

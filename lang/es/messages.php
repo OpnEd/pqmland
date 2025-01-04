@@ -10,6 +10,13 @@ return [
         'remember' => 'Recordarme en este equipo',
         'password' => 'Contraseña'
     ],
+    'contact' => [
+        'name' => 'Nombre',
+        'email' => 'Correo electrónico',
+        'subject' => 'Asunto',
+        'message' => 'Mensaje',
+        'send' => 'Enviar'
+    ],
     'nav' => [
         'cart' => 'Carrito',
         'profile' => 'Perfil',

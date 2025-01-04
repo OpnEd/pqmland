@@ -81,7 +81,8 @@ class ShowProduct extends BaseComponent
         }
 
         // Precio final por unidad
-        $precioFinal = $precioConDescuento + $impuestosTotales;
+        // $precioFinal = $precioConDescuento + $impuestosTotales;
+        $precioFinal = $precioConDescuento;
 
         // Actualizar carrito
         $this->carrito[$productoId] = [
